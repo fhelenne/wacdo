@@ -54,13 +54,13 @@ end
 
 subgraph "Base de données"
 
-DB1["Users"]
+DB1["User"]
 
-DB2["Restaurants"]
+DB2["Restaurant"]
 
-DB3["Postes"]
+DB3["JobTitle"]
 
-DB4["Affectations"]
+DB4["Assignment"]
 
 end
 
