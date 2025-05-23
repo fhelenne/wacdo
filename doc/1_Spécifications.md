@@ -169,6 +169,70 @@ Assignment "1" --> "1" JobTitle : as
 
 ```mermaid
 
-TODO
+erDiagram
+
+  USER {
+    int id PK
+    string name
+    string first_name
+    string email
+    string password
+    date first_hired_at
+    int role_id FK
+    datetime created_at
+    datetime updated_at
+    int created_by FK
+    int updated_by FK
+  }
+
+  ROLE {
+    int id PK
+    string code
+    string name
+  }
+
+  RESTAURANT {
+    int id PK
+    string name
+    string address
+    string zip_code
+    string city
+    datetime created_at
+    datetime updated_at
+    int created_by FK
+    int updated_by FK
+  }
+
+  JOB_TITLE {
+    int id PK
+    string name
+    datetime created_at
+    datetime updated_at
+    int created_by FK
+    int updated_by FK
+  }
+
+  ASSIGNMENT {
+    int id PK
+    int user_id FK
+    int restaurant_id FK
+    int job_title_id FK
+    date start_at
+    date end_at
+    datetime created_at
+    datetime updated_at
+    int created_by FK
+    int updated_by FK
+  }
+
+  %% Relations
+  ROLE ||--o{ USER : has
+  USER ||--o{ ASSIGNMENT : has
+  RESTAURANT ||--o{ ASSIGNMENT : hosts
+  JOB_TITLE ||--o{ ASSIGNMENT : includes
+
+  USER ||--o{ USER : created_by
+  USER ||--o{ USER : updated_by
+
 
 ```
