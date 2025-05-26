@@ -20,7 +20,6 @@ Permettre de gérer les affectations collaborateur/restaurant via une interface 
 	* ajouter/modifier/supprimer une affectation
 * le collaborateur peut 
 	* consulter ses affectations
-	* consulter ses informations personnelles
 
 ## Spécifications Techniques
 
@@ -98,17 +97,9 @@ class User {
 
 +String password
 
++Enum role
+
 +Date first_hired_at
-
-}
-
-  
-
-class Role {
-
-+String code
-
-+String name
 
 }
 
@@ -148,8 +139,6 @@ class Assignment {
 
 %% Relations
 
-Role "1" --> "0..*" User : has
-
 User "1" --> "0..*" Assignment : has
 
 Restaurant "1" --> "0..*" Assignment : hosts
@@ -178,17 +167,11 @@ erDiagram
     string email
     string password
     date first_hired_at
-    int role_id FK
+    enum role
     datetime created_at
     datetime updated_at
     int created_by FK
     int updated_by FK
-  }
-
-  ROLE {
-    int id PK
-    string code
-    string name
   }
 
   RESTAURANT {
@@ -226,7 +209,6 @@ erDiagram
   }
 
   %% Relations
-  ROLE ||--o{ USER : has
   USER ||--o{ ASSIGNMENT : has
   RESTAURANT ||--o{ ASSIGNMENT : hosts
   JOB_TITLE ||--o{ ASSIGNMENT : includes

@@ -1,0 +1,33 @@
+
+back.localhost  {
+    root * /var/www/html/back/public
+    encode zstd gzip
+    file_server
+    php_fastcgi back:9000 {
+        # only fall back to root index.php aka front controller.
+        try_files {path} index.php
+
+        # optionally set the value of the environment variables used in the application
+        # env APP_ENV "prod"
+        # env APP_SECRET "<app-secret-id>"
+        # env DATABASE_URL "mysql://db_user:db_pass@host:3306/db_name"
+
+        # Configure the FastCGI to resolve any symlinks in the root path.
+        # This ensures that OpCache is using the destination filenames,
+        # instead of the symlinks, to cache opcodes and php files see
+        # https://caddy.community/t/root-symlink-folder-updates-and-caddy-reload-not-working/10557
+        resolve_root_symlink
+    }
+    log {
+        output file /var/log/caddy/back.localhost-access.log
+    }
+
+
+}
+
+front.localhost {
+    reverse_proxy front:5173
+    log {
+        output file /var/log/caddy/front.localhost-access.log
+    }
+}

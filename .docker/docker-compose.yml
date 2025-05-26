@@ -1,0 +1,62 @@
+services:
+    db:
+        image: mysql
+        container_name: db
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        ports:
+            - "3306:3306"
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - wacdonet
+
+    back:
+        build:
+            dockerfile: ./DockerFile/php:8.3-fpm.dockerfile
+        container_name: back
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        volumes:
+            - ../back:/var/www/html/back
+            - ./log/back:/var/log
+        depends_on:
+            - db
+        networks:
+            - wacdonet
+
+    front:
+        image: node
+        container_name: front
+        working_dir: /app
+        volumes:
+            - ../front:/app
+            - ./log/front:/var/log
+        command: sh -c "npm install && npm run dev -- --host"
+        networks:
+            - wacdonet
+
+    proxy:
+        image: caddy
+        container_name: proxy
+        ports:
+            - "443:443"
+            - "80:80"
+        volumes:
+            - ./config/caddy/Caddyfile:/etc/caddy/Caddyfile
+            - ./log/caddy:/var/log/caddy
+            - ../back:/var/www/html/back
+        networks:
+            - wacdonet
+
+volumes:
+    db_data:
+
+networks:
+    wacdonet:
