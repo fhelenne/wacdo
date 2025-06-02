@@ -26,6 +26,7 @@ services:
         volumes:
             - ../back:/var/www/html/back
             - ./log/back:/var/log
+            - ./config/php83/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
         depends_on:
             - db
         networks:

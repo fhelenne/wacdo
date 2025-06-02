@@ -18,5 +18,10 @@ RUN docker-php-ext-install  mysqli
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install bcmath
 
+# Installer Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+
 
 

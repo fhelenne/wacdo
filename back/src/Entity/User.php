@@ -7,9 +7,11 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -20,15 +22,17 @@ class User
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Ignore]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable: true)]
     private ?string $password = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
+    #[Ignore]
     private ?\DateTimeImmutable $first_hired_at = null;
 
     #[ORM\Column(enumType: Role::class)]
@@ -87,6 +91,7 @@ class User
         return $this;
     }
 
+    #[Ignore]
     public function getPassword(): ?string
     {
         return $this->password;
