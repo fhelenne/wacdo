@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
-#[Route('/api/assignment')]
+#[Route('/api/v1/assignment')]
 final class AssignmentController extends AbstractController
 {
     /**

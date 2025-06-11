@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-#[Route('/api/restaurant')]
+#[Route('/api/v1/restaurant')]
 final class RestaurantController extends AbstractController
 {
     /**

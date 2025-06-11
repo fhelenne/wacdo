@@ -11,16 +11,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-#[Route('/api/job_title')]
+#[Route('/api/v1/job_title')]
 final class JobTitleController extends AbstractController
 {
     /**
      * @param JobTitleRepository $jobTitleRepository
      * @param SerializerInterface $serializer
      * @return JsonResponse
+     * @throws ExceptionInterface
      */
     #[Route('/', name: 'job_title_list', methods: ['GET'])]
     public function getJobTitles(JobTitleRepository $jobTitleRepository, SerializerInterface $serializer): JsonResponse

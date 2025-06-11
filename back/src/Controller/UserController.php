@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-#[Route('/api/user')]
+#[Route('/api/v1/user')]
 final class UserController extends AbstractController
 {
     #[Route('/', name: 'user_list', methods: ['GET'])]
