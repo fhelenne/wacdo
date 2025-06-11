@@ -22,7 +22,7 @@ final class UserController extends AbstractController
     public function getUsers(UserRepository $userRepository, SerializerInterface $serializer): JsonResponse
     {
         $userList = $userRepository->findAll();
-        $jsonUserList = $serializer->serialize($userList, 'json');
+        $jsonUserList = $serializer->serialize($userList, 'json',['groups' => ['user']]);
         return new JsonResponse($jsonUserList, Response::HTTP_OK, [], true);
     }
 
@@ -30,7 +30,7 @@ final class UserController extends AbstractController
     #[Route('/{id}', name: 'user_detail', methods: ['GET'])]
     public function getUserDetail(User $user, SerializerInterface $serializer): JsonResponse
     {
-        $jsonUser = $serializer->serialize($user, 'json');
+        $jsonUser = $serializer->serialize($user, 'json',['groups' => ['user']]);
         return new JsonResponse($jsonUser, Response::HTTP_OK, [], true);
     }
 
@@ -61,11 +61,11 @@ final class UserController extends AbstractController
     public function createUser(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse
     {
 
-        $user = $serializer->deserialize($request->getContent(), User::class, 'json');
+        $user = $serializer->deserialize($request->getContent(), User::class, 'json',['groups' => ['user']]);
         $em->persist($user);
         $em->flush();
 
-        $jsonUser = $serializer->serialize($user, 'json');
+        $jsonUser = $serializer->serialize($user, 'json',['groups' => ['user']]);
 
         $location = $urlGenerator->generate('user_detail', ['id' => $user->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 

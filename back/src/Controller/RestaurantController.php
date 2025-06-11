@@ -28,7 +28,7 @@ final class RestaurantController extends AbstractController
     public function getRestaurants(RestaurantRepository $restaurantRepository, SerializerInterface $serializer): JsonResponse
     {
         $restaurantList = $restaurantRepository->findAll();
-        $jsonRestaurantList = $serializer->serialize($restaurantList, 'json');
+        $jsonRestaurantList = $serializer->serialize($restaurantList, 'json',['groups' => ['restaurant']]);
         return new JsonResponse($jsonRestaurantList, Response::HTTP_OK, [], true);
     }
 
@@ -36,11 +36,12 @@ final class RestaurantController extends AbstractController
      * @param Restaurant $restaurant
      * @param SerializerInterface $serializer
      * @return JsonResponse
+     * @throws ExceptionInterface
      */
     #[Route('/{id}', name: 'restaurant_detail', methods: ['GET'])]
     public function getRestaurantDetail(Restaurant $restaurant, SerializerInterface $serializer): JsonResponse
     {
-        $jsonRestaurant = $serializer->serialize($restaurant, 'json');
+        $jsonRestaurant = $serializer->serialize($restaurant, 'json',['groups' => ['restaurant']]);
         return new JsonResponse($jsonRestaurant, Response::HTTP_OK, [], true);
     }
 
@@ -70,11 +71,11 @@ final class RestaurantController extends AbstractController
     public function createRestaurant(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse
     {
 
-        $restaurant = $serializer->deserialize($request->getContent(), Restaurant::class, 'json');
+        $restaurant = $serializer->deserialize($request->getContent(), Restaurant::class, 'json',['groups' => ['restaurant']]);
         $em->persist($restaurant);
         $em->flush();
 
-        $jsonRestaurant = $serializer->serialize($restaurant, 'json');
+        $jsonRestaurant = $serializer->serialize($restaurant, 'json',['groups' => ['restaurant']]);
 
         $location = $urlGenerator->generate('restaurant_detail', ['id' => $restaurant->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 

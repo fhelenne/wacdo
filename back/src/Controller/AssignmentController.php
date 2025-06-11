@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Assignment;
 use App\Repository\AssignmentRepository;
+use App\Repository\JobTitleRepository;
+use App\Repository\RestaurantRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,7 +28,7 @@ final class AssignmentController extends AbstractController
     public function getAssignments(AssignmentRepository $assignmentRepository, SerializerInterface $serializer): JsonResponse
     {
         $assignmentList = $assignmentRepository->findAll();
-        $jsonAssignmentList = $serializer->serialize($assignmentList, 'json');
+        $jsonAssignmentList = $serializer->serialize($assignmentList, 'json',['groups' => ['assignments']]);
         return new JsonResponse($jsonAssignmentList, Response::HTTP_OK, [], true);
     }
 
@@ -36,7 +39,7 @@ final class AssignmentController extends AbstractController
      */
     #[Route('/{id}', name: 'assignment_detail', methods: ['GET'])]
     public function getAssignmentDetail(Assignment $assignment, SerializerInterface $serializer): JsonResponse {
-        $jsonAssignment = $serializer->serialize($assignment, 'json');
+        $jsonAssignment = $serializer->serialize($assignment, 'json',['groups' => ['assignments']]);
         return new JsonResponse($jsonAssignment, Response::HTTP_OK, [], true);
     }
 
@@ -63,14 +66,35 @@ final class AssignmentController extends AbstractController
      * @return JsonResponse
      */
     #[Route('/', name: "assignment_create", methods: ['POST'])]
-    public function createAssignment(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse
+    public function createAssignment(Request                $request,
+                                     SerializerInterface    $serializer,
+                                     EntityManagerInterface $em,
+                                     UrlGeneratorInterface  $urlGenerator,
+                                     JobTitleRepository     $jobTitleRepository,
+                                     RestaurantRepository   $restaurantRepository,
+                                     UserRepository         $userRepository): JsonResponse
     {
+        $assignment = $serializer->deserialize($request->getContent(), Assignment::class, 'json',['groups' => ['assignments']]);
 
-        $assignment = $serializer->deserialize($request->getContent(), Assignment::class, 'json');
+        // Récupération de l'ensemble des données envoyées sous forme de tableau
+        $content = $request->toArray();
+
+        // Récupération de l'idAuthor. S'il n'est pas défini, alors on met -1 par défaut.
+        $userId = $content['user_id'] ?? -1;
+        $restaurantId = $content['restaurant_id'] ?? -1;
+        $jobTitleId = $content['job_title_id'] ?? -1;
+
+
+        $assignment->setUser($userRepository->find($userId));
+        $assignment->setRestaurant($restaurantRepository->find($restaurantId));
+        $assignment->setJobTitle($jobTitleRepository->find($jobTitleId));
+
+
+
         $em->persist($assignment);
         $em->flush();
 
-        $jsonAssignment = $serializer->serialize($assignment, 'json');
+        $jsonAssignment = $serializer->serialize($assignment, 'json',['groups' => ['assignments']]);
 
         $location = $urlGenerator->generate('assignment_detail', ['id' => $assignment->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 

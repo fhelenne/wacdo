@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements PasswordAuthenticatedUserInterface
@@ -16,32 +17,38 @@ class User implements PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['user','assignments'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user','assignments'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Ignore]
+    #[Groups(['user','assignments'])]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user','assignments'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255,nullable: true)]
+    #[Ignore]
     private ?string $password = null;
 
     #[ORM\Column(nullable: true)]
-    #[Ignore]
+    #[Groups(['user'])]
     private ?\DateTimeImmutable $first_hired_at = null;
 
     #[ORM\Column(enumType: Role::class)]
+    #[Groups(['user','assignments'])]
     private ?Role $role = null;
 
     /**
      * @var Collection<int, Assignment>
      */
     #[ORM\OneToMany(targetEntity: Assignment::class, mappedBy: 'user', orphanRemoval: true)]
+    #[Groups(['user'])]
     private Collection $assignments;
 
 

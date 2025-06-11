@@ -26,7 +26,7 @@ final class JobTitleController extends AbstractController
     public function getJobTitles(JobTitleRepository $jobTitleRepository, SerializerInterface $serializer): JsonResponse
     {
         $jobTitleList = $jobTitleRepository->findAll();
-        $jsonJobTitleList = $serializer->serialize($jobTitleList, 'json');
+        $jsonJobTitleList = $serializer->serialize($jobTitleList, 'json',['groups' => ['job_title']]);
         return new JsonResponse($jsonJobTitleList, Response::HTTP_OK, [], true);
     }
 
@@ -38,7 +38,7 @@ final class JobTitleController extends AbstractController
     #[Route('/{id}', name: 'job_title_detail', methods: ['GET'])]
     public function getJobTitleDetail(JobTitle $jobTitle, SerializerInterface $serializer): JsonResponse
     {
-        $JobTitle = $serializer->serialize($jobTitle, 'json');
+        $JobTitle = $serializer->serialize($jobTitle, 'json',['groups' => ['job_title']]);
         return new JsonResponse($JobTitle, Response::HTTP_OK, [], true);
     }
 
@@ -68,11 +68,11 @@ final class JobTitleController extends AbstractController
     public function createJobTitle(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse
     {
 
-        $jobTitle = $serializer->deserialize($request->getContent(), JobTitle::class, 'json');
+        $jobTitle = $serializer->deserialize($request->getContent(), JobTitle::class, 'json',['groups' => ['job_title']]);
         $em->persist($jobTitle);
         $em->flush();
 
-        $jsonJobTitle = $serializer->serialize($jobTitle, 'json');
+        $jsonJobTitle = $serializer->serialize($jobTitle, 'json',['groups' => ['job_title']]);
 
         $location = $urlGenerator->generate('job_title_detail', ['id' => $jobTitle->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 

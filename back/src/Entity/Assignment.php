@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AssignmentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AssignmentRepository::class)]
 class Assignment
@@ -11,24 +12,30 @@ class Assignment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['user', 'restaurant','assignments'])]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(['user', 'restaurant', 'assignments'])]
     private ?\DateTimeImmutable $start_at = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['user', 'restaurant', 'assignments'])]
     private ?\DateTimeImmutable $end_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'assignments')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['assignments'])]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'assignments')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['user', 'restaurant', 'assignments'])]
     private ?JobTitle $job_title = null;
 
     #[ORM\ManyToOne(inversedBy: 'assignments')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['user', 'assignments'])]
     private ?Restaurant $restaurant = null;
 
     public function __construct()

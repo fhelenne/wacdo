@@ -6,6 +6,7 @@ use App\Repository\RestaurantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
 class Restaurant
@@ -13,24 +14,30 @@ class Restaurant
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['restaurant','assignments'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user','restaurant','assignments'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['restaurant','assignments'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['restaurant','assignments'])]
     private ?string $zip_code = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['restaurant','assignments'])]
     private ?string $city = null;
 
     /**
      * @var Collection<int, Assignment>
      */
     #[ORM\OneToMany(targetEntity: Assignment::class, mappedBy: 'restaurant', orphanRemoval: true)]
+    #[Groups(['restaurant'])]
     private Collection $assignments;
 
     public function __construct()
