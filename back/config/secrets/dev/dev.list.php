@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'MYSQL_DATABASE' => null,
-    'MYSQL_HOST' => null,
-    'MYSQL_PASSWORD' => null,
-    'MYSQL_ROOT_PASSWORD' => null,
-    'MYSQL_USER' => null,
+    'JWT_PASSPHRASE' => null,
+    'MYSQL_DATABASE_SECRET' => null,
+    'MYSQL_HOST_SECRET' => null,
+    'MYSQL_PASSWORD_SECRET' => null,
+    'MYSQL_USER_SECRET' => null,
 ];
