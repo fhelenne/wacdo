@@ -12,30 +12,30 @@ class ExceptionSubscriber implements EventSubscriberInterface
 {
     public function onExceptionEvent(ExceptionEvent $event): void
     {
-        $exception = $event->getThrowable();
-
-        if ($exception instanceof NotFoundHttpException) {
-            $data = [
-                'status' => $exception->getStatusCode(),
-                'message' => 'not found'
-            ];
-
-            $event->setResponse(new JsonResponse($data));
-        } elseif ($exception instanceof HttpException) {
-            $data = [
-                'status' => $exception->getStatusCode(),
-                'message' => $exception->getMessage()
-            ];
-
-            $event->setResponse(new JsonResponse($data));
-        } else {
-            $data = [
-                'status' => 500, // Le status n'existe pas car ce n'est pas une exception HTTP, donc on met 500 par défaut.
-                'message' => $exception->getMessage()
-            ];
-
-            $event->setResponse(new JsonResponse($data));
-        }
+//        $exception = $event->getThrowable();
+//
+//        if ($exception instanceof NotFoundHttpException) {
+//            $data = [
+//                'status' => $exception->getStatusCode(),
+//                'message' => 'not found'
+//            ];
+//
+//            $event->setResponse(new JsonResponse($data));
+//        } elseif ($exception instanceof HttpException) {
+//            $data = [
+//                'status' => $exception->getStatusCode(),
+//                'message' => $exception->getMessage()
+//            ];
+//
+//            $event->setResponse(new JsonResponse($data));
+//        } else {
+//            $data = [
+//                'status' => 500, // Le status n'existe pas car ce n'est pas une exception HTTP, donc on met 500 par défaut.
+//                'message' => $exception->getMessage()
+//            ];
+//
+//            $event->setResponse(new JsonResponse($data));
+//        }
     }
 
 

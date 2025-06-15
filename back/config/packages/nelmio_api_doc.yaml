@@ -1,9 +1,11 @@
 nelmio_api_doc:
     documentation:
+        openapi: "3.1.0"
         info:
             title: Wacdo back
             description: Documentation api v1 wacdo back
             version: 1.0.0
+
     areas: # to filter documented areas
         path_patterns:
             - ^/api/v1/(?!/docs$) # Accepts routes under /api except /api/doc
