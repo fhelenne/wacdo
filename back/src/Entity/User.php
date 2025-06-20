@@ -2,19 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
-use App\Entity\Enum\Role;
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
-use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource]
-class User implements PasswordAuthenticatedUserInterface
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['email'])]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,29 +24,36 @@ class User implements PasswordAuthenticatedUserInterface
     #[Groups(['user','assignments'])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Groups(['user','assignments'])]
-    private ?string $name = null;
+    #[ORM\Column(length: 180)]
+    #[ApiProperty ]
+    private ?string $firstName = null;
 
-    #[ORM\Column(length: 255)]
-    #[Groups(['user','assignments'])]
-    private ?string $first_name = null;
+    #[ORM\Column(length: 180)]
+    private ?string $lastName = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180)]
+    #[Assert\NotBlank]
+    #[Assert\Email]
     #[Groups(['user','assignments'])]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255,nullable: true)]
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column(type: 'json')]
+    #[Groups(['user','assignments'])]
+    private array $roles = [];
+
+    /**
+     * @var string|null
+     */
+    #[ORM\Column]
     #[Ignore]
     private ?string $password = null;
 
     #[ORM\Column(nullable: true)]
     #[Groups(['user'])]
-    private ?\DateTimeImmutable $first_hired_at = null;
-
-    #[ORM\Column(enumType: Role::class)]
-    #[Groups(['user','assignments'])]
-    private ?Role $role = null;
+    private ?\DateTimeImmutable $firstHiredAt = null;
 
     /**
      * @var Collection<int, Assignment>
@@ -54,38 +63,9 @@ class User implements PasswordAuthenticatedUserInterface
     private Collection $assignments;
 
 
-    public function __construct()
-    {
-        $this->assignments = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getFirstName(): ?string
-    {
-        return $this->first_name;
-    }
-
-    public function setFirstName(string $first_name): static
-    {
-        $this->first_name = $first_name;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -100,7 +80,41 @@ class User implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    #[Ignore]
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @param list<string> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
     public function getPassword(): ?string
     {
         return $this->password;
@@ -113,57 +127,45 @@ class User implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
     public function getFirstHiredAt(): ?\DateTimeImmutable
     {
-        return $this->first_hired_at;
+        return $this->firstHiredAt;
     }
 
-    public function setFirstHiredAt(\DateTimeImmutable $first_hired_at): static
+    public function setFirstHiredAt(?\DateTimeImmutable $firstHiredAt): static
     {
-        $this->first_hired_at = $first_hired_at;
-
+        $this->firstHiredAt = $firstHiredAt;
         return $this;
     }
 
-    public function getRole(): ?Role
+    public function getFirstName(): ?string
     {
-        return $this->role;
+        return $this->firstName;
     }
 
-    public function setRole(Role $role): static
+    public function setFirstName(?string $firstName): static
     {
-        $this->role = $role;
-
+        $this->firstName = $firstName;
         return $this;
     }
 
-    /**
-     * @return Collection<int, Assignment>
-     */
-    public function getAssignments(): Collection
+    public function getLastName(): ?string
     {
-        return $this->assignments;
+        return $this->lastName;
     }
 
-    public function addAssignment(Assignment $assignment): static
+    public function setLastName(?string $lastName): static
     {
-        if (!$this->assignments->contains($assignment)) {
-            $this->assignments->add($assignment);
-            $assignment->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAssignment(Assignment $assignment): static
-    {
-        if ($this->assignments->removeElement($assignment)) {
-            // set the owning side to null (unless already changed)
-            if ($assignment->getUser() === $this) {
-                $assignment->setUser(null);
-            }
-        }
-
+        $this->lastName = $lastName;
         return $this;
     }
 }

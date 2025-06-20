@@ -19,11 +19,11 @@ class Assignment
 
     #[ORM\Column]
     #[Groups(['user', 'restaurant', 'assignments'])]
-    private ?\DateTimeImmutable $start_at = null;
+    private ?\DateTimeImmutable $startAt = null;
 
     #[ORM\Column(nullable: true)]
     #[Groups(['user', 'restaurant', 'assignments'])]
-    private ?\DateTimeImmutable $end_at = null;
+    private ?\DateTimeImmutable $endAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'assignments')]
     #[ORM\JoinColumn(nullable: false)]
@@ -33,7 +33,7 @@ class Assignment
     #[ORM\ManyToOne(inversedBy: 'assignments')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['user', 'restaurant', 'assignments'])]
-    private ?JobTitle $job_title = null;
+    private ?JobTitle $jobTitle = null;
 
     #[ORM\ManyToOne(inversedBy: 'assignments')]
     #[ORM\JoinColumn(nullable: false)]
@@ -51,24 +51,24 @@ class Assignment
 
     public function getStartAt(): ?\DateTimeImmutable
     {
-        return $this->start_at;
+        return $this->startAt;
     }
 
-    public function setStartAt(\DateTimeImmutable $start_at): static
+    public function setStartAt(\DateTimeImmutable $startAt): static
     {
-        $this->start_at = $start_at;
+        $this->startAt = $startAt;
 
         return $this;
     }
 
     public function getEndAt(): ?\DateTimeImmutable
     {
-        return $this->end_at;
+        return $this->endAt;
     }
 
-    public function setEndAt(?\DateTimeImmutable $end_at): static
+    public function setEndAt(?\DateTimeImmutable $endAt): static
     {
-        $this->end_at = $end_at;
+        $this->endAt = $endAt;
 
         return $this;
     }
@@ -87,12 +87,12 @@ class Assignment
 
     public function getJobTitle(): ?JobTitle
     {
-        return $this->job_title;
+        return $this->jobTitle;
     }
 
-    public function setJobTitle(?JobTitle $job_title): static
+    public function setJobTitle(?JobTitle $jobTitle): static
     {
-        $this->job_title = $job_title;
+        $this->jobTitle = $jobTitle;
 
         return $this;
     }

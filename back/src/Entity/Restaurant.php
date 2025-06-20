@@ -29,7 +29,7 @@ class Restaurant
 
     #[ORM\Column(length: 255)]
     #[Groups(['restaurant','assignments'])]
-    private ?string $zip_code = null;
+    private ?string $zipCode = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['restaurant','assignments'])]
@@ -78,12 +78,12 @@ class Restaurant
 
     public function getZipCode(): ?string
     {
-        return $this->zip_code;
+        return $this->zipCode;
     }
 
-    public function setZipCode(string $zip_code): static
+    public function setZipCode(string $zipCode): static
     {
-        $this->zip_code = $zip_code;
+        $this->zipCode = $zipCode;
 
         return $this;
     }

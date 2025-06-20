@@ -22,9 +22,9 @@ class WacdoFixture extends Fixture
     {
 
         $user = new User();
-        $user->setName('Marcheciel')
+        $user->setLastName('Marcheciel')
             ->setFirstName('Luc')
-            ->setRole(Role::ADMIN)
+            ->setRoles(['ROLE_ADMIN','ROLE_EMPLOYEE'])
             ->setEmail('admin@wacdo.local')
             ->setPassword($this->userPassword->hashPassword( $user, 'admin123'))
             ->setFirstHiredAt(new \DateTimeImmutable('now -1month'))
@@ -32,9 +32,9 @@ class WacdoFixture extends Fixture
         $manager->persist($user);
 
         $user1 = new User();
-        $user1->setName('Smith')
+        $user1->setLastName('Smith')
             ->setFirstName('Mister')
-            ->setRole(Role::EMPLOYEE)
+            ->setRoles(['ROLE_EMPLOYEE'])
             ->setEmail('employee1@wacdo.local')
             ->setPassword($this->userPassword->hashPassword( $user, 'employee1'))
             ->setFirstHiredAt(new \DateTimeImmutable('now -1week'))
@@ -42,9 +42,9 @@ class WacdoFixture extends Fixture
         $manager->persist($user1);
 
         $user2 = new User();
-        $user2->setName('Toukour')
+        $user2->setLastName('Toukour')
             ->setFirstName('Neo')
-            ->setRole(Role::EMPLOYEE)
+            ->setRoles(['ROLE_EMPLOYEE'])
             ->setEmail('employee2@wacdo.local')
             ->setPassword($this->userPassword->hashPassword( $user, 'employee2'))
             ->setFirstHiredAt(new \DateTimeImmutable('now -1day'))
