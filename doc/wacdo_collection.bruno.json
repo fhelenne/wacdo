@@ -1,0 +1,848 @@
+{
+  "name": "wacdo",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "job_title",
+      "filename": "job_title",
+      "seq": 4,
+      "root": {
+        "request": {
+          "vars": {
+            "req": [
+              {
+                "name": "endpoint",
+                "value": "job_titles",
+                "enabled": true,
+                "local": false,
+                "uid": "1bUvECwDFiMda0kQaJgmo"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "job_title",
+          "seq": 4
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "create",
+          "filename": "create.bru",
+          "seq": 1,
+          "request": {
+            "url": "{{url}}/{{endpoint}}",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"job test\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "filename": "delete.bru",
+          "seq": 3,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "DELETE",
+            "headers": [],
+            "params": [
+              {
+                "name": "id",
+                "value": "4",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "detail",
+          "filename": "detail.bru",
+          "seq": 5,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "id",
+                "value": "3",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "list",
+          "filename": "list.bru",
+          "seq": 4,
+          "request": {
+            "url": "{{url}}/{{endpoint}}",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "filename": "update.bru",
+          "seq": 2,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "PATCH",
+            "headers": [
+              {
+                "name": "content-type",
+                "value": "application/merge-patch+json",
+                "enabled": true
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "4",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"job test 2\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "assignment",
+      "filename": "assignment",
+      "seq": 5,
+      "root": {
+        "request": {
+          "vars": {
+            "req": [
+              {
+                "name": "endpoint",
+                "value": "assignments",
+                "enabled": true,
+                "local": false,
+                "uid": "UcucZQYqrHVjQFfUDJRME"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "assignment",
+          "seq": 5
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "create",
+          "filename": "create.bru",
+          "seq": 1,
+          "request": {
+            "url": "{{url}}/{{endpoint}}",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"user\": \"/api/v2/users/2\",\n  \"restaurant\": \"/api/v2/restaurants/3\",\n  \"jobTitle\": \"/api/v2/job_titles/3\",\n  \"startAt\": \"2025-05-24T17:28:57+00:00\",\n  \"endAt\": \"2026-05-24T17:28:57+00:00\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "filename": "delete.bru",
+          "seq": 3,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "DELETE",
+            "headers": [],
+            "params": [
+              {
+                "name": "id",
+                "value": "10",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "detail",
+          "filename": "detail.bru",
+          "seq": 5,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "id",
+                "value": "19",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "list",
+          "filename": "list.bru",
+          "seq": 4,
+          "request": {
+            "url": "{{url}}/{{endpoint}}",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "filename": "update.bru",
+          "seq": 2,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "PATCH",
+            "headers": [
+              {
+                "name": "content-type",
+                "value": "application/merge-patch+json",
+                "enabled": true
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "1",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"endAt\": \"2050-05-24T17:28:57+00:00\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "restaurant",
+      "filename": "restaurant",
+      "seq": 3,
+      "root": {
+        "request": {
+          "vars": {
+            "req": [
+              {
+                "name": "endpoint",
+                "value": "restaurants",
+                "enabled": true,
+                "local": false,
+                "uid": "Oweqsc62N2JPkWDS1VWRS"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "restaurant",
+          "seq": 3
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "create",
+          "filename": "create.bru",
+          "seq": 1,
+          "request": {
+            "url": "{{url}}/{{endpoint}}",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"wacdo new\",\n  \"address\": \"rue du marché\",\n  \"zipCode\": \"30000\",\n  \"city\": \"Nimes\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "filename": "delete.bru",
+          "seq": 3,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "DELETE",
+            "headers": [],
+            "params": [
+              {
+                "name": "id",
+                "value": "5",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "detail",
+          "filename": "detail.bru",
+          "seq": 5,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "id",
+                "value": "3",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "list",
+          "filename": "list.bru",
+          "seq": 4,
+          "request": {
+            "url": "{{url}}/{{endpoint}}",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "filename": "update.bru",
+          "seq": 2,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "PATCH",
+            "headers": [
+              {
+                "name": "content-type",
+                "value": "application/merge-patch+json",
+                "enabled": true
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "5",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"wacdo new 2\",\n  \"address\": \"rue du marché 2\",\n  \"zipCode\": \"30011\",\n  \"city\": \"Nimes2\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "user",
+      "filename": "user",
+      "seq": 2,
+      "root": {
+        "request": {
+          "vars": {
+            "req": [
+              {
+                "name": "endpoint",
+                "value": "users",
+                "enabled": true,
+                "local": false,
+                "uid": "DMGsoQ7LnTXraZxLkw1LA"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "user",
+          "seq": 2
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "create",
+          "filename": "create.bru",
+          "seq": 1,
+          "request": {
+            "url": "{{url}}/{{endpoint}}",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "  {\n    \"firstName\": \"test\",\n    \"lastName\": \"test\",\n    \"email\": \"test@test.fr\",\n    \"plainPassword\": \"222\",\n    \"roles\":[\n      \"ROLE_EMPLOYEE\"\n    ],\n    \"firstHiredAt\":  \"2025-05-24T17:28:57+00:00\"\n  }",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "filename": "delete.bru",
+          "seq": 3,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "DELETE",
+            "headers": [],
+            "params": [
+              {
+                "name": "id",
+                "value": "4",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "detail",
+          "filename": "detail.bru",
+          "seq": 5,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "id",
+                "value": "2",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "list",
+          "filename": "list.bru",
+          "seq": 4,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "filename": "update.bru",
+          "seq": 2,
+          "request": {
+            "url": "{{url}}/{{endpoint}}/:id",
+            "method": "PATCH",
+            "headers": [
+              {
+                "name": "content-type",
+                "value": "application/merge-patch+json",
+                "enabled": true
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "8",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"firstName\": \"test2\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "activeEnvironmentUid": "LruVD7blQP9jFvQv6CTki",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "base_url",
+          "value": "https://back.localhost",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "localhost"
+    },
+    {
+      "variables": [
+        {
+          "name": "base_url",
+          "value": "https://fhelenne.alwaysdata.net/formation/back",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "prod"
+    }
+  ],
+  "root": {
+    "request": {
+      "auth": {
+        "mode": "none"
+      },
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{access_token}}",
+          "enabled": true,
+          "uid": "fWFlYoTb13AlB5UqcLkPq"
+        },
+        {
+          "name": "content-type",
+          "value": "application/ld+json",
+          "enabled": true,
+          "uid": "gv2RCm6lhqcZwo0KBrtWg"
+        }
+      ],
+      "script": {
+        "req": "const axios = require(\"axios\");\nconst url = require(\"url\");\nconst https = require(\"https\");\nconst httpsAgent = new https.Agent({ rejectUnauthorized: false });\n\nvar path = bru.getEnvVar(\"base_url\")+\"/auth\";\n\nvar headers = {\"Content-Type\": \"application/json\"};\nvar params = {email: bru.getCollectionVar(\"email\"),password: bru.getCollectionVar(\"password\")};\n\nconst auth1 = await axios.post(path,\n           params,\n           {httpsAgent,headers: headers}).then((response) => {\n           bru.setVar(\"access_token\",response.data.token); //save access_token_1 for use elsewhere\n});\n"
+      },
+      "vars": {
+        "req": [
+          {
+            "name": "email",
+            "value": "admin@wacdo.local",
+            "enabled": true,
+            "local": false,
+            "uid": "xDzgvBLePE6W7S4NJR1jt"
+          },
+          {
+            "name": "password",
+            "value": "admin123",
+            "enabled": true,
+            "local": false,
+            "uid": "H89uoA6wxjAIKqa5ytLUL"
+          },
+          {
+            "name": "url",
+            "value": "{{base_url}}/api/v2",
+            "enabled": true,
+            "local": false,
+            "uid": "JN6BZ5Udq9Ov1pN3TWn50"
+          },
+          {
+            "name": "access_token",
+            "value": "{{access_token}}",
+            "enabled": true,
+            "local": false,
+            "uid": "aDpoy3FUVRHxg6JQIoKet"
+          }
+        ]
+      }
+    }
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "wacdo",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.0038280487060546875,
+    "filesCount": 27,
+    "clientCertificates": {
+      "enabled": true,
+      "certs": []
+    }
+  }
+}
