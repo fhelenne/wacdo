@@ -14,9 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 #[Route('/api/v1/assignment')]
+#[IsGranted('ROLE_ADMIN')]
 final class AssignmentController extends AbstractController
 {
     /**
@@ -64,6 +67,7 @@ final class AssignmentController extends AbstractController
      * @param EntityManagerInterface $em
      * @param UrlGeneratorInterface $urlGenerator
      * @return JsonResponse
+     * @throws ExceptionInterface
      */
     #[Route('/', name: "assignment_create", methods: ['POST'])]
     public function createAssignment(Request                $request,
@@ -74,15 +78,15 @@ final class AssignmentController extends AbstractController
                                      RestaurantRepository   $restaurantRepository,
                                      UserRepository         $userRepository): JsonResponse
     {
-        $assignment = $serializer->deserialize($request->getContent(), Assignment::class, 'json',['groups' => ['assignments']]);
+        $assignment = $serializer->deserialize($request->getContent(), Assignment::class, 'json',['groups' => ['assignment']]);
 
         // Récupération de l'ensemble des données envoyées sous forme de tableau
         $content = $request->toArray();
 
         // Récupération de l'idAuthor. S'il n'est pas défini, alors on met -1 par défaut.
-        $userId = $content['user_id'] ?? -1;
-        $restaurantId = $content['restaurant_id'] ?? -1;
-        $jobTitleId = $content['job_title_id'] ?? -1;
+        $userId = $content['userId'] ?? -1;
+        $restaurantId = $content['restaurantId'] ?? -1;
+        $jobTitleId = $content['jobTitleId'] ?? -1;
 
 
         $assignment->setUser($userRepository->find($userId));

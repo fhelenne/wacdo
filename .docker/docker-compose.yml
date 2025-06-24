@@ -48,6 +48,7 @@ services:
             - ./config/caddy/Caddyfile:/etc/caddy/Caddyfile
             - ./log/caddy:/var/log/caddy
             - ../back:/var/www/html/back
+            - ./caddy/data:/data
         networks:
             - wacdonet
 

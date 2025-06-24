@@ -5,17 +5,21 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use JetBrains\PhpStorm\NoReturn;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/api/v1/user')]
+#[IsGranted('ROLE_ADMIN')]
 final class UserController extends AbstractController
 {
     #[Route('/', name: 'user_list', methods: ['GET'])]
@@ -50,6 +54,7 @@ final class UserController extends AbstractController
 
 
     /**
+     * @param UserPasswordHasherInterface $passwordHasher
      * @param Request $request
      * @param SerializerInterface $serializer
      * @param EntityManagerInterface $em
@@ -58,10 +63,15 @@ final class UserController extends AbstractController
      * @throws ExceptionInterface
      */
     #[Route('/', name: "user_create", methods: ['POST'])]
-    public function createUser(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse
+    public function createUser(UserPasswordHasherInterface $passwordHasher, Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse
     {
-
         $user = $serializer->deserialize($request->getContent(), User::class, 'json',['groups' => ['user']]);
+        $hashedPassword = $passwordHasher->hashPassword(
+            $user,
+            $user->getPassword()
+        );
+
+        $user->setPassword($hashedPassword);
         $em->persist($user);
         $em->flush();
 

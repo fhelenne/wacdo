@@ -3,6 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\RestaurantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,36 +16,47 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Post(validationContext: ['groups' => ['restaurant:create']]),
+        new Get(),
+        new Put(),
+        new Patch(),
+        new Delete(),
+    ],
+    normalizationContext: ['groups' => ['restaurant:read']],
+    denormalizationContext: ['groups' => ['restaurant:update']],
+)]
 class Restaurant
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['restaurant','assignments'])]
+    #[Groups(['restaurant:read','assignments'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['user','restaurant','assignments'])]
+    #[Groups(['user:read','restaurant:read','assignment:read'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['restaurant','assignments'])]
+    #[Groups(['restaurant:read','assignments'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['restaurant','assignments'])]
+    #[Groups(['restaurant:read','assignments'])]
     private ?string $zipCode = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['restaurant','assignments'])]
+    #[Groups(['restaurant:read','assignments'])]
     private ?string $city = null;
 
     /**
      * @var Collection<int, Assignment>
      */
     #[ORM\OneToMany(targetEntity: Assignment::class, mappedBy: 'restaurant', orphanRemoval: true)]
-    #[Groups(['restaurant'])]
+    #[Groups(['restaurant:read'])]
     private Collection $assignments;
 
     public function __construct()

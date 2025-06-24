@@ -3,41 +3,62 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\AssignmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: AssignmentRepository::class)]
-#[ApiResource]
+#[ApiResource(
+
+    operations: [
+        new GetCollection(),
+        new Post(validationContext: ['groups' => ['assignment:create']]),
+        new Get(),
+        new Put(),
+        new Patch(),
+        new Delete(),
+    ],
+    normalizationContext: ['groups' => ['assignment:read']],
+    denormalizationContext: ['groups' => ['assignment:create', 'assignment:update']],
+)]
 class Assignment
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['user', 'restaurant','assignments'])]
+    #[Groups(['user:read', 'assignment:read'])]
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Groups(['user', 'restaurant', 'assignments'])]
+    #[Groups(['restaurant:read', 'assignment:create'])]
     private ?\DateTimeImmutable $startAt = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['user', 'restaurant', 'assignments'])]
+    #[Groups(['user:read', 'restaurant:read', 'assignment:read', 'assignment:create'])]
     private ?\DateTimeImmutable $endAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'assignments')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['assignments'])]
+    #[Groups(['restaurant:read', 'assignment:read'])]
+    #[SerializedName("employee")]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'assignments')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['user', 'restaurant', 'assignments'])]
+    #[Groups(['assignment:read', 'assignment:create', 'restaurant:read'])]
     private ?JobTitle $jobTitle = null;
 
     #[ORM\ManyToOne(inversedBy: 'assignments')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['user', 'assignments'])]
+    #[Groups(['user:read', 'assignment:read', 'assignment:create'])]
     private ?Restaurant $restaurant = null;
 
     public function __construct()
