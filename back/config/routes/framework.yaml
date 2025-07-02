@@ -1,8 +1,3 @@
-framework:
-    session:
-        name: "WACDO_FH"
-
-
 when@dev:
     _errors:
         resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
