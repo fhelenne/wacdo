@@ -1,6 +1,6 @@
 framework:
     session:
-        name:   WACDO_FH
+        name: "WACDO_FH"
 
 
 when@dev:
