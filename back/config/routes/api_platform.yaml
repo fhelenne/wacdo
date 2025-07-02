@@ -1,4 +1,4 @@
-api_v2_doc:
+api_doc:
     resource: .
     type: api_platform
-    prefix: /api/v2
+    prefix: /api
