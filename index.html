@@ -68,14 +68,23 @@ main {
 
 .link-list-item {
     align-items: center;
-    display: flex;
-    height: 2em;
+    display: inline-block;
     justify-content: center;
     line-height: 2em;
     list-style-type: none;
     margin: 1vh 0 1vh 0;
     text-align: center;
     width: 100%;
+}
+
+.link-list-item a {
+    display: block;
+    line-height:2rem;
+    width: 100%;
+}
+
+.link-list-item a:hover {
+    color:black;
 }
 
 .link-list-item:hover {
@@ -151,7 +160,7 @@ main {
                 <h2 class="link-section-title red">Formation</h2>
                 <hr />
                 <ul class="link-list">
-                    <li class="link-list-item"><a class="link" href="https://fhelenne.alwaysdata.net/formation/back/">Accès back <img src="https://insight.symfony.com/projects/76c18180-f463-4022-867c-7f147e05f186/mini.svg"/></a></li>
+                    <li class="link-list-item"><a class="link" href="https://fhelenne.alwaysdata.net/formation/back/">Accès back<br/><img src="https://insight.symfony.com/projects/76c18180-f463-4022-867c-7f147e05f186/mini.svg"/></a></li>
                     <li class="link-list-item"><a class="link" href="https://fhelenne.alwaysdata.net/formation/front/">Accès front</a></li>
                     <li class="link-list-item"><a class="link" href="https://github.com/fhelenne/wacdo">Accès depot git</a></li>
                 </ul>
