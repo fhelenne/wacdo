@@ -21,7 +21,7 @@ docker compose -f .docker/docker-compose.yml up
 ```
 
 
-## Back
+## Back [![SymfonyInsight](https://insight.symfony.com/projects/76c18180-f463-4022-867c-7f147e05f186/mini.svg)](https://insight.symfony.com/projects/76c18180-f463-4022-867c-7f147e05f186)
 
 ### Collections postman/bruno
 
