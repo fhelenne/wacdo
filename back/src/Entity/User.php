@@ -25,12 +25,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
-        new GetCollection(),
-        new Post(validationContext: ['groups' => ['Default', 'user:create']], processor: UserPasswordHasher::class),
-        new Get(),
-        new Put(processor: UserPasswordHasher::class),
-        new Patch(processor: UserPasswordHasher::class),
-        new Delete(),
+        new GetCollection(security: "is_granted('ROLE_ADMIN')"),
+        new Post(security: "is_granted('ROLE_ADMIN') or (object == user and previous_object == user)",validationContext: ['groups' => ['Default', 'user:create']], processor: UserPasswordHasher::class),
+        new Get(security: "is_granted('ROLE_ADMIN') or ((object == user and previous_object == user))"),
+        new Put(security: "is_granted('ROLE_ADMIN') or (object == user and previous_object == user)", processor: UserPasswordHasher::class),
+        new Patch(security: "is_granted('ROLE_ADMIN') or (object == user and previous_object == user)",processor: UserPasswordHasher::class),
+        new Delete(security: "is_granted('ROLE_ADMIN')"),
     ],
     normalizationContext: ['groups' => ['user:read']],
     denormalizationContext: ['groups' => ['user:create', 'user:update']],
