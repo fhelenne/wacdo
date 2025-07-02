@@ -1,0 +1,9 @@
+{
+    "name": "wacdo-fh",
+    "short_name": "wacdo-fh",
+    "icons": [
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}
