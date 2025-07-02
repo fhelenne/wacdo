@@ -53,3 +53,25 @@
 /.env
 /.docker/log/*/*
 
+/.docker/caddy/data/caddy/certificates/local/back.localhost/back.localhost.crt
+/.docker/caddy/data/caddy/certificates/local/back.localhost/back.localhost.json
+/.docker/caddy/data/caddy/certificates/local/back.localhost/back.localhost.key
+/.idea/dataSources.xml
+/deploy.sh
+/.docker/caddy/data/caddy/certificates/local/front.localhost/front.localhost.crt
+/.docker/caddy/data/caddy/certificates/local/front.localhost/front.localhost.json
+/.docker/caddy/data/caddy/certificates/local/front.localhost/front.localhost.key
+/.docker/caddy/data/caddy/instance.uuid
+/.docker/caddy/data/caddy/pki/authorities/local/intermediate.crt
+/.docker/caddy/data/caddy/pki/authorities/local/intermediate.key
+/.docker/caddy/data/caddy/last_clean.json
+/.idea/modules.xml
+/.idea/php.xml
+/.idea/phpunit.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/reset.sh
+/.docker/caddy/data/caddy/pki/authorities/local/root.crt
+/.docker/caddy/data/caddy/pki/authorities/local/root.key
+/rsync_exclude.txt
+/.idea/vcs.xml
+/.idea/www.iml
