@@ -2,11 +2,15 @@
 
 Projet formation FH.
 
+Une application symfony pour le back
+
+Une application react pour le front
+
 ## installation
 
 1. copier .env.sample -> .env et renseigner les paramètres
 
-## Lancer l'application
+## Lancement
 
 Pour plus de simplicité, on utilise docker pour avoir un environnement complet :
 
@@ -16,8 +20,20 @@ Pour plus de simplicité, on utilise docker pour avoir un environnement complet 
 docker compose -f .docker/docker-compose.yml up
 ```
 
-initialiser/purger les données en base :
+
+## Back
+
+### Collections postman/bruno
+
+Disponibles dans back/.collections
+
+### Initialiser/purger les données en base :
 
 ```bash
 docker exec -it back php back/bin/console doctrine:fixtures:load --no-interaction 
 ```
+
+
+## Front
+
+TODO
