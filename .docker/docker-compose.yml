@@ -7,6 +7,7 @@ services:
             MYSQL_DATABASE: "wacdo"
             MYSQL_USER: "fhelenne"
             MYSQL_PASSWORD: "azeaze"
+            MYSQL_SERVER_VERSION: "azeaze"
         ports:
             - "3306:3306"
         volumes:
