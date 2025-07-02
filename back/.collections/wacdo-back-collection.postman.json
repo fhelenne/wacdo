@@ -1,0 +1,703 @@
+{
+  "info": {
+    "name": "wacdo",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "assignment",
+      "item": [
+        {
+          "name": "create",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": \"/api/v2/users/2\",\n  \"restaurant\": \"/api/v2/restaurants/3\",\n  \"jobTitle\": \"/api/v2/job_titles/3\",\n  \"startAt\": \"2025-05-24T17:28:57+00:00\",\n  \"endAt\": \"2026-05-24T17:28:57+00:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "detail",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "19"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "list",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "update",
+          "event": [],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/merge-patch+json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"endAt\": \"2050-05-24T17:28:57+00:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "job_title",
+      "item": [
+        {
+          "name": "create",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"job test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "4"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "detail",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "3"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "list",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "update",
+          "event": [],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/merge-patch+json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "4"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"job test 2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "restaurant",
+      "item": [
+        {
+          "name": "create",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"wacdo new\",\n  \"address\": \"rue du marché\",\n  \"zipCode\": \"30000\",\n  \"city\": \"Nimes\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "5"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "detail",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "3"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "list",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "update",
+          "event": [],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/merge-patch+json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "5"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"wacdo new 2\",\n  \"address\": \"rue du marché 2\",\n  \"zipCode\": \"30011\",\n  \"city\": \"Nimes2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "create",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "  {\n    \"firstName\": \"test\",\n    \"lastName\": \"test\",\n    \"email\": \"test@test.fr\",\n    \"plainPassword\": \"222\",\n    \"roles\":[\n      \"ROLE_EMPLOYEE\"\n    ],\n    \"firstHiredAt\":  \"2025-05-24T17:28:57+00:00\"\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "4"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "detail",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "2"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "list",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "update",
+          "event": [],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/merge-patch+json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/{{endpoint}}/:id",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "{{endpoint}}",
+                ":id"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "8"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"test2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "endpoint",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "base_url",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
