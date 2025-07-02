@@ -39,7 +39,8 @@ services:
             - wacdonet
 
     proxy:
-        image: caddy
+        build:
+            dockerfile: ./DockerFile/caddy.dockerfile
         container_name: proxy
         ports:
             - "443:443"

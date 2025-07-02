@@ -77,7 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Assignment>
      */
-    #[ORM\OneToMany(targetEntity: Assignment::class, mappedBy: 'user', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Assignment::class, mappedBy: 'user', fetch: 'LAZY', orphanRemoval: true)]
     #[Groups(['user:read', 'user:create', 'user:update'])]
     private Collection $assignments;
 

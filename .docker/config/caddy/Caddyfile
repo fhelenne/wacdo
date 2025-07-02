@@ -1,7 +1,21 @@
-
 back.localhost  {
     root * /var/www/html/back/public
     encode zstd gzip
+    header {
+                Access-Control-Allow-Origin *
+                Access-Control-Allow-Methods "GET, POST, PUT, PATCH, OPTIONS"
+                Strict-Transport-Security max-age=31536000
+                Referrer-Policy "no-referrer, strict-origin-when-cross-origin, no-referrer-when-downgrade"
+                X-Content-Type-Options nosniff
+                Access-Control-Allow-Headers "Origin, Access-Control-Allow-Headers, Access-Control-Allow-Origin, Accept, Content-Type, X-Auth-Token, X-Requested-With"
+
+                CustomDomainHost {host}
+                FWServe main
+                X-Real-IP {remote}
+                X-Forwarded-For {remote}
+                X-Self-Sub false
+                Server Avoca
+            }
     file_server
     php_fastcgi back:9000 {
         # only fall back to root index.php aka front controller.
@@ -31,3 +45,4 @@ front.localhost {
         output file /var/log/caddy/front.localhost-access.log
     }
 }
+

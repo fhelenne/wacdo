@@ -45,18 +45,18 @@ class Assignment
     #[Groups(['user:read', 'restaurant:read', 'assignment:read', 'assignment:create'])]
     private ?\DateTimeImmutable $endAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'assignments')]
+    #[ORM\ManyToOne(fetch: 'LAZY', inversedBy: 'assignments',)]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['restaurant:read', 'assignment:read'])]
     #[SerializedName("employee")]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'assignments')]
+    #[ORM\ManyToOne(fetch: 'LAZY', inversedBy: 'assignments',)]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['assignment:read', 'assignment:create', 'restaurant:read'])]
     private ?JobTitle $jobTitle = null;
 
-    #[ORM\ManyToOne(inversedBy: 'assignments')]
+    #[ORM\ManyToOne(fetch: 'LAZY', inversedBy: 'assignments',)]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['user:read', 'assignment:read', 'assignment:create'])]
     private ?Restaurant $restaurant = null;
