@@ -128,18 +128,11 @@ docker exec -it back php back/bin/phpunit
 docker exec -it front npm test
 ```
 
-## Déploiement
-
-Le script `deploy.sh` à la racine du projet permet de déployer l'application en production.
-
-```bash
-./deploy.sh
-```
 
 ## Sécurité
 
 L'application implémente plusieurs mesures de sécurité :
-- Protection CSRF
+- Protection CSRFœ
 - Protection contre les attaques XSS
 - Authentification JWT
 - Contrôle d'accès basé sur les rôles
