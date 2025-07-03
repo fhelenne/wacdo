@@ -132,7 +132,7 @@ docker exec -it front npm test
 ## Sécurité
 
 L'application implémente plusieurs mesures de sécurité :
-- Protection CSRFœ
+- Protection CSRF
 - Protection contre les attaques XSS
 - Authentification JWT
 - Contrôle d'accès basé sur les rôles
