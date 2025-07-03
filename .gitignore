@@ -1,64 +1,70 @@
-# Cache and logs (Symfony2)
-/app/cache/*
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
+# ===========================
+# Symfony (Backend)
+# ===========================
 
 # Email spool folder
 /app/spool/*
 
-# Cache, session files and logs (Symfony3)
-/var/cache/*
-/var/logs/*
-/var/sessions/*
-!var/cache/.gitkeep
-!var/logs/.gitkeep
-!var/sessions/.gitkeep
-
-# Logs (Symfony4)
-/var/log/*
-!var/log/.gitkeep
-
-# Parameters
-/app/config/parameters.yml
-/app/config/parameters.ini
+# Cache, session files and logs (Symfony)
+/back/var/cache/*
+/back/var/log/*
+/back/var/sessions/*
+!back/var/cache/.gitkeep
+!back/var/log/.gitkeep
+!back/var/sessions/.gitkeep
 
 # Managed by Composer
-/app/bootstrap.php.cache
-/var/bootstrap.php.cache
-/bin/*
-!bin/console
-!bin/symfony_requirements
-/vendor/
-
-# Assets and user uploads
-/web/bundles/
-/web/uploads/
+/back/var/bootstrap.php.cache
+/back/bin/*
+!back/bin/console
+!back/bin/symfony_requirements
+/back/vendor/
 
 # PHPUnit
-/app/phpunit.xml
-/phpunit.xml
-
-# Build data
-/build/
-
-# Composer PHAR
-/composer.phar
+/back/phpunit.xml
+/back/.phpunit.result.cache
+/back/coverage/
 
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
 
-# Embedded web-server pid file
-/.web-server-pid
-/.env.local
-/.env
-/.docker/log/*/*
+# Symfony environment
+/back/.env.local
+/back/.env.local.php
+/back/.env.*.local
+/back/.env.dev
+/back/.env.prod
+/back/.env.test
 
+# ===========================
+# React (Frontend)
+# ===========================
+# Node.js
+/front/node_modules/
+/front/dist/
+/front/build/
+/front/.vite/
+/front/coverage/
+/front/.env.local
+/front/.env.development.local
+/front/.env.test.local
+/front/.env.production.local
+/front/npm-debug.log*
+/front/yarn-debug.log*
+/front/yarn-error.log*
+/front/junit.xml
+
+# ===========================
+# Docker & Infrastructure
+# ===========================
+# Docker
+/.docker/log/*
+!/.docker/log/.gitkeep
+/.docker/caddy/data/
+/.docker/*/temp/
 /.docker/caddy/data/caddy/certificates/local/back.localhost/back.localhost.crt
 /.docker/caddy/data/caddy/certificates/local/back.localhost/back.localhost.json
 /.docker/caddy/data/caddy/certificates/local/back.localhost/back.localhost.key
-/.idea/dataSources.xml
-/deploy.sh
 /.docker/caddy/data/caddy/certificates/local/front.localhost/front.localhost.crt
 /.docker/caddy/data/caddy/certificates/local/front.localhost/front.localhost.json
 /.docker/caddy/data/caddy/certificates/local/front.localhost/front.localhost.key
@@ -66,13 +72,45 @@
 /.docker/caddy/data/caddy/pki/authorities/local/intermediate.crt
 /.docker/caddy/data/caddy/pki/authorities/local/intermediate.key
 /.docker/caddy/data/caddy/last_clean.json
+/.docker/caddy/data/caddy/pki/authorities/local/root.crt
+/.docker/caddy/data/caddy/pki/authorities/local/root.key
+
+# Embedded web-server pid file
+/.web-server-pid
+
+# ===========================
+# IDE & Éditeurs
+# ===========================
+/.idea/
+/.vscode/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.DS_Store
+/.idea/dataSources.xml
 /.idea/modules.xml
 /.idea/php.xml
 /.idea/phpunit.xml
 /.idea/inspectionProfiles/Project_Default.xml
-/reset.sh
-/.docker/caddy/data/caddy/pki/authorities/local/root.crt
-/.docker/caddy/data/caddy/pki/authorities/local/root.key
-/rsync_exclude.txt
 /.idea/vcs.xml
 /.idea/www.iml
+
+# ===========================
+# Système & Temporaires
+# ===========================
+# Build & Temp
+/var/
+/tmp/
+/temp/
+*.tmp
+*.bak
+*.swp
+/build/
+
+# Environment files
+/.env
+
+# Scripts
+/deploy.sh
+/reset.sh
+/rsync_exclude.txt
