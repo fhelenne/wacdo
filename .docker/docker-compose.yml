@@ -23,10 +23,14 @@ services:
             - ../back:/var/www/html/back
             - ./log/back:/var/log
             - ./config/php83/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+        ports:
+            - "9000:9000"
         depends_on:
             - db
         networks:
             - wacdonet
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
 
     front:
         image: node
