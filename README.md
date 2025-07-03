@@ -67,7 +67,7 @@ www/
    ```bash
    cp .env.sample .env
    ```
-   
+
    Éditer le fichier `.env` avec les paramètres appropriés :
    ```
    MYSQL_HOST="db"
@@ -121,6 +121,18 @@ docker exec -it back php back/bin/console api:doc:dump
 ### Exécution des tests backend
 ```bash
 docker exec -it back php back/bin/phpunit
+```
+
+#### Tests des entités
+Le projet inclut des tests unitaires complets pour toutes les entités :
+- `UserTest` : Validation des getters, setters et relations pour l'entité User
+- `RestaurantTest` : Validation des getters, setters et relations pour l'entité Restaurant
+- `JobTitleTest` : Validation des getters, setters et relations pour l'entité JobTitle
+- `AssignmentTest` : Validation des getters, setters et relations pour l'entité Assignment
+
+Pour exécuter uniquement les tests d'entités :
+```bash
+docker exec -it back php bin/phpunit tests/Entity
 ```
 
 ### Exécution des tests frontend
