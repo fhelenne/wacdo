@@ -1,19 +1,16 @@
 <?php
-// tests/AuthenticationTest.php
 
-namespace App\Tests;
+namespace App\Tests\Controller;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Entity\User;
 use App\Repository\UserRepository;
 
-class AuthenticationTest extends ApiTestCase
+abstract class BaseController extends ApiTestCase
 {
-
-
-    public function testLogin(): void
+    protected function getAuthenticatedClient(): \ApiPlatform\Symfony\Bundle\Test\Client
     {
-       static::bootKernel();
+        static::bootKernel();
         $client = self::createClient();
         $container = self::getContainer();
 
@@ -25,8 +22,7 @@ class AuthenticationTest extends ApiTestCase
             throw new \Exception('Tole8admin user not found. Make sure fixtures are loaded.');
         }
 
-
-        // retrieve a token
+        // Get JWT token
         $response = $client->request('POST', '/auth', [
             'headers' => ['Content-Type' => 'application/json'],
             'json' => [
@@ -36,8 +32,16 @@ class AuthenticationTest extends ApiTestCase
         ]);
 
         $json = $response->toArray();
-        self::assertResponseIsSuccessful();
-        $this->assertArrayHasKey('token', $json);
+        $token = $json['token'];
 
+        // Set the authorization header for subsequent requests
+        $client->setDefaultOptions([
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json',
+            ],
+        ]);
+
+        return $client;
     }
 }
