@@ -1,4 +1,16 @@
 import { Link, useLocation } from 'react-router-dom';
+import { memo } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faChartBar, 
+  faUsers, 
+  faClipboardList, 
+  faStore, 
+  faBriefcase, 
+  faHamburger, 
+  faUser, 
+  faSignOutAlt 
+} from '../utils/icons.js';
 
 function Navigation() {
   const location = useLocation();
@@ -9,47 +21,58 @@ function Navigation() {
   }
 
   const navItems = [
-    { path: '/dashboard', name: 'Tableau de bord' },
-    { path: '/users', name: 'Utilisateurs' },
-    { path: '/assignments', name: 'Affectations' },
-    { path: '/restaurants', name: 'Restaurants' },
-    { path: '/job-titles', name: 'Postes' },
+    { path: '/dashboard', name: 'Tableau de bord', icon: faChartBar },
+    { path: '/users', name: 'Utilisateurs', icon: faUsers },
+    { path: '/assignments', name: 'Affectations', icon: faClipboardList },
+    { path: '/restaurants', name: 'Restaurants', icon: faStore },
+    { path: '/job-titles', name: 'Postes', icon: faBriefcase },
   ];
 
   return (
-    <nav role="nav">
-      <section>
-        <header>
-          <Link to="/dashboard" role="logo">
-            Wacdo Admin
-          </Link>
-          <div role="menu">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                role="item"
-                data-active={location.pathname === item.path}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        </header>
+    <nav role="navigation">
+      <div>
         <div>
-          <div role="user">
-            Admin
+          <div>
+            <div>
+              <Link 
+                to="/dashboard" 
+                role="link"
+              >
+<FontAwesomeIcon icon={faHamburger} /> Wacdo Admin
+              </Link>
+            </div>
+            <div>
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    role="link"
+                    aria-current={isActive ? "page" : undefined}
+                  >
+                    <FontAwesomeIcon icon={item.icon} />
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-          <Link
-            to="/login"
-            role="logout"
-          >
-            Déconnexion
-          </Link>
+          <div>
+            <div role="status">
+              <FontAwesomeIcon icon={faUser} /> Admin
+            </div>
+            <Link
+              to="/login"
+              role="button"
+            >
+<FontAwesomeIcon icon={faSignOutAlt} /> Déconnexion
+            </Link>
+          </div>
         </div>
-      </section>
+      </div>
     </nav>
   );
 }
 
-export default Navigation;
+export default memo(Navigation);

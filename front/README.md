@@ -1,12 +1,66 @@
-# React + Vite
+# Application Frontend Wacdo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface de gestion pour le réseau de restaurants Wacdo permettant l'administration des utilisateurs, restaurants, affectations et postes de travail.
 
-Currently, two official plugins are available:
+## 🚀 Démarrage rapide
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Installation des dépendances
+npm install
 
-## Expanding the ESLint configuration
+# Lancement en mode développement
+npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Construction pour la production
+npm run build
+```
+
+## 📋 Fonctionnalités
+
+- **Authentification** : Système de connexion sécurisé
+- **Tableau de bord** : Vue d'ensemble avec statistiques et activités
+- **Gestion des restaurants** : CRUD complet des établissements
+- **Gestion des utilisateurs** : Administration du personnel
+- **Gestion des affectations** : Attribution du personnel aux postes
+- **Gestion des postes** : Administration des rôles et responsabilités
+
+## 🛠️ Technologies
+
+- React 19.1.0 avec hooks modernes
+- React Router DOM pour la navigation
+- Vite pour le bundling et le développement
+- FontAwesome pour les icônes
+- ESLint et Prettier pour la qualité du code
+
+## 📖 Documentation complète
+
+Pour une documentation détaillée, consultez le fichier [DOCUMENTATION_FR.md](./DOCUMENTATION_FR.md) qui contient :
+- Guide d'installation et configuration
+- Architecture de l'application
+- Description détaillée des composants
+- Bonnes pratiques et conventions
+
+## 🏗️ Architecture
+
+```
+src/
+├── components/     # Composants réutilisables
+├── pages/         # Pages de l'application
+├── styles/        # Feuilles de style
+├── utils/         # Utilitaires
+├── App.jsx        # Composant racine
+└── main.jsx       # Point d'entrée
+```
+
+## 📱 Pages disponibles
+
+- `/login` - Connexion
+- `/dashboard` - Tableau de bord
+- `/users` - Gestion des utilisateurs
+- `/restaurants` - Gestion des restaurants
+- `/assignments` - Gestion des affectations
+- `/job-titles` - Gestion des postes
+
+---
+
+*Application développée pour la gestion du réseau Wacdo*
