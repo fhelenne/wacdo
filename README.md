@@ -98,13 +98,13 @@ docker exec -it back composer install
 
 ### Création de la base de données
 ```bash
-docker exec -it back php back/bin/console doctrine:database:create
-docker exec -it back php back/bin/console doctrine:migrations:migrate
+docker exec -it back php bin/console doctrine:database:create
+docker exec -it back php bin/console doctrine:migrations:migrate
 ```
 
 ### Chargement des données de test
 ```bash
-docker exec -it back php back/bin/console doctrine:fixtures:load --no-interaction
+docker exec -it back php bin/console doctrine:fixtures:load --no-interaction
 ```
 
 ## Documentation API
@@ -113,14 +113,14 @@ Les collections Postman/Bruno sont disponibles dans le dossier `back/.collection
 
 Pour générer la documentation API :
 ```bash
-docker exec -it back php back/bin/console api:doc:dump
+docker exec -it back php bin/console api:doc:dump
 ```
 
 ## Tests
 
 ### Exécution des tests backend
 ```bash
-docker exec -it back php back/bin/phpunit
+docker exec -it back php bin/phpunit
 ```
 
 #### Tests des entités
