@@ -63,18 +63,12 @@ function Restaurant() {
 
   return (
     <main role="restaurant">
+
       <section>
         <PageHeader 
           title="Gestion des Restaurants"
           actionButton={<Button>Ajouter un restaurant</Button>}
         />
-
-        <section>
-          <StatCard 
-            title="Total restaurants" 
-            value={restaurants.length} 
-          />
-        </section>
 
         <section>
           <SearchBar placeholder="Rechercher un restaurant..." />

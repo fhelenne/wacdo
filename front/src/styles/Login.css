@@ -1,0 +1,74 @@
+/* Login Page Styles */
+
+[role="login"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 1rem;
+}
+
+[role="login"] > section {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+[role="login"] [role="banner"] {
+  background-color: transparent;
+  box-shadow: none;
+  border-bottom: none;
+  padding: 0;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+[role="login"] [role="banner"] > div {
+  justify-content: center;
+}
+
+[role="login"] [role="form"] {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Form Field Container Overrides for Login */
+[role="login"] [role="form"] > div:not(:last-child) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Checkbox and Link Container */
+[role="login"] [role="form"] > div:nth-last-child(2) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+[role="login"] [role="form"] > div:nth-last-child(2) > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+[role="login"] input[type="checkbox"] + label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0;
+}
+
+/* Login Button Override */
+[role="login"] [role="button"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+}

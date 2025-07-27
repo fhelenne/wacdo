@@ -1,3 +1,4 @@
+import '../styles/components/DataTable.css';
 function DataTable({ columns, data, renderActions }) {
   return (
     <div 

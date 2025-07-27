@@ -6,7 +6,8 @@ import {
   faClipboardList, 
   faStore, 
   faBriefcase, 
-  faHamburger, 
+  faHamburger,
+  faMagnifyingGlass,
   faUser, 
   faSignOutAlt 
 } from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +18,7 @@ library.add(
   faUsers,
   faClipboardList,
   faStore,
+  faMagnifyingGlass,
   faBriefcase,
   faHamburger,
   faUser,
@@ -29,6 +31,7 @@ export {
   faUsers,
   faClipboardList,
   faStore,
+  faMagnifyingGlass,
   faBriefcase,
   faHamburger,
   faUser,

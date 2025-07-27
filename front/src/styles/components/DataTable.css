@@ -1,0 +1,90 @@
+/* Data Table Component Styles */
+
+[role="region"][aria-label="Data table"] {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+[role="region"][aria-label="Data table"] > div {
+  overflow-x: auto;
+}
+
+[role="table"] {
+  width: 100%;
+}
+
+[role="table"] thead {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+[role="columnheader"] {
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+[role="columnheader"]:last-child {
+  text-align: right;
+}
+
+[role="table"] tbody {
+  background-color: white;
+  divide-y: 1px solid #e5e7eb;
+}
+
+[role="row"] {
+  transition: background-color 0.15s;
+}
+
+[role="row"]:hover {
+  background-color: #f9fafb;
+}
+
+[role="cell"] {
+  padding: 1rem 1.5rem;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  color: #111827;
+}
+
+[role="cell"]:last-child {
+  text-align: right;
+  font-weight: 500;
+}
+
+[role="cell"]:last-child > div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Empty State */
+[role="region"][aria-label="Data table"] [role="status"] {
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280;
+}
+
+[role="region"][aria-label="Data table"] [role="status"] > div:first-child {
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
+}
+
+[role="region"][aria-label="Data table"] [role="status"] > div:nth-child(2) {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+[role="region"][aria-label="Data table"] [role="status"] > div:last-child {
+  font-size: 0.875rem;
+}

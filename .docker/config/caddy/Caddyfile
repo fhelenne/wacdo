@@ -1,6 +1,6 @@
 back.localhost  {
     root * /var/www/html/back/public
-    encode zstd gzip
+    encode zstd br gzip
     header {
                 Access-Control-Allow-Origin *
                 Access-Control-Allow-Methods "GET, POST, PUT, PATCH, OPTIONS"
@@ -41,6 +41,7 @@ back.localhost  {
 
 front.localhost {
     reverse_proxy front:5173
+    encode zstd br gzip
     log {
         output file /var/log/caddy/front.localhost-access.log
     }

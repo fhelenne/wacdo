@@ -1,0 +1,166 @@
+/* Shared Form Styles */
+
+/* Form Field Base Styles */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+[role="searchbox"],
+[role="combobox"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  background-color: white;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+[role="searchbox"]:focus,
+[role="combobox"]:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #4f46e5;
+  border-color: #4f46e5;
+}
+
+/* Label Styles */
+label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+/* Form Field Container */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Button Base Styles */
+[role="button"],
+button {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+[role="button"]:disabled,
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary Button */
+[role="button"]:not([data-variant]),
+button:not([data-variant]) {
+  background-color: #4f46e5;
+  color: white;
+}
+
+[role="button"]:not([data-variant]):hover:not(:disabled),
+button:not([data-variant]):hover:not(:disabled) {
+  background-color: #4338ca;
+}
+
+[role="button"]:not([data-variant]):focus,
+button:not([data-variant]):focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #4f46e5;
+  ring-offset: 2px;
+}
+
+/* Secondary Button */
+[role="button"][data-variant="secondary"],
+button[data-variant="secondary"] {
+  background-color: white;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+[role="button"][data-variant="secondary"]:hover:not(:disabled),
+button[data-variant="secondary"]:hover:not(:disabled) {
+  background-color: #f9fafb;
+}
+
+[role="button"][data-variant="secondary"]:focus,
+button[data-variant="secondary"]:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #4f46e5;
+  ring-offset: 2px;
+}
+
+/* Danger Button */
+[role="button"][data-variant="danger"],
+button[data-variant="danger"] {
+  background-color: #dc2626;
+  color: white;
+}
+
+[role="button"][data-variant="danger"]:hover:not(:disabled),
+button[data-variant="danger"]:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+[role="button"][data-variant="danger"]:focus,
+button[data-variant="danger"]:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #dc2626;
+  ring-offset: 2px;
+}
+
+/* Checkbox Styles */
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  accent-color: #4f46e5;
+}
+
+/* Link Styles */
+a {
+  font-size: 0.875rem;
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #4338ca;
+  text-decoration: underline;
+}
+
+/* Form Layout Utilities */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

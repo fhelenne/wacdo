@@ -1,3 +1,4 @@
+import '../styles/components/StatCard.css';
 function StatCard({ title, value, subtitle }) {
   return (
     <div role="stat-card">

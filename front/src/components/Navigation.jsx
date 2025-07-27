@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import '../styles/components/Navigation.css';
 import { 
   faChartBar, 
   faUsers, 
@@ -21,10 +22,9 @@ function Navigation() {
   }
 
   const navItems = [
-    { path: '/dashboard', name: 'Tableau de bord', icon: faChartBar },
-    { path: '/users', name: 'Utilisateurs', icon: faUsers },
+    { path: '/restaurants', name: 'Tableau de bord', icon: faChartBar },
+    { path: '/users', name: 'Collaborateurs', icon: faUsers },
     { path: '/assignments', name: 'Affectations', icon: faClipboardList },
-    { path: '/restaurants', name: 'Restaurants', icon: faStore },
     { path: '/job-titles', name: 'Postes', icon: faBriefcase },
   ];
 

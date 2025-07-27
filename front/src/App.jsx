@@ -4,7 +4,6 @@ import Navigation from './components/Navigation'
 import Loading from './components/Loading'
 import ErrorBoundary from './components/ErrorBoundary'
 import './App.css'
-import './styles/components.css'
 
 // Lazy load page components for better performance
 const Login = lazy(() => import('./pages/Login'))

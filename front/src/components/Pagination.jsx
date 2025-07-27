@@ -1,3 +1,4 @@
+import '../styles/components/Pagination.css';
 function Pagination({ currentCount, totalCount, itemType }) {
   return (
     <footer role="contentinfo">
