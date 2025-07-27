@@ -5,8 +5,7 @@ import '../styles/components/Navigation.css';
 import { 
   faChartBar, 
   faUsers, 
-  faClipboardList, 
-  faStore, 
+  faClipboardList,
   faBriefcase, 
   faHamburger, 
   faUser, 
