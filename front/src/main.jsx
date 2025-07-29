@@ -4,6 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import { register as registerSW } from './utils/serviceWorker.js'
 
+const BackUrl = import.meta.env.VITE_WACDO_BACK_URL;
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />

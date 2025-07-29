@@ -2,6 +2,7 @@ import StatCard from '../components/StatCard';
 import PageHeader from '../components/PageHeader';
 import ActivityItem from '../components/ActivityItem';
 import Button from '../components/Button';
+import { faChartBar } from '../utils/icons.js';
 
 function Dashboard() {
   return (
@@ -41,7 +42,7 @@ function Dashboard() {
               timestamp="Il y a 6 heures"
             />
           </div>
-          <Button>
+          <Button icon={faChartBar} color="primary">
             Voir toutes les activités →
           </Button>
         </section>

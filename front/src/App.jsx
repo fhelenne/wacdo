@@ -13,6 +13,8 @@ const Assignment = lazy(() => import('./pages/Assignment'))
 const Restaurant = lazy(() => import('./pages/Restaurant'))
 const JobTitle = lazy(() => import('./pages/JobTitle'))
 
+
+
 function App() {
   return (
     <ErrorBoundary>

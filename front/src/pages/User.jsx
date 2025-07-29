@@ -1,49 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Loading from '../components/Loading';
 import PageHeader from '../components/PageHeader';
 import Button from '../components/Button';
 import SearchBar from '../components/SearchBar';
 import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
+import { faPlus, faEdit, faTrash } from '../utils/icons.js';
 
 function User() {
-  const [users] = useState([
-    { 
-      id: 1, 
-      firstName: 'Marie', 
-      lastName: 'Dupont', 
-      email: 'marie.dupont@wacdo.com', 
-      roles: ['ROLE_MANAGER'],
-      firstHiredAt: '2023-01-15T00:00:00+00:00',
-      assignments: []
-    },
-    { 
-      id: 2, 
-      firstName: 'Jean', 
-      lastName: 'Martin', 
-      email: 'jean.martin@wacdo.com', 
-      roles: ['ROLE_USER'],
-      firstHiredAt: '2023-02-01T00:00:00+00:00',
-      assignments: []
-    },
-    { 
-      id: 3, 
-      firstName: 'Sophie', 
-      lastName: 'Bernard', 
-      email: 'sophie.bernard@wacdo.com', 
-      roles: ['ROLE_SUPERVISOR'],
-      firstHiredAt: '2023-01-10T00:00:00+00:00',
-      assignments: []
-    },
-    { 
-      id: 4, 
-      firstName: 'Pierre', 
-      lastName: 'Durand', 
-      email: 'pierre.durand@wacdo.com', 
-      roles: ['ROLE_USER'],
-      firstHiredAt: '2023-03-01T00:00:00+00:00',
-      assignments: []
-    },
-  ]);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(import.meta.env.VITE_WACDO_BACK_URL + `/users`)
+      .then((response) => response.json())
+      .then((response) => {
+        setUsers(response.member);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
 
   const columns = [
     { 
@@ -59,8 +39,8 @@ function User() {
 
   const renderActions = () => (
     <>
-      <Button role="action-button">Modifier</Button>
-      <Button role="action-button">Supprimer</Button>
+      <Button icon={faEdit} color="warning">Modifier</Button>
+      <Button icon={faTrash} color="danger">Supprimer</Button>
     </>
   );
 
@@ -69,23 +49,26 @@ function User() {
       <section>
         <PageHeader 
           title="Gestion des Utilisateurs"
-          actionButton={<Button>Ajouter un utilisateur</Button>}
+          actionButton={<Button icon={faPlus} color="success">Ajouter un utilisateur</Button>}
         />
-
         <section>
           <SearchBar placeholder="Rechercher un utilisateur..." />
-
-          <DataTable 
-            columns={columns}
-            data={users}
-            renderActions={renderActions}
-          />
-
-          <Pagination 
-            currentCount={users.length}
-            totalCount={users.length}
-            itemType="utilisateurs"
-          />
+          {loading ? (
+            <Loading message="Chargement des utilisateurs..." />
+          ) : (
+            <>
+              <DataTable 
+                columns={columns}
+                data={users}
+                renderActions={renderActions}
+              />
+              <Pagination 
+                currentCount={users.length}
+                totalCount={users.length}
+                itemType="utilisateurs"
+              />
+            </>
+          )}
         </section>
       </section>
     </main>

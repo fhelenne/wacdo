@@ -1,46 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Loading from '../components/Loading';
 import PageHeader from '../components/PageHeader';
 import Button from '../components/Button';
 import StatCard from '../components/StatCard';
 import SearchBar from '../components/SearchBar';
 import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
+import { faPlus, faEdit, faTrash } from '../utils/icons.js';
 
 function Restaurant() {
-  const [restaurants] = useState([
-    { 
-      id: 1, 
-      name: 'Wacdo Centre', 
-      address: '123 Rue de la Paix',
-      zipCode: '75001',
-      city: 'Paris',
-      assignments: []
-    },
-    { 
-      id: 2, 
-      name: 'Wacdo Nord', 
-      address: '456 Avenue du Nord',
-      zipCode: '59000',
-      city: 'Lille',
-      assignments: []
-    },
-    { 
-      id: 3, 
-      name: 'Wacdo Sud', 
-      address: '789 Boulevard du Midi',
-      zipCode: '13000',
-      city: 'Marseille',
-      assignments: []
-    },
-    { 
-      id: 4, 
-      name: 'Wacdo Est', 
-      address: '321 Rue de l\'Est',
-      zipCode: '67000',
-      city: 'Strasbourg',
-      assignments: []
-    },
-  ]);
+  const [restaurants, setRestaurants] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(import.meta.env.VITE_WACDO_BACK_URL + `/restaurants`)
+      .then((response) => response.json())
+      .then((response) => {
+        setRestaurants(response.member);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
 
   const columns = [
     { 
@@ -56,8 +40,8 @@ function Restaurant() {
 
   const renderActions = () => (
     <>
-      <Button>Modifier</Button>
-      <Button>Supprimer</Button>
+      <Button icon={faEdit} color="warning">Modifier</Button>
+      <Button icon={faTrash} color="danger">Supprimer</Button>
     </>
   );
 
@@ -67,23 +51,27 @@ function Restaurant() {
       <section>
         <PageHeader 
           title="Gestion des Restaurants"
-          actionButton={<Button>Ajouter un restaurant</Button>}
+          actionButton={<Button icon={faPlus} color="success">Ajouter un restaurant</Button>}
         />
 
         <section>
           <SearchBar placeholder="Rechercher un restaurant..." />
-
-          <DataTable 
-            columns={columns}
-            data={restaurants}
-            renderActions={renderActions}
-          />
-
-          <Pagination 
-            currentCount={restaurants.length}
-            totalCount={restaurants.length}
-            itemType="restaurants"
-          />
+          {loading ? (
+            <Loading message="Chargement des restaurants..." />
+          ) : (
+            <>
+              <DataTable 
+                columns={columns}
+                data={restaurants}
+                renderActions={renderActions}
+              />
+              <Pagination 
+                currentCount={restaurants.length}
+                totalCount={restaurants.length}
+                itemType="restaurants"
+              />
+            </>
+          )}
         </section>
       </section>
     </main>

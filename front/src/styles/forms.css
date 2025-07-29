@@ -164,3 +164,40 @@ a:hover {
   align-items: center;
   gap: 0.5rem;
 }
+
+/* Custom Button Colors (class for color) */
+[role="button"].success {
+  background-color: #16a34a;
+  color: white;
+}
+[role="button"].success:hover:not(:disabled) {
+  background-color: #15803d;
+}
+[role="button"].success:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #bbf7d0;
+}
+
+[role="button"].warning {
+  background-color: #f59e42;
+  color: white;
+}
+[role="button"].warning:hover:not(:disabled) {
+  background-color: #d97706;
+}
+[role="button"].warning:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #fde68a;
+}
+
+[role="button"].danger {
+  background-color: #dc2626;
+  color: white;
+}
+[role="button"].danger:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+[role="button"].danger:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #fecaca;
+}

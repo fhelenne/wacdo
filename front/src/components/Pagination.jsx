@@ -3,22 +3,11 @@ function Pagination({ currentCount, totalCount, itemType }) {
   return (
     <footer role="contentinfo">
       <div>
-        <button role="button">
-          ← Précédent
-        </button>
-        <button role="button">
-          Suivant →
-        </button>
-      </div>
-      <div>
-        <div>
           <p role="status">
             Affichage de <span>1</span> à{' '}
             <span>{currentCount}</span> sur{' '}
             <span>{totalCount}</span> {itemType}
           </p>
-        </div>
-        <div>
           <nav 
             role="navigation"
             aria-label="Pagination"
@@ -42,7 +31,6 @@ function Pagination({ currentCount, totalCount, itemType }) {
               </svg>
             </button>
           </nav>
-        </div>
       </div>
     </footer>
   );
