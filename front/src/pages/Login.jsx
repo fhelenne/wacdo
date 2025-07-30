@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import FormField from '../components/FormField';
 import Button from '../components/Button';
@@ -6,11 +7,31 @@ import Button from '../components/Button';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Implement login logic
-    console.log('Login attempt:', { email, password });
+    setError(null);
+    try {
+      const response = await fetch(import.meta.env.VITE_WACDO_BACK_URL + '/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      if (!response.ok) {
+        throw new Error('Identifiants invalides');
+      }
+      const data = await response.json();
+      if (data.token) {
+        localStorage.setItem('jwt', data.token);
+        navigate('/dashboard');
+      } else {
+        throw new Error('Réponse inattendue du serveur');
+      }
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -21,6 +42,9 @@ function Login() {
           description="Accédez à votre espace Wacdo"
           titleLevel="h2"
         />
+        {error && (
+          <div role="alert" style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>
+        )}
         <form role="form" onSubmit={handleSubmit}>
           <FormField
             id="email"

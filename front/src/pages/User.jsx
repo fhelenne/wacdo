@@ -6,6 +6,7 @@ import SearchBar from '../components/SearchBar';
 import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
 import { faPlus, faEdit, faTrash } from '../utils/icons.js';
+import fetchWithJWT from '../utils/PrivateRoute'
 
 function User() {
   const [users, setUsers] = useState([]);
@@ -13,7 +14,7 @@ function User() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(import.meta.env.VITE_WACDO_BACK_URL + `/users`)
+    fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/users`)
       .then((response) => response.json())
       .then((response) => {
         setUsers(response.member);

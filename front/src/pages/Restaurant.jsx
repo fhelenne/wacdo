@@ -7,6 +7,7 @@ import SearchBar from '../components/SearchBar';
 import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
 import { faPlus, faEdit, faTrash } from '../utils/icons.js';
+import fetchWithJWT from '../utils/PrivateRoute'
 
 function Restaurant() {
   const [restaurants, setRestaurants] = useState([]);
@@ -14,7 +15,7 @@ function Restaurant() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(import.meta.env.VITE_WACDO_BACK_URL + `/restaurants`)
+    fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/restaurants`)
       .then((response) => response.json())
       .then((response) => {
         setRestaurants(response.member);

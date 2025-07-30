@@ -6,6 +6,7 @@ import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
 import Loading from '../components/Loading';
 import { faPlus, faEdit, faTrash } from '../utils/icons.js';
+import fetchWithJWT from '../utils/PrivateRoute'
 
 function Assignment() {
     const [assignments, setAssignments] = useState([]);
@@ -14,7 +15,7 @@ function Assignment() {
     // 2. Fetch assignments on mount
     useEffect(() => {
         setLoading(true);
-        fetch(import.meta.env.VITE_WACDO_BACK_URL + `/assignments`)
+        fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/assignments`)
             .then((response) => response.json())
             .then((response) => {
                 setAssignments(response.member);

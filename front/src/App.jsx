@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Suspense, lazy } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { Suspense, lazy, useState, useEffect } from 'react'
 import Navigation from './components/Navigation'
 import Loading from './components/Loading'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -13,7 +13,27 @@ const Assignment = lazy(() => import('./pages/Assignment'))
 const Restaurant = lazy(() => import('./pages/Restaurant'))
 const JobTitle = lazy(() => import('./pages/JobTitle'))
 
+// Protected Route Component
+function ProtectedRoute({ children }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    setIsAuthenticated(!!token);
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading) {
+    return <Loading message="Vérification de l'authentification..." />;
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
 
 function App() {
   return (
@@ -24,11 +44,32 @@ function App() {
           <Suspense fallback={<Loading />}>
             <Routes>
               <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/users" element={<User />} />
-              <Route path="/assignments" element={<Assignment />} />
-              <Route path="/restaurants" element={<Restaurant />} />
-              <Route path="/job-titles" element={<JobTitle />} />
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/dashboard" element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/users" element={
+                <ProtectedRoute>
+                  <User />
+                </ProtectedRoute>
+              } />
+              <Route path="/assignments" element={
+                <ProtectedRoute>
+                  <Assignment />
+                </ProtectedRoute>
+              } />
+              <Route path="/restaurants" element={
+                <ProtectedRoute>
+                  <Restaurant />
+                </ProtectedRoute>
+              } />
+              <Route path="/job-titles" element={
+                <ProtectedRoute>
+                  <JobTitle />
+                </ProtectedRoute>
+              } />
             </Routes>
           </Suspense>
         </div>

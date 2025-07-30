@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../styles/components/Navigation.css';
@@ -14,6 +14,7 @@ import {
 
 function Navigation() {
   const location = useLocation();
+  const navigate = useNavigate();
   
   // Don't show navigation on login page
   if (location.pathname === '/login') {
@@ -26,6 +27,12 @@ function Navigation() {
     { path: '/assignments', name: 'Affectations', icon: faClipboardList },
     { path: '/job-titles', name: 'Postes', icon: faBriefcase },
   ];
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem('jwt');
+    navigate('/login');
+  };
 
   return (
     <nav role="navigation">
@@ -61,12 +68,15 @@ function Navigation() {
             <div role="status">
               <FontAwesomeIcon icon={faUser} /> Admin
             </div>
-            <Link
-              to="/login"
+            <button
+              type="button"
               role="button"
+              onClick={handleLogout}
+              style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: 0 }}
+              aria-label="Déconnexion"
             >
-<FontAwesomeIcon icon={faSignOutAlt} /> Déconnexion
-            </Link>
+              <FontAwesomeIcon icon={faSignOutAlt} /> Déconnexion
+            </button>
           </div>
         </div>
       </div>
