@@ -31,55 +31,47 @@ function Navigation() {
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem('jwt');
-    navigate('/login');
+    navigate('./login');
   };
 
   return (
     <nav role="navigation">
-      <div>
-        <div>
-          <div>
-            <div>
-              <Link 
-                to="/dashboard" 
-                role="link"
+      <Link
+        base={import.meta.env.BASE_URL}
+        to="/dashboard"
+        role="link"
+      >
+        <FontAwesomeIcon icon={faHamburger} /> Wacdo Admin
+      </Link>
+      <ul role="menubar">
+        {navItems.map((item) => {
+          const isActive = location.pathname === item.path;
+          return (
+            <li role="none" key={item.path}>
+              <Link
+                base={import.meta.env.BASE_URL}
+                to={item.path}
+                role="menuitem"
+                aria-current={isActive ? "page" : undefined}
               >
-<FontAwesomeIcon icon={faHamburger} /> Wacdo Admin
+                <FontAwesomeIcon icon={item.icon} />
+                <span>{item.name}</span>
               </Link>
-            </div>
-            <div>
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    role="link"
-                    aria-current={isActive ? "page" : undefined}
-                  >
-                    <FontAwesomeIcon icon={item.icon} />
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-          <div>
-            <div role="status">
-              <FontAwesomeIcon icon={faUser} /> Admin
-            </div>
-            <button
-              type="button"
-              role="button"
-              onClick={handleLogout}
-              style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: 0 }}
-              aria-label="Déconnexion"
-            >
-              <FontAwesomeIcon icon={faSignOutAlt} /> Déconnexion
-            </button>
-          </div>
-        </div>
+            </li>
+          );
+        })}
+      </ul>
+      <div role="status">
+        <FontAwesomeIcon icon={faUser} /> Admin
       </div>
+      <button
+        type="button"
+        role="button"
+        onClick={handleLogout}
+        aria-label="Déconnexion"
+      >
+        <FontAwesomeIcon icon={faSignOutAlt} /> Déconnexion
+      </button>
     </nav>
   );
 }

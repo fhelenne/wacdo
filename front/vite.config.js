@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   host: true,
+  base: '/formation/front',
   strictPort: false,
   cors: true,
   origin: undefined,

@@ -68,7 +68,6 @@ src/
 ├── styles/              # Feuilles de style
 │   └── components.css   # Styles des composants
 ├── utils/               # Utilitaires
-│   └── serviceWorker.js # Service Worker
 ├── App.jsx              # Composant racine
 └── main.jsx             # Point d'entrée
 ```
@@ -188,7 +187,6 @@ npm run lint         # Vérifie la qualité du code avec ESLint
 ### Fonctionnalités avancées
 - **Lazy Loading** : Chargement différé des pages pour optimiser les performances
 - **Error Boundaries** : Gestion robuste des erreurs
-- **Service Worker** : Support pour les fonctionnalités PWA
 - **Responsive Design** : Interface adaptative pour tous les écrans
 
 ## Bonnes pratiques

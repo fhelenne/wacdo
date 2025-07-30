@@ -5,7 +5,7 @@ function Button({ children, icon, variant = 'primary', color = 'default', onClic
     <button
       role="button"
       data-variant={variant !== 'primary' ? variant : undefined}
-      class={color !== 'default' ? color : undefined}
+      className={color !== 'default' ? color : undefined}
       onClick={onClick}
       type={type}
       disabled={disabled}

@@ -3,10 +3,12 @@ import { Suspense, lazy, useState, useEffect } from 'react'
 import Navigation from './components/Navigation'
 import Loading from './components/Loading'
 import ErrorBoundary from './components/ErrorBoundary'
+import './styles/forms.css'
 import './App.css'
 
+
 // Lazy load page components for better performance
-const Login = lazy(() => import('./pages/Login'))
+import Login from './pages/Login'
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const User = lazy(() => import('./pages/User'))
 const Assignment = lazy(() => import('./pages/Assignment'))
@@ -27,7 +29,6 @@ function ProtectedRoute({ children }) {
   if (isLoading) {
     return <Loading message="Vérification de l'authentification..." />;
   }
-
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
@@ -38,10 +39,11 @@ function ProtectedRoute({ children }) {
 function App() {
   return (
     <ErrorBoundary>
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <div>
-          <Navigation />
           <Suspense fallback={<Loading />}>
+            {/* Navigation is now inside Suspense to avoid flicker */}
+            <Navigation />
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<Navigate to="/dashboard" replace />} />

@@ -1,12 +1,13 @@
 /* Shared Form Styles */
-
+input {
+  color:black;
+}
 /* Form Field Base Styles */
 input[type="text"],
 input[type="email"],
 input[type="password"],
 [role="searchbox"],
 [role="combobox"] {
-  width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
