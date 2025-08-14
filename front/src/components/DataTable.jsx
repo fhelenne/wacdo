@@ -1,5 +1,6 @@
 import '../styles/components/DataTable.css';
 function DataTable({ columns, data, renderActions }) {
+  console.log(data);
   return (
     <div 
       role="region" 

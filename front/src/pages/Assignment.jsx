@@ -12,13 +12,35 @@ function Assignment() {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Helpers to safely read nested values that may be objects or IRI strings
+  const isObject = (value) => value !== null && typeof value === 'object';
+  const getEmployeeFullName = (row) => {
+    if (!row || !row.employee || !isObject(row.employee)) return '';
+    const firstName = row.employee.firstName || '';
+    const lastName = row.employee.lastName || '';
+    return `${firstName} ${lastName}`.trim();
+  };
+  const getJobTitleName = (row) => {
+    if (!row || !row.jobTitle || !isObject(row.jobTitle)) return '';
+    return row.jobTitle.name || '';
+  };
+  const getRestaurantName = (row) => {
+    if (!row || !row.restaurant || !isObject(row.restaurant)) return '';
+    return row.restaurant.name || '';
+  };
+
     // 2. Fetch assignments on mount
     useEffect(() => {
         setLoading(true);
         fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/assignments`)
             .then((response) => response.json())
             .then((response) => {
-                setAssignments(response.member);
+                const items = Array.isArray(response.member)
+                  ? response.member
+                  : Array.isArray(response['hydra:member'])
+                    ? response['hydra:member']
+                    : [];
+                setAssignments(items);
                 setLoading(false);
             })
             .catch((error) => {
@@ -28,9 +50,18 @@ function Assignment() {
     }, []);
 
   const columns = [
-    { header: 'Collaborateur', key: 'user' },
-    { header: 'Poste', key: 'jobTitle' },
-    { header: 'Restaurant', key: 'restaurant' },
+    { 
+      header: 'Collaborateur', 
+      render: (row) => getEmployeeFullName(row)
+    },
+    { 
+      header: 'Poste', 
+      render: (row) => getJobTitleName(row)
+    },
+    { 
+      header: 'Restaurant', 
+      render: (row) => getRestaurantName(row)
+    },
   ];
 
   const renderActions = () => (
