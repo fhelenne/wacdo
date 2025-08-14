@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import PageHeader from '../components/PageHeader';
 import FormField from '../components/FormField';
 import Button from '../components/Button';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,9 +26,13 @@ function Login() {
         throw new Error('Identifiants invalides');
       }
       const data = await response.json();
+      const userInfo = jwtDecode(data.token)
+
       if (data.token) {
-        localStorage.setItem('jwt', data.token);
-        navigate('/dashboard');
+        login(data.token);
+        const isAdmin = !!userInfo.roles?.includes("ROLE_ADMIN");
+        const isEmployee = !!userInfo.roles?.includes("ROLE_EMPLOYEE") && !isAdmin;
+        navigate(isAdmin ? '/dashboard' : isEmployee ? '/users' : '/dashboard');
       } else {
         throw new Error('Réponse inattendue du serveur');
       }

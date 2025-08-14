@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import Loading from '../components/Loading';
 import PageHeader from '../components/PageHeader';
 import Button from '../components/Button';
+import StatCard from '../components/StatCard';
 import SearchBar from '../components/SearchBar';
 import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
 import { faPlus, faEdit, faTrash } from '../utils/icons.js';
-import fetchWithJWT from '../utils/PrivateRoute'
+import fetchWithJWT from '../utils/FetcWithJWT.js'
 
 function User() {
   const [users, setUsers] = useState([]);
@@ -28,13 +29,13 @@ function User() {
 
   const columns = [
     { 
-      header: 'Nom', 
-      render: (user) => `${user.firstName} ${user.lastName}`
-    },
-    { header: 'Email', key: 'email' },
-    { 
-      header: 'Rôles', 
-      render: (user) => user.roles.join(', ')
+      header: 'Collaborateur', 
+      render: (user) => (
+        <div>
+          <div>{user.firstName} {user.lastName}</div>
+          <div>{user.email}</div>
+        </div>
+      )
     }
   ];
 
@@ -46,16 +47,18 @@ function User() {
   );
 
   return (
-    <main role="user">
+    <main role="users">
+
       <section>
         <PageHeader 
-          title="Gestion des Utilisateurs"
-          actionButton={<Button icon={faPlus} color="success">Ajouter un utilisateur</Button>}
+          title="Gestion des collaborateurs"
+          actionButton={<Button icon={faPlus} color="success">Ajouter un collaborateur</Button>}
         />
+
         <section>
-          <SearchBar placeholder="Rechercher un utilisateur..." />
+          <SearchBar placeholder="Rechercher un collaborateur..." />
           {loading ? (
-            <Loading message="Chargement des utilisateurs..." />
+            <Loading message="Chargement des collaborateurs..." />
           ) : (
             <>
               <DataTable 
@@ -66,7 +69,7 @@ function User() {
               <Pagination 
                 currentCount={users.length}
                 totalCount={users.length}
-                itemType="utilisateurs"
+                itemType="collaborateurs"
               />
             </>
           )}

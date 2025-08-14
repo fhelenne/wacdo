@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react';
 import Loading from '../components/Loading';
 import PageHeader from '../components/PageHeader';
 import Button from '../components/Button';
-import StatCard from '../components/StatCard';
 import SearchBar from '../components/SearchBar';
 import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
 import { faPlus, faEdit, faTrash } from '../utils/icons.js';
-import fetchWithJWT from '../utils/PrivateRoute'
+import fetchWithJWT from '../utils/FetcWithJWT.js'
 
 function JobTitle() {
   const [jobTitles, setJobTitles] = useState([]);
@@ -15,7 +14,7 @@ function JobTitle() {
 
   useEffect(() => {
     setLoading(true);
-    fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/job_titles`)
+    fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles')
       .then((response) => response.json())
       .then((response) => {
         setJobTitles(response.member);
@@ -26,7 +25,6 @@ function JobTitle() {
         setLoading(false);
       });
   }, []);
-
 
   const columns = [
     { header: 'Poste', key: 'name' }
@@ -44,20 +42,11 @@ function JobTitle() {
       <section>
         <PageHeader 
           title="Gestion des Postes"
-          actionButton={<Button icon={faPlus} color="success">Créer un poste</Button>}
+          actionButton={<Button icon={faPlus} color="success">Ajouter un poste</Button>}
         />
 
         <section>
-          <StatCard 
-            title="Total postes" 
-            value={jobTitles.length} 
-          />
-        </section>
-
-        <section>
-          <SearchBar 
-            placeholder="Rechercher un poste..."
-          />
+          <SearchBar placeholder="Rechercher un poste..." />
           {loading ? (
             <Loading message="Chargement des postes..." />
           ) : (

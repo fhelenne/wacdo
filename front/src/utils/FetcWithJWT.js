@@ -3,11 +3,13 @@
 
 export default async function fetchWithJWT(url, options = {}) {
   const token = localStorage.getItem('jwt');
+  
   const headers = {
     ...(options.headers || {}),
     ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   };
+  
   return fetch(url, {
     ...options,
     headers,

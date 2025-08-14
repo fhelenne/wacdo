@@ -7,7 +7,7 @@ import SearchBar from '../components/SearchBar';
 import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
 import { faPlus, faEdit, faTrash } from '../utils/icons.js';
-import fetchWithJWT from '../utils/PrivateRoute'
+import fetchWithJWT from '../utils/FetcWithJWT.js'
 
 function Restaurant() {
   const [restaurants, setRestaurants] = useState([]);

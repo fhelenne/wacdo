@@ -2,12 +2,11 @@ back.localhost  {
     root * /var/www/html/back/public
     encode zstd br gzip
     header {
-                Access-Control-Allow-Origin *
                 Access-Control-Allow-Methods "GET, POST, PUT, PATCH, OPTIONS"
                 Strict-Transport-Security max-age=31536000
                 Referrer-Policy "no-referrer, strict-origin-when-cross-origin, no-referrer-when-downgrade"
                 X-Content-Type-Options nosniff
-                Access-Control-Allow-Headers "Origin, Access-Control-Allow-Headers, Access-Control-Allow-Origin, Accept, Content-Type, X-Auth-Token, X-Requested-With"
+                Access-Control-Allow-Headers "Origin, Access-Control-Allow-Headers, Access-Control-Allow-Origin, Accept, Content-Type, Authorization, X-Auth-Token, X-Requested-With"
 
                 CustomDomainHost {host}
                 FWServe main
@@ -46,4 +45,3 @@ front.localhost {
         output file /var/log/caddy/front.localhost-access.log
     }
 }
-

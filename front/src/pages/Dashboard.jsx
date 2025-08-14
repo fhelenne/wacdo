@@ -1,8 +1,5 @@
 import StatCard from '../components/StatCard';
 import PageHeader from '../components/PageHeader';
-import ActivityItem from '../components/ActivityItem';
-import Button from '../components/Button';
-import { faChartBar } from '../utils/icons.js';
 
 function Dashboard() {
   return (
@@ -25,26 +22,7 @@ function Dashboard() {
             <h3>Activités récentes</h3>
             <span>Aujourd'hui</span>
           </header>
-          <div role="activity-list">
-            <ActivityItem 
-              title="Nouvel utilisateur ajouté"
-              description="Marie Dupont a rejoint l'équipe"
-              timestamp="Il y a 2 heures"
-            />
-            <ActivityItem 
-              title="Restaurant mis à jour"
-              description='"Wacdo Centre" - Informations modifiées'
-              timestamp="Il y a 4 heures"
-            />
-            <ActivityItem 
-              title="Nouvelle affectation"
-              description="Jean Martin assigné au poste de Manager"
-              timestamp="Il y a 6 heures"
-            />
-          </div>
-          <Button icon={faChartBar} color="primary">
-            Voir toutes les activités →
-          </Button>
+        
         </section>
       </section>
     </main>

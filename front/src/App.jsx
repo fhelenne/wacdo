@@ -1,10 +1,11 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import { Suspense, lazy, useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { Suspense, lazy } from 'react'
 import Navigation from './components/Navigation'
 import Loading from './components/Loading'
 import ErrorBoundary from './components/ErrorBoundary'
 import './styles/forms.css'
 import './App.css'
+import { useAuth } from './contexts/AuthContext.jsx'
 
 
 // Lazy load page components for better performance
@@ -17,23 +18,27 @@ const JobTitle = lazy(() => import('./pages/JobTitle'))
 
 // Protected Route Component
 function ProtectedRoute({ children }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const { isAuthenticated, isEmployee } = useAuth()
+  const location = useLocation()
 
-  useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    setIsAuthenticated(!!token);
-    setIsLoading(false);
-  }, []);
-
-  if (isLoading) {
-    return <Loading message="Vérification de l'authentification..." />;
-  }
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" replace />
   }
 
-  return children;
+  if (isEmployee) {
+    const allowedPaths = ['/users']
+    if (!allowedPaths.includes(location.pathname)) {
+      return <Navigate to="/users" replace />
+    }
+  }
+
+  return children
+}
+
+function RoleBasedHomeRedirect() {
+  const { isAuthenticated, isAdmin } = useAuth()
+  if (!isAuthenticated) return <Navigate to="/login" replace />
+  return <Navigate to={isAdmin ? '/dashboard' : '/users'} replace />
 }
 
 function App() {
@@ -46,7 +51,7 @@ function App() {
             <Navigation />
             <Routes>
               <Route path="/login" element={<Login />} />
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/" element={<RoleBasedHomeRedirect />} />
               <Route path="/dashboard" element={
                 <ProtectedRoute>
                   <Dashboard />

@@ -11,34 +11,40 @@ import {
   faUser, 
   faSignOutAlt 
 } from '../utils/icons.js';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
 function Navigation() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAuthenticated, isAdmin, isEmployee, logout } = useAuth();
   
   // Don't show navigation on login page
-  if (location.pathname === '/login') {
+  if (location.pathname === '/login' || !isAuthenticated) {
     return null;
   }
 
-  const navItems = [
+  const allNavItems = [
     { path: '/restaurants', name: 'Tableau de bord', icon: faChartBar },
     { path: '/users', name: 'Collaborateurs', icon: faUsers },
     { path: '/assignments', name: 'Affectations', icon: faClipboardList },
     { path: '/job-titles', name: 'Postes', icon: faBriefcase },
   ];
 
+  const navItems = isEmployee
+    ? allNavItems.filter((item) => item.path === '/users')
+    : allNavItems;
+
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.removeItem('jwt');
-    navigate('./login');
+    logout();
+    navigate('/login');
   };
 
   return (
     <nav role="navigation">
       <Link
         base={import.meta.env.BASE_URL}
-        to="/dashboard"
+        to={isEmployee ? '/users' : '/dashboard'}
         role="link"
       >
         <FontAwesomeIcon icon={faHamburger} /> Wacdo Admin
@@ -62,7 +68,7 @@ function Navigation() {
         })}
       </ul>
       <div role="status">
-        <FontAwesomeIcon icon={faUser} /> Admin
+        <FontAwesomeIcon icon={faUser} /> {isAdmin ? 'Admin' : 'Employé'}
       </div>
       <button
         type="button"
