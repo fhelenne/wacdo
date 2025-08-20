@@ -38,7 +38,7 @@ class JobTitle
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['user:read', 'assignment:read', 'restaurant:read', 'job_title:read'])]
+    #[Groups(['user:read', 'assignment:read', 'restaurant:read', 'job_title:read','job_title:create'])]
     private ?string $name = null;
 
     /**

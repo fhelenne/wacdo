@@ -15,6 +15,7 @@ const User = lazy(() => import('./pages/User'))
 const Assignment = lazy(() => import('./pages/Assignment'))
 const Restaurant = lazy(() => import('./pages/Restaurant'))
 const JobTitle = lazy(() => import('./pages/JobTitle'))
+const CreateJobTitle = lazy(() => import('./pages/CreateJobTitle'))
 
 // Protected Route Component
 function ProtectedRoute({ children }) {

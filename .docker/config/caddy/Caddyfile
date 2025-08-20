@@ -4,7 +4,8 @@ back.localhost  {
     header {
                 Access-Control-Allow-Methods "GET, POST, PUT, PATCH, OPTIONS"
                 Strict-Transport-Security max-age=31536000
-                Referrer-Policy "no-referrer, strict-origin-when-cross-origin, no-referrer-when-downgrade"
+                Access-Control-Allow-Origin *
+                Referrer-Policy "unsafe-url"
                 X-Content-Type-Options nosniff
                 Access-Control-Allow-Headers "Origin, Access-Control-Allow-Headers, Access-Control-Allow-Origin, Accept, Content-Type, Authorization, X-Auth-Token, X-Requested-With"
 
