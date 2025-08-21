@@ -37,19 +37,19 @@ class Restaurant
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['user:read','restaurant:read','assignment:read'])]
+    #[Groups(['user:read','restaurant:read','restaurant:create','restaurant:update','assignment:read'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['restaurant:read','assignments'])]
+    #[Groups(['restaurant:read','restaurant:create','restaurant:update','assignments'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['restaurant:read','assignments'])]
+    #[Groups(['restaurant:read','restaurant:create','restaurant:update','assignments'])]
     private ?string $zipCode = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['restaurant:read','assignments'])]
+    #[Groups(['restaurant:read','restaurant:create','restaurant:update','assignments'])]
     private ?string $city = null;
 
     /**

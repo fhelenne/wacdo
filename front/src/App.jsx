@@ -14,6 +14,8 @@ const Dashboard = lazy(() => import('./pages/Dashboard'))
 const User = lazy(() => import('./pages/User'))
 const Assignment = lazy(() => import('./pages/Assignment'))
 const Restaurant = lazy(() => import('./pages/Restaurant'))
+const CreateRestaurant = lazy(() => import('./pages/CreateRestaurant'))
+const EditRestaurant = lazy(() => import('./pages/EditRestaurant'))
 const JobTitle = lazy(() => import('./pages/JobTitle'))
 const CreateJobTitle = lazy(() => import('./pages/CreateJobTitle'))
 const EditJobTitle = lazy(() => import('./pages/EditJobTitle'))
@@ -72,6 +74,16 @@ function App() {
               <Route path="/restaurants" element={
                 <ProtectedRoute>
                   <Restaurant />
+                </ProtectedRoute>
+              } />
+                <Route path="/restaurants/add" element={
+                <ProtectedRoute>
+                  <CreateRestaurant />
+                </ProtectedRoute>
+              } />
+                 <Route path="/restaurants/edit/:id" element={
+                <ProtectedRoute>
+                  <EditRestaurant />
                 </ProtectedRoute>
               } />
               <Route path="/job-titles" element={

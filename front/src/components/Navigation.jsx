@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../styles/components/Navigation.css';
 import { 
-  faChartBar, 
+  faHouse,
   faUsers, 
   faClipboardList,
   faBriefcase, 
@@ -24,7 +24,7 @@ function Navigation() {
   }
 
   const allNavItems = [
-    { path: '/restaurants', name: 'Tableau de bord', icon: faChartBar },
+    { path: '/restaurants', name: 'Restaurants', icon: faHouse },
     { path: '/users', name: 'Collaborateurs', icon: faUsers },
     { path: '/assignments', name: 'Affectations', icon: faClipboardList },
     { path: '/job-titles', name: 'Postes', icon: faBriefcase },

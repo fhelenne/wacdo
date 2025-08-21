@@ -27,6 +27,18 @@ function Restaurant() {
       });
   }, []);
 
+  const handleDelete = (id) => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer ce restaurant ?")) {
+      fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/restaurants/${id}`, {
+        method: "DELETE",
+      })
+      .then(() => {
+        setRestaurants(restaurants.filter(restaurant => restaurant.id !== id)); // Update state after deletion
+      })
+      .catch((error) => console.log(error));
+    }
+  };
+
   const columns = [
     { 
       header: 'Restaurant', 
@@ -39,10 +51,10 @@ function Restaurant() {
     }
   ];
 
-  const renderActions = () => (
+  const renderActions = (restaurant) => (
     <>
-      <Button icon={faEdit} color="warning">Modifier</Button>
-      <Button icon={faTrash} color="danger">Supprimer</Button>
+      <Button icon={faEdit} color="warning" to={"/restaurants/edit/"+restaurant.id}>Modifier</Button>
+      <Button icon={faTrash} color="danger" onClick={() => handleDelete(restaurant.id)}>Supprimer</Button>
     </>
   );
 
@@ -52,7 +64,7 @@ function Restaurant() {
       <section>
         <PageHeader 
           title="Gestion des Restaurants"
-          actionButton={<Button icon={faPlus} color="success">Ajouter un restaurant</Button>}
+          actionButton={<Button icon={faPlus} color="success" to={'/restaurants/add/'}>Ajouter un restaurant</Button>}
         />
 
         <section>
