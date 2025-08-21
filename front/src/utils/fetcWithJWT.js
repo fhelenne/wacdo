@@ -3,11 +3,14 @@
 
 export default async function fetchWithJWT(url, options = {}) {
   const token = localStorage.getItem('jwt');
-  
+  let ContentType = 'application/json';
+  if(options.method === 'PATCH'){
+      ContentType = 'application/merge-patch+json';
+  }
   const headers = {
     ...(options.headers || {}),
     ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
-    'Content-Type': 'application/json'
+    'Content-Type': ContentType
   };
   
   return fetch(url, {

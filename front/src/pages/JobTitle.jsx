@@ -49,6 +49,24 @@ function JobTitle() {
     </>
   );
 
+  const handleSearch = ({ searchTerm, filters }) => {
+    // Implement search logic
+    console.log('Search Term:', searchTerm);
+    console.log('Active Filters:', filters);
+  };
+
+  const searchFilters = [
+    {
+      name: 'department',
+      label: 'Département',
+      defaultOption: 'Tous les départements',
+      options: [
+        { value: 'sales', label: 'Ventes' },
+        { value: 'marketing', label: 'Marketing' }
+      ]
+    }
+  ];
+
   return (
     <main role="jobtitle">
       <section>
@@ -58,7 +76,11 @@ function JobTitle() {
         />
 
         <section>
-          <SearchBar placeholder="Rechercher un poste..." />
+          <SearchBar 
+            placeholder="Rechercher un poste..." 
+            filters={searchFilters}
+            onSearch={handleSearch}
+          />
           {loading ? (
             <Loading message="Chargement des postes..." />
           ) : (

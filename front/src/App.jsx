@@ -16,6 +16,7 @@ const Assignment = lazy(() => import('./pages/Assignment'))
 const Restaurant = lazy(() => import('./pages/Restaurant'))
 const JobTitle = lazy(() => import('./pages/JobTitle'))
 const CreateJobTitle = lazy(() => import('./pages/CreateJobTitle'))
+const EditJobTitle = lazy(() => import('./pages/EditJobTitle'))
 
 // Protected Route Component
 function ProtectedRoute({ children }) {
@@ -81,6 +82,11 @@ function App() {
                 <Route path="/job-titles/add" element={
                 <ProtectedRoute>
                   <CreateJobTitle />
+                </ProtectedRoute>
+              } />
+                 <Route path="/job-titles/edit/:id" element={
+                <ProtectedRoute>
+                  <EditJobTitle />
                 </ProtectedRoute>
               } />
             </Routes>

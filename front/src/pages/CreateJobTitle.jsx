@@ -23,7 +23,7 @@ export default function CreateJobTitle() {
           title="Créer un poste"
           description=""
         />
-          <form onSubmit={handleOnSubmit}>
+          <form role="form" onSubmit={handleOnSubmit}>
               <FormField name='name' label="Nom du poste" placeholder="Nom du poste" onChange={(e) => setTitle(e.target.value)}/>
               <Button type='submit'>Enregistrer</Button>
           </form>

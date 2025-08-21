@@ -4,26 +4,30 @@ import FormField from "../components/FormField.jsx";
 import {useEffect, useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js';
 import {useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export default function EditJobTitle() {
     const [title,setTitle] = useState('');
-    const id = useParams();
-     useEffect(() => {
-        fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles/'+id,{
+    const params = useParams();
+    const navigate = useNavigate();
+    useEffect(() => {
+        console.log('init');
+        fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles/'+params.id,{
           method: "GET"
-          // …
-        }).then(response => {
-            setTitle(response.data.name);
+        }).then((response) => response.json())
+          .then(response => {
+            setTitle(response.name);
         });
-    }, [id]);
+    }, [params]);
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles',{
+        fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles/'+params.id,{
           method: "PATCH",
-          body: JSON.stringify({ id: id, name: title }),
+          body: JSON.stringify({ name: title }),
           // …
         });
+        navigate('/job-titles');
     }
 
   return (  <main role="dashboard">
@@ -32,8 +36,8 @@ export default function EditJobTitle() {
           title="Modifier le poste {title}"
           description=""
         />
-          <form onSubmit={handleOnSubmit}>
-              <FormField name='name' label="Nom du poste" value="toto" onChange={(e) => setTitle(e.target.value)}/>
+          <form role="form" onSubmit={handleOnSubmit}>
+              <FormField name='name' label="Nom du poste" value={title} onChange={(e) => setTitle(e.target.value)}/>
               <Button type='submit'>Enregistrer</Button>
           </form>
       </section>
