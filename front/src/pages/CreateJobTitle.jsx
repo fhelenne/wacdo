@@ -2,9 +2,11 @@ import PageHeader from "../components/PageHeader.jsx";
 import Button from "../components/Button.jsx";
 import FormField from "../components/FormField.jsx";
 import {useState} from "react";
-import fetchWithAuth from '../utils/FetcWithJWT.js'
+import fetchWithAuth from '../utils/fetcWithJWT.js'
+import {useNavigate} from "react-router-dom";
 export default function CreateJobTitle() {
     const [title,setTitle] = useState('');
+    const navigate = useNavigate();
     const handleOnSubmit = (e) => {
         e.preventDefault();
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles',{
@@ -12,6 +14,7 @@ export default function CreateJobTitle() {
           body: JSON.stringify({ name: title }),
           // …
         });
+        navigate('/job-titles');
     }
 
   return (  <main role="dashboard">

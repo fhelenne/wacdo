@@ -6,7 +6,7 @@ import SearchBar from '../components/SearchBar';
 import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
 import { faPlus, faEdit, faTrash } from '../utils/icons.js';
-import fetchWithJWT from '../utils/FetcWithJWT.js'
+import fetchWithJWT from '../utils/fetcWithJWT.js'
 
 function JobTitle() {
   const [jobTitles, setJobTitles] = useState([]);
@@ -44,7 +44,7 @@ function JobTitle() {
 
   const renderActions = (job) => (
     <>
-      <Button icon={faEdit} color="warning">Modifier</Button>
+      <Button icon={faEdit} color="warning" to={"/job-titles/edit/"+job.id}>Modifier</Button>
       <Button icon={faTrash} color="danger" onClick={() => handleDelete(job.id)}>Supprimer</Button>
     </>
   );
