@@ -13,6 +13,18 @@ function User() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
+    const handleDelete = (id) => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer ce collaborateur ?")) {
+      fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/users/${id}`, {
+        method: "DELETE",
+      })
+      .then(() => {
+        setUsers(users.filter(user => user.id !== id)); // Update state after deletion
+      })
+      .catch((error) => console.log(error));
+    }
+  };
+
   useEffect(() => {
     setLoading(true);
     fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/users`)
@@ -39,10 +51,10 @@ function User() {
     }
   ];
 
-  const renderActions = () => (
+  const renderActions = (user) => (
     <>
-      <Button icon={faEdit} color="warning">Modifier</Button>
-      <Button icon={faTrash} color="danger">Supprimer</Button>
+      <Button icon={faEdit} color="warning" to={"/users/edit/"+user.id}>Modifier</Button>
+      <Button icon={faTrash} color="danger" onClick={() => handleDelete(user.id)}>Supprimer</Button>
     </>
   );
 
@@ -52,7 +64,7 @@ function User() {
       <section>
         <PageHeader 
           title="Gestion des collaborateurs"
-          actionButton={<Button icon={faPlus} color="success">Ajouter un collaborateur</Button>}
+          actionButton={<Button icon={faPlus} color="success" to={'/users/add/'}>Ajouter un collaborateur</Button>}
         />
 
         <section>

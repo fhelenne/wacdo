@@ -11,7 +11,6 @@ export default function EditJobTitle() {
     const params = useParams();
     const navigate = useNavigate();
     useEffect(() => {
-        console.log('init');
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles/'+params.id,{
           method: "GET"
         }).then((response) => response.json())

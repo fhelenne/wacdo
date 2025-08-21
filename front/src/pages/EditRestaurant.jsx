@@ -14,7 +14,6 @@ export default function EditRestaurant() {
     const params = useParams();
     const navigate = useNavigate();
     useEffect(() => {
-        console.log('init');
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/restaurants/' + params.id, {
             method: "GET"
         }).then((response) => response.json())
