@@ -9,7 +9,7 @@ export default function CreateJobTitle() {
         e.preventDefault();
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles',{
           method: "POST",
-          body: { name: title },
+          body: JSON.stringify({ name: title }),
           // …
         });
     }

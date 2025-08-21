@@ -78,6 +78,11 @@ function App() {
                   <JobTitle />
                 </ProtectedRoute>
               } />
+                <Route path="/job-titles/add" element={
+                <ProtectedRoute>
+                  <CreateJobTitle />
+                </ProtectedRoute>
+              } />
             </Routes>
           </Suspense>
         </div>

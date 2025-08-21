@@ -26,14 +26,26 @@ function JobTitle() {
       });
   }, []);
 
+  const handleDelete = (id) => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer ce poste ?")) {
+      fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/job_titles/${id}`, {
+        method: "DELETE",
+      })
+      .then(() => {
+        setJobTitles(jobTitles.filter(job => job.id !== id)); // Update state after deletion
+      })
+      .catch((error) => console.log(error));
+    }
+  };
+
   const columns = [
     { header: 'Poste', key: 'name' }
   ];
 
-  const renderActions = () => (
+  const renderActions = (job) => (
     <>
       <Button icon={faEdit} color="warning">Modifier</Button>
-      <Button icon={faTrash} color="danger">Supprimer</Button>
+      <Button icon={faTrash} color="danger" onClick={() => handleDelete(job.id)}>Supprimer</Button>
     </>
   );
 
@@ -42,7 +54,7 @@ function JobTitle() {
       <section>
         <PageHeader 
           title="Gestion des Postes"
-          actionButton={<Button icon={faPlus} color="success">Ajouter un poste</Button>}
+          actionButton={<Button icon={faPlus} color="success" to={'/job-titles/add/'}>Ajouter un poste</Button>}
         />
 
         <section>
