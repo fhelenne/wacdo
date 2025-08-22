@@ -1,6 +1,7 @@
 import PageHeader from "../components/PageHeader.jsx";
 import Button from "../components/Button.jsx";
 import FormField from "../components/FormField.jsx";
+import EntityPicker from "../components/forms/EntityPicker.jsx";
 import {useEffect, useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js';
 import {useParams} from "react-router-dom";
@@ -10,6 +11,7 @@ export default function EditUser() {
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [firstHiredAt,setFirstHiredAt] = useState('');
+    const [jobTitle, setJobTitle] = useState('');
     const params = useParams();
     const navigate = useNavigate();
     useEffect(() => {
@@ -20,6 +22,7 @@ export default function EditUser() {
             setFirstName(response.firstName);
             setLastName(response.lastName);
             setFirstHiredAt(response.firstHiredAt);
+            setJobTitle(response.jobTitle);
         });
     }, [params]);
 
@@ -30,7 +33,8 @@ export default function EditUser() {
           body: JSON.stringify({
               firstName: firstName,
               lastName: lastName,
-              firstHiredAt: firstHiredAt
+              firstHiredAt: firstHiredAt,
+              jobTitle: jobTitle
           }),
           // …
         });
@@ -47,6 +51,12 @@ export default function EditUser() {
               <FormField name='firstName' label="Prénom" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
               <FormField name='lastName' label="Nom" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
               <FormField name='firstHiredAt' type="date" label="Date de première embauche" value={firstHiredAt} onChange={(e) => setFirstHiredAt(e.target.value)}/>
+              <EntityPicker 
+                entityType="jobTitles"
+                label="Poste"
+                initialValue={jobTitle}
+                onEntitySelect={(selectedJobTitleId) => setJobTitle(selectedJobTitleId)}
+              />
               <Button type='submit'>Enregistrer</Button>
           </form>
       </section>

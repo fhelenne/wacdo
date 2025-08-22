@@ -38,20 +38,20 @@ class Assignment
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Groups(['restaurant:read', 'assignment:create'])]
+    #[Groups(['restaurant:read', 'assignment:read', 'assignment:create'])]
     private ?\DateTimeImmutable $startAt = null;
 
     #[ORM\Column(nullable: true)]
     #[Groups(['user:read', 'restaurant:read', 'assignment:read', 'assignment:create'])]
     private ?\DateTimeImmutable $endAt = null;
 
-    #[ORM\ManyToOne(fetch: 'LAZY', inversedBy: 'assignments',)]
+    #[ORM\ManyToOne(fetch: 'LAZY', inversedBy: 'assignments')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['restaurant:read', 'assignment:read'])]
+    #[Groups(['restaurant:read', 'assignment:read', 'assignment:create'])]
     #[SerializedName("employee")]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(fetch: 'LAZY', inversedBy: 'assignments',)]
+    #[ORM\ManyToOne(fetch: 'LAZY', inversedBy: 'assignments')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['assignment:read', 'assignment:create', 'restaurant:read'])]
     private ?JobTitle $jobTitle = null;

@@ -29,25 +29,58 @@ function Assignment() {
     return row.restaurant.name || '';
   };
 
-    // 2. Fetch assignments on mount
-    useEffect(() => {
-        setLoading(true);
-        fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/assignments`)
-            .then((response) => response.json())
-            .then((response) => {
-                const items = Array.isArray(response.member)
-                  ? response.member
-                  : Array.isArray(response['hydra:member'])
-                    ? response['hydra:member']
-                    : [];
-                setAssignments(items);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-            });
-    }, []);
+  // Format date to local format
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    return new Date(dateString).toLocaleDateString('fr-FR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+  };
+
+  // Fetch assignments on mount
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
+  // Fetch assignments method
+  const fetchAssignments = () => {
+    setLoading(true);
+    fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/assignments`)
+      .then((response) => response.json())
+      .then((response) => {
+        const items = Array.isArray(response.member)
+          ? response.member
+          : Array.isArray(response['hydra:member'])
+            ? response['hydra:member']
+            : [];
+        setAssignments(items);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Failed to fetch assignments:', error);
+        setLoading(false);
+      });
+  };
+
+  // Handle delete assignment
+  const handleDelete = (id) => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer cette affectation ?")) {
+      fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/assignments/${id}`, {
+        method: "DELETE",
+      })
+      .then(() => {
+        // Remove the deleted assignment from the state
+        setAssignments(assignments.filter(assignment => assignment.id !== id));
+      })
+      .catch((error) => {
+        console.error('Failed to delete assignment:', error);
+        // Optionally, show an error message to the user
+        window.alert("Impossible de supprimer l'affectation. Veuillez réessayer.");
+      });
+    }
+  };
 
   const columns = [
     { 
@@ -62,12 +95,32 @@ function Assignment() {
       header: 'Restaurant', 
       render: (row) => getRestaurantName(row)
     },
+    { 
+      header: 'Date de début', 
+      render: (row) => formatDate(row.startAt)
+    },
+    { 
+      header: 'Date de fin', 
+      render: (row) => formatDate(row.endAt)
+    },
   ];
 
-  const renderActions = () => (
+  const renderActions = (assignment) => (
     <>
-      <Button icon={faEdit} color="warning">Modifier</Button>
-      <Button icon={faTrash} color="danger">Supprimer</Button>
+      <Button
+        icon={faEdit}
+        color="warning"
+        to={`/assignments/edit/${assignment.id}`}
+      >
+        Modifier
+      </Button>
+      <Button 
+        icon={faTrash} 
+        color="danger" 
+        onClick={() => handleDelete(assignment.id)}
+      >
+        Supprimer
+      </Button>
     </>
   );
 
@@ -76,7 +129,7 @@ function Assignment() {
       <section>
         <PageHeader 
           title="Gestion des Affectations"
-          actionButton={<Button icon={faPlus} color="success">Ajouter une affectation</Button>}
+          actionButton={<Button icon={faPlus} color="success" to={'/assignments/add/'}>Ajouter une affectation</Button>}
         />
 
         <section>
