@@ -55,7 +55,6 @@ src/
 ## 📱 Pages disponibles
 
 - `/login` - Connexion
-- `/dashboard` - Tableau de bord
 - `/users` - Gestion des utilisateurs
 - `/restaurants` - Gestion des restaurants
 - `/assignments` - Gestion des affectations

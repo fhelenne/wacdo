@@ -24,9 +24,9 @@ function Navigation() {
   }
 
   const allNavItems = [
+    { path: '/assignments', name: 'Affectations', icon: faClipboardList },
     { path: '/restaurants', name: 'Restaurants', icon: faHouse },
     { path: '/users', name: 'Collaborateurs', icon: faUsers },
-    { path: '/assignments', name: 'Affectations', icon: faClipboardList },
     { path: '/job-titles', name: 'Postes', icon: faBriefcase },
   ];
 
@@ -44,7 +44,7 @@ function Navigation() {
     <nav role="navigation">
       <Link
         base={import.meta.env.BASE_URL}
-        to={isEmployee ? '/users' : '/dashboard'}
+        to={isEmployee ? '/users' : '/assignments'}
         role="link"
       >
         <FontAwesomeIcon icon={faHamburger} /> Wacdo Admin

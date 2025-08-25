@@ -30,7 +30,16 @@ export function AuthProvider({ children }) {
   }, [token])
 
   function login(newToken) {
-    localStorage.setItem('jwt', newToken)
+
+	const now = new Date()
+
+	// `item` is an object which contains the original value
+	// as well as the time when it's supposed to expire
+	const item = {
+		value: newToken,
+		expiry: now.getTime() + import.meta.env.VITE_WACDO_TOKEN_TTL,
+	}
+	localStorage.setItem('jwt', JSON.stringify(item))
     setToken(newToken)
   }
 

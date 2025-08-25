@@ -9,7 +9,6 @@ import { useAuth } from './contexts/AuthContext.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 
 import Login from './pages/Login'
-const Dashboard = lazy(() => import('./pages/Dashboard'))
 const User = lazy(() => import('./pages/User'))
 const CreateUser = lazy(() => import('./pages/CreateUser'))
 const EditUser = lazy(() => import('./pages/EditUser'))
@@ -26,7 +25,7 @@ const EditJobTitle = lazy(() => import('./pages/EditJobTitle'))
 function RoleBasedHomeRedirect() {
   const { isAuthenticated, isAdmin } = useAuth()
   if (!isAuthenticated) return <Navigate to="/login" replace />
-  return <Navigate to={isAdmin ? '/dashboard' : '/users'} replace />
+  return <Navigate to={isAdmin ? '/assignments' : '/users'} replace />
 }
 
 function AppShell({ children }) {
@@ -48,7 +47,6 @@ function App() {
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<RoleBasedHomeRedirect />} />
-              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="/users" element={<ProtectedRoute><User /></ProtectedRoute>} />
               <Route path="/users/add" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
               <Route path="/users/edit/:id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />

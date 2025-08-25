@@ -32,7 +32,7 @@ function Login() {
         login(data.token);
         const isAdmin = !!userInfo.roles?.includes("ROLE_ADMIN");
         const isEmployee = !!userInfo.roles?.includes("ROLE_EMPLOYEE") && !isAdmin;
-        navigate(isAdmin ? '/dashboard' : isEmployee ? '/users' : '/dashboard');
+        navigate(isAdmin ? '/assignments' : isEmployee ? '/users' : '/assignments');
       } else {
         throw new Error('Réponse inattendue du serveur');
       }

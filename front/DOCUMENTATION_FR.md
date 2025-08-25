@@ -60,7 +60,6 @@ src/
 │   └── ErrorBoundary.jsx # Gestion des erreurs
 ├── pages/               # Pages de l'application
 │   ├── Login.jsx        # Page de connexion
-│   ├── Dashboard.jsx    # Tableau de bord
 │   ├── User.jsx         # Gestion des utilisateurs
 │   ├── Restaurant.jsx   # Gestion des restaurants
 │   ├── Assignment.jsx   # Gestion des affectations
@@ -75,7 +74,6 @@ src/
 ### Routing
 L'application utilise React Router pour la navigation :
 - `/login` - Page de connexion
-- `/dashboard` - Tableau de bord principal
 - `/users` - Gestion des utilisateurs
 - `/restaurants` - Gestion des restaurants
 - `/assignments` - Gestion des affectations
@@ -90,14 +88,6 @@ L'application utilise React Router pour la navigation :
   - Option "Se souvenir de moi"
   - Lien "Mot de passe oublié"
 - **Composants utilisés** : PageHeader, FormField, Button
-
-### 2. Tableau de bord (`/dashboard`)
-- **Objectif** : Vue d'ensemble de l'activité du réseau
-- **Fonctionnalités** :
-  - Statistiques en temps réel (utilisateurs, restaurants, affectations, postes)
-  - Flux d'activités récentes
-  - Navigation rapide vers les autres sections
-- **Composants utilisés** : StatCard, ActivityItem, Button
 
 ### 3. Gestion des restaurants (`/restaurants`)
 - **Objectif** : Administration des établissements Wacdo
