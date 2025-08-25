@@ -7,6 +7,13 @@ import fetchWithAuth from '../utils/fetcWithJWT.js'
 import {useParams, useNavigate} from "react-router-dom";
 
 export default function EditAssignment() {
+
+    // Utilitaire de formatage pour extraire uniquement "YYYY-MM-DD" d'une date ISO
+    const formatDateToInput = (isoDate) => {
+        if (!isoDate) return ''; // Gérer les cas sans valeur
+        return new Date(isoDate).toISOString().split('T')[0]; // Extraire uniquement la partie "YYYY-MM-DD"
+    };
+
     const [user, setUser] = useState('');
     const [restaurant, setRestaurant] = useState('');
     const [jobTitle, setJobTitle] = useState('');
@@ -23,11 +30,11 @@ export default function EditAssignment() {
         .then((response) => response.json())
         .then((response) => {
             // Assuming the response contains the full assignment details
-            setUser(response.user);
-            setRestaurant(response.restaurant);
-            setJobTitle(response.jobTitle);
-            setStartAt(response.startAt);
-            setEndAt(response.endAt);
+            setUser(response.employee['@id']);
+            setRestaurant(response.restaurant['@id']);
+            setJobTitle(response.jobTitle['@id']);
+            setStartAt(formatDateToInput(response.startAt));
+            setEndAt(formatDateToInput(response.endAt));
         })
         .catch((error) => {
             console.error('Failed to fetch assignment details:', error);
@@ -71,8 +78,7 @@ export default function EditAssignment() {
                 />
                 <form role="form" onSubmit={handleOnSubmit}>
                     <div role="group" aria-labelledby="user-label">
-                        <label id="user-label">Collaborateur</label>
-                        <EntityPicker 
+                        <EntityPicker
                             entityType="users"
                             label="Collaborateur"
                             initialValue={user}
@@ -80,8 +86,7 @@ export default function EditAssignment() {
                         />
                     </div>
                     <div role="group" aria-labelledby="restaurant-label">
-                        <label id="restaurant-label">Restaurant</label>
-                        <EntityPicker 
+                        <EntityPicker
                             entityType="restaurants"
                             label="Restaurant"
                             initialValue={restaurant}
@@ -89,8 +94,7 @@ export default function EditAssignment() {
                         />
                     </div>
                     <div role="group" aria-labelledby="job-title-label">
-                        <label id="job-title-label">Poste</label>
-                        <EntityPicker 
+                        <EntityPicker
                             entityType="jobTitles"
                             label="Poste"
                             initialValue={jobTitle}

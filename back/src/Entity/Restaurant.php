@@ -33,7 +33,7 @@ class Restaurant
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['restaurant:read','assignments'])]
+    #[Groups(['restaurant:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]

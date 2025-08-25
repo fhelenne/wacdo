@@ -9,7 +9,6 @@ export default function EntityPicker({
     renderOption 
 }) {
     const [entities, setEntities] = useState([]);
-    const [selectedEntity, setSelectedEntity] = useState('');
     const [loading, setLoading] = useState(true);
 
     // Mapping of entity types to their API endpoints and ID extraction
@@ -44,26 +43,15 @@ export default function EntityPicker({
                 const fetchedEntities = response.member || [];
                 setEntities(fetchedEntities);
                 setLoading(false);
-
-                // Set initial value if provided
-                // if (initialValue) {
-                //     setSelectedEntity(config.apiPath+initialValue);
-                // }
             })
             .catch((error) => {
                 console.error(`Failed to fetch ${entityType}:`, error);
                 setLoading(false);
             });
-    }, [entityType]);
+    }, []);
 
     const handleEntityChange = (e) => {
-        const entityId = e.target.value;
-        setSelectedEntity(entityId);
-        if (onEntitySelect) {
-            // Prefix the entity ID with the appropriate API path
-            const prefixedEntityId = entityId ? `${config.apiPath}${entityId}` : '';
-            onEntitySelect(prefixedEntityId);
-        }
+        onEntitySelect( e.target.value);
     };
 
     // Default option renderer if not provided
@@ -92,12 +80,12 @@ export default function EntityPicker({
             ) : (
                 <select
                     role="listbox"
-                    value={selectedEntity}
+                    value={initialValue}
                     onChange={handleEntityChange}
                 >
                     <option value="">Sélectionner un {label || entityType}</option>
                     {entities.map((entity) => (
-                        <option key={entity.id} value={entity.id}>
+                        <option key={entity.id} value={entity['@id']}>
                             {optionRenderer(entity)}
                         </option>
                     ))}
