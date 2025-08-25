@@ -12,6 +12,15 @@ const AuthContext = createContext({
 })
 
 export function AuthProvider({ children }) {
+    if(localStorage.getItem('jwt')){
+        const now = new Date()
+        const item = JSON.parse(localStorage.getItem('jwt'))
+        console.log(now.getTime());
+        console.log(item.expiry);
+        if (now.getTime() > item.expiry) {
+            localStorage.removeItem('jwt')
+        }
+    }
   const [token, setToken] = useState(() => localStorage.getItem('jwt'))
   const [roles, setRoles] = useState([])
 
@@ -37,7 +46,7 @@ export function AuthProvider({ children }) {
 	// as well as the time when it's supposed to expire
 	const item = {
 		value: newToken,
-		expiry: now.getTime() + import.meta.env.VITE_WACDO_TOKEN_TTL,
+		expiry: Number(import.meta.env.VITE_WACDO_TOKEN_TTL) + now.getTime(),
 	}
 	localStorage.setItem('jwt', JSON.stringify(item))
     setToken(newToken)
