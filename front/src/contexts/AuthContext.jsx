@@ -7,21 +7,20 @@ const AuthContext = createContext({
   isAdmin: false,
   isEmployee: false,
   login: () => {},
-  logout: () => {},
-  refreshFromStorage: () => {}
+  logout: () => {}
 })
 
 export function AuthProvider({ children }) {
+    const tokenData = JSON.parse(localStorage.getItem('jwt'))
     if(localStorage.getItem('jwt')){
         const now = new Date()
-        const item = JSON.parse(localStorage.getItem('jwt'))
         console.log(now.getTime());
-        console.log(item.expiry);
-        if (now.getTime() > item.expiry) {
+        console.log(tokenData.expiry);
+        if (now.getTime() > tokenData.expiry) {
             localStorage.removeItem('jwt')
         }
     }
-  const [token, setToken] = useState(() => localStorage.getItem('jwt'))
+  const [token, setToken] = useState(() => tokenData?.token)
   const [roles, setRoles] = useState([])
 
   function decodeRoles(jwt) {
@@ -29,8 +28,8 @@ export function AuthProvider({ children }) {
     try {
       const info = jwtDecode(jwt)
       return Array.isArray(info?.roles) ? info.roles : []
-    } catch (_) {
-      return []
+    } catch (e) {
+      return [e]
     }
   }
 
@@ -57,15 +56,12 @@ export function AuthProvider({ children }) {
     setToken(null)
   }
 
-  function refreshFromStorage() {
-    setToken(localStorage.getItem('jwt'))
-  }
 
   const value = useMemo(() => {
     const isAuthenticated = !!token
     const isAdmin = roles.includes('ROLE_ADMIN')
     const isEmployee = roles.includes('ROLE_EMPLOYEE') && !isAdmin
-    return { isAuthenticated, roles, isAdmin, isEmployee, login, logout, refreshFromStorage }
+    return { isAuthenticated, roles, isAdmin, isEmployee, login, logout }
   }, [token, roles])
 
   return (
