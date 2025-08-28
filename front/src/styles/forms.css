@@ -4,7 +4,7 @@ form {
     flex-direction: column;
     gap: 1.5rem;
     align-items: stretch;
-    min-height: 100vh;
+    /*min-height: 100vh;*/
     background-color: #f9fafb;
     padding: 1rem;
 
