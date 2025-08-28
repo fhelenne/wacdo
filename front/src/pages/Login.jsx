@@ -5,6 +5,7 @@ import PageHeader from '../components/PageHeader';
 import FormField from '../components/FormField';
 import Button from '../components/Button';
 import { useAuth } from '../contexts/AuthContext.jsx';
+import '../styles/login.css';
 
 function Login() {
   const [email, setEmail] = useState('');

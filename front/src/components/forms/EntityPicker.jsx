@@ -1,13 +1,13 @@
 import {useState, useEffect} from "react";
 import fetchWithJWT from '../../utils/fetcWithJWT.js';
 
-export default function EntityPicker({ 
-    entityType, 
-    onEntitySelect, 
-    initialValue, 
-    label,
-    renderOption 
-}) {
+export default function EntityPicker({
+                                         entityType,
+                                         onEntitySelect,
+                                         initialValue,
+                                         label,
+                                         renderOption
+                                     }) {
     const [entities, setEntities] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -51,7 +51,7 @@ export default function EntityPicker({
     }, []);
 
     const handleEntityChange = (e) => {
-        onEntitySelect( e.target.value);
+        onEntitySelect(e.target.value);
     };
 
     // Default option renderer if not provided
@@ -71,15 +71,18 @@ export default function EntityPicker({
     const optionRenderer = renderOption || defaultOptionRenderer;
 
     return (
-        <label role={`${entityType}-selection`}>
-            {label || entityType.charAt(0).toUpperCase() + entityType.slice(1)}
+        <div>
+            <label role={`${entityType}-selection`} htmlFor={`${entityType}-selection`}>
+                {label || entityType.charAt(0).toUpperCase() + entityType.slice(1)}
+            </label>
             {loading ? (
-                <select disabled>
+                <select disabled id={`${entityType}-selection`}>
                     <option>Chargement...</option>
                 </select>
             ) : (
                 <select
                     role="listbox"
+                     id={`${entityType}-selection`}
                     value={initialValue}
                     onChange={handleEntityChange}
                 >
@@ -91,6 +94,6 @@ export default function EntityPicker({
                     ))}
                 </select>
             )}
-        </label>
+        </div>
     );
 } 

@@ -1,206 +1,188 @@
 /* Shared Form Styles */
-input {
-  color:black;
-}
-/* Form Field Base Styles */
-input[type="date"],
-input[type="text"],
-input[type="email"],
-input[type="password"],
-[role="searchbox"],
-[role="combobox"] {
-  padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  transition: all 0.2s;
-  background-color: white;
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: stretch;
+    min-height: 100vh;
+    background-color: #f9fafb;
+    padding: 1rem;
+
+    > section {
+        background-color: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e5e7eb;
+        padding: 2rem;
+        width: 100%;
+        max-width: 400px;
+    }
 }
 
-input[type="date"]:focus,
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-[role="searchbox"]:focus,
-[role="combobox"]:focus {
-  outline: none;
-  ring: 2px;
-  ring-color: #4f46e5;
-  border-color: #4f46e5;
-}
-
-/* Label Styles */
 label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #374151;
-  margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.25rem;
+    margin-right: 0.25rem;
 }
 
-/* Form Field Container */
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+select,
+input {
+    padding: 0.5rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    background-color: white;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #4f46e5;
+    border-color: #4f46e5;
+}
+
+
+/* Checkbox Styles */
+input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    accent-color: #4f46e5;
+}
+
+
+/* Form Layout Utilities */
+input[type="checkbox"] + label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 0;
 }
 
 /* Button Base Styles */
 [role="button"],
 button {
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  transition: all 0.2s;
-  border: none;
-  cursor: pointer;
-  font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
 }
 
 [role="button"]:disabled,
 button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* Primary Button */
 [role="button"]:not([data-variant]),
 button:not([data-variant]) {
-  background-color: #4f46e5;
-  color: white;
+    background-color: #4f46e5;
+    color: white;
 }
 
 [role="button"]:not([data-variant]):hover:not(:disabled),
 button:not([data-variant]):hover:not(:disabled) {
-  background-color: #4338ca;
+    background-color: #4338ca;
 }
 
 [role="button"]:not([data-variant]):focus,
 button:not([data-variant]):focus {
-  outline: none;
-  ring: 2px;
-  ring-color: #4f46e5;
-  ring-offset: 2px;
+    outline: none;
+    ring: 2px;
+    ring-color: #4f46e5;
+    ring-offset: 2px;
 }
 
 /* Secondary Button */
 [role="button"][data-variant="secondary"],
 button[data-variant="secondary"] {
-  background-color: white;
-  color: #374151;
-  border: 1px solid #d1d5db;
+    background-color: white;
+    color: #374151;
+    border: 1px solid #d1d5db;
 }
 
 [role="button"][data-variant="secondary"]:hover:not(:disabled),
 button[data-variant="secondary"]:hover:not(:disabled) {
-  background-color: #f9fafb;
+    background-color: #f9fafb;
 }
 
 [role="button"][data-variant="secondary"]:focus,
 button[data-variant="secondary"]:focus {
-  outline: none;
-  ring: 2px;
-  ring-color: #4f46e5;
-  ring-offset: 2px;
+    outline: none;
+    ring: 2px;
+    ring-color: #4f46e5;
+    ring-offset: 2px;
 }
 
 /* Danger Button */
 [role="button"][data-variant="danger"],
 button[data-variant="danger"] {
-  background-color: #dc2626;
-  color: white;
+    background-color: #dc2626;
+    color: white;
 }
 
 [role="button"][data-variant="danger"]:hover:not(:disabled),
 button[data-variant="danger"]:hover:not(:disabled) {
-  background-color: #b91c1c;
+    background-color: #b91c1c;
 }
 
 [role="button"][data-variant="danger"]:focus,
 button[data-variant="danger"]:focus {
-  outline: none;
-  ring: 2px;
-  ring-color: #dc2626;
-  ring-offset: 2px;
+    outline: none;
+    ring: 2px;
+    ring-color: #dc2626;
+    ring-offset: 2px;
 }
 
-/* Checkbox Styles */
-input[type="checkbox"] {
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.25rem;
-  accent-color: #4f46e5;
-}
-
-/* Link Styles */
-a {
-  font-size: 0.875rem;
-  color: #4f46e5;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-a:hover {
-  color: #4338ca;
-  text-decoration: underline;
-}
-
-/* Form Layout Utilities */
-.form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.form-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  gap: 1rem;
-}
-
-.form-group {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 
 /* Custom Button Colors (class for color) */
 [role="button"].success {
-  background-color: #16a34a;
-  color: white;
+    background-color: #16a34a;
+    color: white;
 }
+
 [role="button"].success:hover:not(:disabled) {
-  background-color: #15803d;
+    background-color: #15803d;
 }
+
 [role="button"].success:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #bbf7d0;
+    outline: none;
+    box-shadow: 0 0 0 2px #bbf7d0;
 }
 
 [role="button"].warning {
-  background-color: #f59e42;
-  color: white;
+    background-color: #f59e42;
+    color: white;
 }
+
 [role="button"].warning:hover:not(:disabled) {
-  background-color: #d97706;
+    background-color: #d97706;
 }
+
 [role="button"].warning:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #fde68a;
+    outline: none;
+    box-shadow: 0 0 0 2px #fde68a;
 }
 
 [role="button"].danger {
-  background-color: #dc2626;
-  color: white;
+    background-color: #dc2626;
+    color: white;
 }
+
 [role="button"].danger:hover:not(:disabled) {
-  background-color: #b91c1c;
+    background-color: #b91c1c;
 }
+
 [role="button"].danger:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #fecaca;
+    outline: none;
+    box-shadow: 0 0 0 2px #fecaca;
 }
