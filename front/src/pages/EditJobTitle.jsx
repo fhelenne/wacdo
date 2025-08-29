@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js';
 import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
+import {notify} from "../utils/notify.js";
 
 export default function EditJobTitle() {
     const [title,setTitle] = useState('');
@@ -25,8 +26,18 @@ export default function EditJobTitle() {
           method: "PATCH",
           body: JSON.stringify({ name: title }),
           // …
+        })
+        .then(response => {
+            if (response.ok) {
+                notify.success('poste enregistré', {});
+                navigate('/job-titles');
+            } else {
+                notify.error('Erreur lors de la modification du poste', {});
+            }
+        })
+        .catch(error => {
+            notify.error('Erreur de connexion'+error, {});
         });
-        navigate('/job-titles');
     }
 
   return (  <main role="dashboard">

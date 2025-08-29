@@ -17,6 +17,7 @@ function FormField({
         name={name}
         type={type}
         role={role}
+        data-form-type="other"
         required={required}
         placeholder={placeholder}
         value={value}

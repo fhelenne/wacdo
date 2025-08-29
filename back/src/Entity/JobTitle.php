@@ -15,12 +15,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: JobTitleRepository::class)]
 #[ApiResource(
 
     operations: [
         new GetCollection(),
-        new Post(validationContext: ['groups' => ['job_title:create']]),
+        new Post(),
         new Get(),
         new Put(),
         new Patch(),
@@ -38,8 +40,9 @@ class JobTitle
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     #[Groups(['user:read', 'assignment:read', 'restaurant:read', 'job_title:read','job_title:create','job_title:update'])]
-    private ?string $name = null;
+    private string $name;
 
     /**
      * @var Collection<int, Assignment>

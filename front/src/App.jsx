@@ -7,6 +7,7 @@ import './styles/forms.css'
 import './App.css'
 import { useAuth } from './contexts/AuthContext.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
+import {ToastContainer} from 'react-toastify'
 
 import Login from './pages/Login'
 const User = lazy(() => import('./pages/User'))
@@ -42,6 +43,7 @@ function App() {
   return (
     <ErrorBoundary>
       <Router basename={import.meta.env.BASE_URL}>
+          <ToastContainer></ToastContainer>
         <Suspense fallback={<Loading />}>
           <AppShell>
             <Routes>

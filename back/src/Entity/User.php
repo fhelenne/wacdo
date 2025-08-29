@@ -3,8 +3,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiFilter;
-use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
@@ -20,13 +18,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
         new GetCollection(security: "is_granted('ROLE_ADMIN')"),
-        new Post(security: "is_granted('ROLE_ADMIN') or (object == user and previous_object == user)",validationContext: ['groups' => ['Default', 'user:create']], processor: UserPasswordHasher::class),
+        new Post(security: "is_granted('ROLE_ADMIN') or (object == user and previous_object == user)", processor: UserPasswordHasher::class),
         new Get(security: "is_granted('ROLE_ADMIN') or ((object == user and previous_object == user))"),
         new Put(security: "is_granted('ROLE_ADMIN') or (object == user and previous_object == user)", processor: UserPasswordHasher::class),
         new Patch(security: "is_granted('ROLE_ADMIN') or (object == user and previous_object == user)",processor: UserPasswordHasher::class),
