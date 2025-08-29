@@ -8,6 +8,7 @@ import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
 import { faPlus, faEdit, faTrash } from '../utils/icons.js';
 import fetchWithJWT from '../utils/fetcWithJWT.js'
+import {notify} from "../utils/notify.js";
 
 function Restaurant() {
   const [restaurants, setRestaurants] = useState([]);
@@ -33,9 +34,10 @@ function Restaurant() {
         method: "DELETE",
       })
       .then(() => {
+          notify.success('supprimé !', {})
         setRestaurants(restaurants.filter(restaurant => restaurant.id !== id)); // Update state after deletion
       })
-      .catch((error) => console.log(error));
+      .catch((error) => notify.error(error, {}));
     }
   };
 

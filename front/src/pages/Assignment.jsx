@@ -7,6 +7,7 @@ import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
 import { faPlus, faEdit, faTrash } from '../utils/icons.js';
 import fetchWithJWT from '../utils/fetcWithJWT.js'
+import {notify} from "../utils/notify.js";
 
 function Assignment() {
   const [assignments, setAssignments] = useState([]);
@@ -72,12 +73,13 @@ function Assignment() {
       })
       .then(() => {
         // Remove the deleted assignment from the state
+          notify.success('supprimé !', {})
         setAssignments(assignments.filter(assignment => assignment.id !== id));
       })
       .catch((error) => {
-        console.error('Failed to delete assignment:', error);
+        notify.error(error, {});
         // Optionally, show an error message to the user
-        window.alert("Impossible de supprimer l'affectation. Veuillez réessayer.");
+        // window.alert("Impossible de supprimer l'affectation. Veuillez réessayer.");
       });
     }
   };

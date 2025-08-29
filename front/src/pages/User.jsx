@@ -8,6 +8,7 @@ import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
 import { faPlus, faEdit, faTrash } from '../utils/icons.js';
 import fetchWithJWT from '../utils/fetcWithJWT.js'
+import {notify} from "../utils/notify.js";
 
 function User() {
   const [users, setUsers] = useState([]);
@@ -19,9 +20,10 @@ function User() {
         method: "DELETE",
       })
       .then(() => {
+          notify.success('supprimé !', {})
         setUsers(users.filter(user => user.id !== id)); // Update state after deletion
       })
-      .catch((error) => console.log(error));
+      .catch((error) => notify.error(error, {}));
     }
   };
 
@@ -34,7 +36,7 @@ function User() {
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        notify.error(error, {});
         setLoading(false);
       });
   }, []);

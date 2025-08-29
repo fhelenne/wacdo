@@ -7,6 +7,7 @@ import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
 import { faPlus, faEdit, faTrash } from '../utils/icons.js';
 import fetchWithJWT from '../utils/fetcWithJWT.js'
+import {notify} from "../utils/notify.js";
 
 function JobTitle() {
   const [jobTitles, setJobTitles] = useState([]);
@@ -32,9 +33,10 @@ function JobTitle() {
         method: "DELETE",
       })
       .then(() => {
+        notify.success('supprimé !', {})
         setJobTitles(jobTitles.filter(job => job.id !== id)); // Update state after deletion
       })
-      .catch((error) => console.log(error));
+      .catch((error) =>  notify.error(error, {}));
     }
   };
 
