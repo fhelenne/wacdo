@@ -4,6 +4,7 @@ import FormField from "../components/FormField.jsx";
 import {useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js'
 import {useNavigate} from "react-router-dom";
+import {notify} from "../utils/notify.js";
 export default function CreateRestaurant() {
     const [name,setName] = useState('');
     const [address,setAddress] = useState('');
@@ -16,8 +17,17 @@ export default function CreateRestaurant() {
           method: "POST",
           body: JSON.stringify({ name: name, address: address, zipCode: zipCode, city: city }),
           // …
+        }).then(response => {
+            if (response.ok) {
+                notify.success('Restaurant créé', {});
+                navigate('/restaurants');
+            } else {
+                notify.error('Erreur lors de la création du restaurant', {});
+            }
+        })
+        .catch(error => {
+            notify.error('Erreur de connexion'+error, {});
         });
-        navigate('/restaurants');
     }
 
   return (  <main role="dashboard">

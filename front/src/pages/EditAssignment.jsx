@@ -5,6 +5,7 @@ import EntityPicker from "../components/forms/EntityPicker.jsx";
 import {useEffect, useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js'
 import {useParams, useNavigate} from "react-router-dom";
+import {notify} from "../utils/notify.js";
 
 export default function EditAssignment() {
 
@@ -59,13 +60,16 @@ export default function EditAssignment() {
                 'Content-Type': 'application/merge-patch+json'
             }
         })
-        .then(() => {
-            navigate('/assignments');
+        .then(response => {
+            if (response.ok) {
+                notify.success('Affectation modifiée', {});
+                navigate('/assignments');
+            } else {
+                notify.error('Erreur lors de la modification de l\'affectation', {});
+            }
         })
-        .catch((error) => {
-            console.error('Failed to update assignment:', error);
-            // Optionally, show an error message to the user
-            window.alert("Impossible de mettre à jour l'affectation. Veuillez réessayer.");
+        .catch(error => {
+            notify.error('Erreur de connexion'+error, {});
         });
     }
 

@@ -18,7 +18,7 @@ export default function CreateJobTitle() {
         })
         .then(response => {
             if (response.ok) {
-                notify.success('poste enregistré', {});
+                notify.success('poste créé', {});
                 navigate('/job-titles');
             } else {
                 notify.error('Erreur lors de la création du poste', {});

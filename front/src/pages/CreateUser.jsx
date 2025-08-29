@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js';
 import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
+import {notify} from "../utils/notify.js";
 
 export default function CreateUser() {
     const [firstName,setFirstName] = useState('');
@@ -23,8 +24,17 @@ export default function CreateUser() {
               firstHiredAt: firstHiredAt
           }),
           // …
+        }).then(response => {
+            if (response.ok) {
+                notify.success('Collaborateur créé', {});
+                navigate('/users');
+            } else {
+                notify.error('Erreur lors de la création du collaborateur', {});
+            }
+        })
+        .catch(error => {
+            notify.error('Erreur de connexion'+error, {});
         });
-        navigate('/users');
     }
 
   return (  <main role="dashboard">

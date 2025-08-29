@@ -5,6 +5,7 @@ import EntityPicker from "../components/forms/EntityPicker.jsx";
 import {useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js'
 import {useNavigate} from "react-router-dom";
+import {notify} from "../utils/notify.js";
 
 export default function CreateAssignment() {
     const [user, setUser] = useState('');
@@ -26,8 +27,17 @@ export default function CreateAssignment() {
                 endAt: endAt
             }),
             // …
+        }).then(response => {
+            if (response.ok) {
+                notify.success('Affectation créée', {});
+                navigate('/assignments');
+            } else {
+                notify.error('Erreur lors de la création de l\'affectation', {});
+            }
+        })
+        .catch(error => {
+            notify.error('Erreur de connexion'+error, {});
         });
-        navigate('/assignments');
     }
 
     return (

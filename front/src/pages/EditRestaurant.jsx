@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js';
 import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
+import {notify} from "../utils/notify.js";
 
 export default function EditRestaurant() {
     const [name, setName] = useState('');
@@ -36,8 +37,17 @@ export default function EditRestaurant() {
                 city: city,
             }),
             // …
+        }).then(response => {
+            if (response.ok) {
+                notify.success('Restaurant modifié', {});
+                navigate('/restaurants');
+            } else {
+                notify.error('Erreur lors de la modification du restaurant', {});
+            }
+        })
+        .catch(error => {
+            notify.error('Erreur de connexion'+error, {});
         });
-        navigate('/restaurants');
     }
 
     return (<main role="dashboard">
