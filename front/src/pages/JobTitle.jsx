@@ -46,6 +46,7 @@ function JobTitle() {
 
   const renderActions = (job) => (
     <>
+      <Button icon={faEdit} color="info" to={"/job-titles/detail/"+job.id}>Détail</Button>
       <Button icon={faEdit} color="warning" to={"/job-titles/edit/"+job.id}>Modifier</Button>
       <Button icon={faTrash} color="danger" onClick={() => handleDelete(job.id)}>Supprimer</Button>
     </>

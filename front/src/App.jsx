@@ -20,6 +20,7 @@ const Restaurant = lazy(() => import('./pages/Restaurant'))
 const CreateRestaurant = lazy(() => import('./pages/CreateRestaurant'))
 const EditRestaurant = lazy(() => import('./pages/EditRestaurant'))
 const JobTitle = lazy(() => import('./pages/JobTitle'))
+const DetailJobTitle = lazy(() => import('./pages/DetailJobTitle'))
 const CreateJobTitle = lazy(() => import('./pages/CreateJobTitle'))
 const EditJobTitle = lazy(() => import('./pages/EditJobTitle'))
 
@@ -59,6 +60,7 @@ function App() {
               <Route path="/restaurants/add" element={<ProtectedRoute><CreateRestaurant /></ProtectedRoute>} />
               <Route path="/restaurants/edit/:id" element={<ProtectedRoute><EditRestaurant /></ProtectedRoute>} />
               <Route path="/job-titles" element={<ProtectedRoute><JobTitle /></ProtectedRoute>} />
+              <Route path="/job-titles/detail/:id" element={<ProtectedRoute><DetailJobTitle /></ProtectedRoute>} />
               <Route path="/job-titles/add" element={<ProtectedRoute><CreateJobTitle /></ProtectedRoute>} />
               <Route path="/job-titles/edit/:id" element={<ProtectedRoute><EditJobTitle /></ProtectedRoute>} />
               <Route path="*" element={<Navigate to="/" replace />} />
