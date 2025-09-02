@@ -4,10 +4,11 @@ import FormField from "../components/FormField.jsx";
 import EntityPicker from "../components/forms/EntityPicker.jsx";
 import {useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js'
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {notify} from "../utils/notify.js";
 
 export default function CreateAssignment() {
+    let params = new URLSearchParams(window.location.search);
     const [user, setUser] = useState('');
     const [restaurant, setRestaurant] = useState('');
     const [jobTitle, setJobTitle] = useState('');
@@ -35,9 +36,9 @@ export default function CreateAssignment() {
                 notify.error('Erreur lors de la création de l\'affectation', {});
             }
         })
-        .catch(error => {
-            notify.error('Erreur de connexion'+error, {});
-        });
+            .catch(error => {
+                notify.error('Erreur de connexion' + error, {});
+            });
     }
 
     return (
@@ -52,6 +53,7 @@ export default function CreateAssignment() {
                     <EntityPicker
                         entityType="users"
                         label="Collaborateur"
+                        initialValue={params.get('user_id')?params.get('user_id'):' '}
                         onEntitySelect={(selectedUserId) => setUser(selectedUserId)}
                     />
                     <EntityPicker

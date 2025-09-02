@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 
     operations: [
         new GetCollection(),
-        new Post(validationContext: ['groups' => ['assignment:create']]),
+        new Post(),
         new Get(),
         new Put(),
         new Patch(),

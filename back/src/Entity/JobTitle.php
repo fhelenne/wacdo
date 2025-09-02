@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Delete(),
     ],
     normalizationContext: ['groups' => ['job_title:read']],
-    denormalizationContext: ['groups' => ['job_title:create', 'job_title:update']],
+    denormalizationContext: ['groups' => ['job_title:update']],
 )]
 class JobTitle
 {

@@ -6,6 +6,7 @@ import {
 } from '../utils/icons.js';
 
 function SearchBar({ placeholder, filters = [] }) {
+    return '';
   return (
     <div role="search">
       <div>
