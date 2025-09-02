@@ -13,7 +13,6 @@ import Pagination from "../components/Pagination.jsx";
 
 function DetailUser() {
     const [user, setUser] = useState([]);
-    const [assignments, setAssignments] = useState([]);
     const [loading, setLoading] = useState(true);
     const params = useParams();
 

@@ -52,7 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[Assert\NotBlank(groups: ['user:create'])]
+    #[Assert\NotBlank(groups: ['user:create','user:update'])]
     #[Groups(['user:create', 'user:update'])]
     private ?string $plainPassword = null;
 
