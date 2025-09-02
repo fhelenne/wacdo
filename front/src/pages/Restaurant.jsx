@@ -43,10 +43,10 @@ function Restaurant() {
 
     const columns = [
 
-        {
-            header: 'Id',
-            render: (restaurant) => restaurant.id
-        }, {
+            {
+                header: 'Id',
+                render: (restaurant) => restaurant.id
+            }, {
                 header: 'Restaurant',
                 render:
                     (restaurant) => (
@@ -61,7 +61,7 @@ function Restaurant() {
     ;
 
     const renderActions = (restaurant) => (
-        <>
+        <><Button icon={faEdit} color="info" to={"/restaurants/detail/" + restaurant.id}>Détail</Button>
             <Button icon={faEdit} color="warning" to={"/restaurants/edit/" + restaurant.id}>Modifier</Button>
             <Button icon={faTrash} color="danger" onClick={() => handleDelete(restaurant.id)}>Supprimer</Button>
         </>

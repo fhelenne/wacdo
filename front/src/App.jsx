@@ -18,6 +18,7 @@ const Assignment = lazy(() => import('./pages/Assignment'))
 const CreateAssignment = lazy(() => import('./pages/CreateAssignment'))
 const EditAssignment = lazy(() => import('./pages/EditAssignment'))
 const Restaurant = lazy(() => import('./pages/Restaurant'))
+const DetailRestaurant = lazy(() => import('./pages/DetailRestaurant'))
 const CreateRestaurant = lazy(() => import('./pages/CreateRestaurant'))
 const EditRestaurant = lazy(() => import('./pages/EditRestaurant'))
 const JobTitle = lazy(() => import('./pages/JobTitle'))
@@ -59,6 +60,7 @@ function App() {
               <Route path="/assignments/add" element={<ProtectedRoute><CreateAssignment /></ProtectedRoute>} />
               <Route path="/assignments/edit/:id" element={<ProtectedRoute><EditAssignment /></ProtectedRoute>} />
               <Route path="/restaurants" element={<ProtectedRoute><Restaurant /></ProtectedRoute>} />
+              <Route path="/restaurants/detail/:id" element={<ProtectedRoute><DetailRestaurant /></ProtectedRoute>} />
               <Route path="/restaurants/add" element={<ProtectedRoute><CreateRestaurant /></ProtectedRoute>} />
               <Route path="/restaurants/edit/:id" element={<ProtectedRoute><EditRestaurant /></ProtectedRoute>} />
               <Route path="/job-titles" element={<ProtectedRoute><JobTitle /></ProtectedRoute>} />
