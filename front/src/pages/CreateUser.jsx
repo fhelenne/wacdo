@@ -40,7 +40,7 @@ export default function CreateUser() {
   return (  <main role="dashboard">
       <section>
         <PageHeader
-          title="Modifier le collaborateur {firstName} {lastName}"
+          title="Créer un collaborateur"
           description=""
         />
           <form role="form" onSubmit={handleOnSubmit}>

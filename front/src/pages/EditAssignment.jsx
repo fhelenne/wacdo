@@ -28,20 +28,20 @@ export default function EditAssignment() {
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + `/assignments/${params.id}`, {
             method: "GET"
         })
-        .then((response) => response.json())
-        .then((response) => {
-            // Assuming the response contains the full assignment details
-            setUser(response.employee['@id']);
-            setRestaurant(response.restaurant['@id']);
-            setJobTitle(response.jobTitle['@id']);
-            setStartAt(formatDateToInput(response.startAt));
-            setEndAt(formatDateToInput(response.endAt));
-        })
-        .catch((error) => {
-            console.error('Failed to fetch assignment details:', error);
-            // Optionally, show an error message or redirect
-            navigate('/assignments');
-        });
+            .then((response) => response.json())
+            .then((response) => {
+                // Assuming the response contains the full assignment details
+                setUser(response.employee['@id']);
+                setRestaurant(response.restaurant['@id']);
+                setJobTitle(response.jobTitle['@id']);
+                setStartAt(formatDateToInput(response.startAt));
+                setEndAt(formatDateToInput(response.endAt));
+            })
+            .catch((error) => {
+                console.error('Failed to fetch assignment details:', error);
+                // Optionally, show an error message or redirect
+                navigate('/assignments');
+            });
     }, [params.id, navigate]);
 
     const handleOnSubmit = (e) => {
@@ -60,24 +60,24 @@ export default function EditAssignment() {
                 'Content-Type': 'application/merge-patch+json'
             }
         })
-        .then(response => {
-            if (response.ok) {
-                notify.success('Affectation modifiée', {});
-                navigate('/assignments');
-            } else {
-                notify.error('Erreur lors de la modification de l\'affectation', {});
-            }
-        })
-        .catch(error => {
-            notify.error('Erreur de connexion'+error, {});
-        });
+            .then(response => {
+                if (response.ok) {
+                    notify.success('Affectation modifiée', {});
+                    navigate('/assignments');
+                } else {
+                    notify.error('Erreur lors de la modification de l\'affectation', {});
+                }
+            })
+            .catch(error => {
+                notify.error('Erreur de connexion' + error, {});
+            });
     }
 
     return (
         <main role="dashboard">
             <section>
                 <PageHeader
-                    title="Modifier une affectation"
+                    title={"Modifier l'affectation #" + params.id}
                     description=""
                 />
                 <form role="form" onSubmit={handleOnSubmit}>
@@ -105,17 +105,17 @@ export default function EditAssignment() {
                             onEntitySelect={(selectedJobTitleId) => setJobTitle(selectedJobTitleId)}
                         />
                     </div>
-                    <FormField 
-                        name='startAt' 
-                        type="date" 
-                        label="Date de début" 
+                    <FormField
+                        name='startAt'
+                        type="date"
+                        label="Date de début"
                         value={startAt}
                         onChange={(e) => setStartAt(e.target.value)}
                     />
-                    <FormField 
-                        name='endAt' 
-                        type="date" 
-                        label="Date de fin" 
+                    <FormField
+                        name='endAt'
+                        type="date"
+                        label="Date de fin"
                         value={endAt}
                         onChange={(e) => setEndAt(e.target.value)}
                     />

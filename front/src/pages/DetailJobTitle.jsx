@@ -30,7 +30,7 @@ function EditJobTitle() {
         <main role="jobtitle">
             <section>
                 <PageHeader
-                    title="Detail du poste"
+                    title={"Detail du poste " +params.id}
                     actionButton={<Button icon={faEdit} color="warning"
                                           to={'/job-titles/edit/' + params.id}>Modifier</Button>}
                 />

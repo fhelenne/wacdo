@@ -85,6 +85,10 @@ function Assignment() {
   };
 
   const columns = [
+      {
+          header: 'Id',
+          render: (row) => row.id
+      },
     { 
       header: 'Collaborateur', 
       render: (row) => getEmployeeFullName(row)
