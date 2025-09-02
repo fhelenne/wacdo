@@ -17,16 +17,15 @@ export function AuthProvider({ children }) {
       const tokenString = localStorage.getItem('jwt')
       if (!tokenString) return null
       
-      const tokenData = JSON.parse(tokenString)
-      // Retourner le token même s'il est expiré pour permettre le refresh
-      return tokenData?.value || null
+      // Le token est maintenant stocké directement comme string
+      return tokenString
     } catch (error) {
       console.error('Erreur lors de la lecture du token:', error)
       localStorage.removeItem('jwt')
       return null
     }
   })
-  
+
   const [roles, setRoles] = useState([])
 
   // Vérifier l'expiration du token après l'initialisation
@@ -36,15 +35,11 @@ export function AuthProvider({ children }) {
         const tokenString = localStorage.getItem('jwt')
         if (!tokenString) return
 
-        const tokenData = JSON.parse(tokenString)
-        if (!tokenData?.value || !tokenData?.expiry) {
-          localStorage.removeItem('jwt')
-          setToken(null)
-          return
-        }
+        // Utiliser l'expiry du token décodé au lieu du localStorage
+        const decodedToken = jwtDecode(tokenString)
+        const now = Math.floor(Date.now() / 1000) // exp est en secondes
 
-        const now = new Date().getTime()
-        if (now > tokenData.expiry) {
+        if (decodedToken.exp && now > decodedToken.exp) {
           console.log('Token expiré, suppression...')
           localStorage.removeItem('jwt')
           setToken(null)
@@ -76,15 +71,8 @@ export function AuthProvider({ children }) {
   }, [token])
 
   function login(newToken) {
-    const now = new Date()
-
-    // Structure cohérente : {value: token, expiry: timestamp}
-    const item = {
-      value: newToken,
-      expiry: Number(import.meta.env.VITE_WACDO_TOKEN_TTL) * 1000 + now.getTime(),
-    }
-    
-    localStorage.setItem('jwt', JSON.stringify(item))
+    // Stocker directement le token sans wrapper
+    localStorage.setItem('jwt', newToken)
     setToken(newToken)
   }
 

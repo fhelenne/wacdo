@@ -2,14 +2,14 @@
 // Respecte les principes SOLID et les guidelines d'accessibilité du projet
 
 export default async function fetchWithJWT(url, options = {}) {
-  const token = JSON.parse(localStorage.getItem('jwt'));
+  const token = localStorage.getItem('jwt');
   let ContentType = 'application/json';
   if(options.method === 'PATCH'){
       ContentType = 'application/merge-patch+json';
   }
   const headers = {
     ...(options.headers || {}),
-    ...(token ? { 'Authorization': `Bearer ${token.value}` } : {}),
+    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
     'Content-Type': ContentType
   };
   
