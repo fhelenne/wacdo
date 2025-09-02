@@ -53,7 +53,7 @@ export default function EditUser() {
   return (  <main role="dashboard">
       <section>
         <PageHeader
-          title="Modifier le collaborateur {firstName} {lastName}"
+          title= {"Modifier le collaborateur "+firstName+" "+lastName}
           description=""
         />
           <form role="form" onSubmit={handleOnSubmit}>

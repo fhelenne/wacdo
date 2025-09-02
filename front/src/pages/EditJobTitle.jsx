@@ -43,7 +43,7 @@ export default function EditJobTitle() {
   return (  <main role="dashboard">
       <section>
         <PageHeader
-          title="Modifier le poste {title}"
+          title={"Modifier le poste "+title}
           description=""
         />
           <form role="form" onSubmit={handleOnSubmit}>

@@ -53,7 +53,7 @@ export default function EditRestaurant() {
     return (<main role="dashboard">
         <section>
             <PageHeader
-                title="Modifier le poste {title}"
+                title={"Modifier le restaurant "+name}
                 description=""
             />
             <form role="form" onSubmit={handleOnSubmit}>
