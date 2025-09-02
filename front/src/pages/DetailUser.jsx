@@ -44,8 +44,11 @@ function DetailUser() {
       })
       .then(() => {
         // Remove the deleted assignment from the state
-          notify.success('supprimé !', {})
-        setUser(user.filter(user => user.id === id));
+        notify.success('supprimé !', {})
+        setUser(prevUser => ({
+          ...prevUser,
+          assignments: prevUser.assignments.filter(assignment => assignment.id !== id)
+        }));
       })
       .catch((error) => {
         notify.error(error, {});
