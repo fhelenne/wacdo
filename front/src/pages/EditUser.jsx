@@ -9,9 +9,15 @@ import {useNavigate} from "react-router-dom";
 import {notify} from "../utils/notify.js";
 
 export default function EditUser() {
+     const formatDateToInput = (isoDate) => {
+        if (!isoDate) return ''; // Gérer les cas sans valeur
+        return new Date(isoDate).toISOString().split('T')[0]; // Extraire uniquement la partie "YYYY-MM-DD"
+    };
+
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [firstHiredAt,setFirstHiredAt] = useState('');
+    const [email,setEmail] = useState('');
     const [jobTitle, setJobTitle] = useState('');
     const params = useParams();
     const navigate = useNavigate();
@@ -22,7 +28,8 @@ export default function EditUser() {
           .then(response => {
             setFirstName(response.firstName);
             setLastName(response.lastName);
-            setFirstHiredAt(response.firstHiredAt);
+            setFirstHiredAt(formatDateToInput(response.firstHiredAt));
+            setEmail(response.email);
             setJobTitle(response.jobTitle);
         });
     }, [params]);
@@ -35,6 +42,7 @@ export default function EditUser() {
               firstName: firstName,
               lastName: lastName,
               firstHiredAt: firstHiredAt,
+              email: email,
               jobTitle: jobTitle
           }),
         }).then(response => {
@@ -59,6 +67,7 @@ export default function EditUser() {
           <form role="form" onSubmit={handleOnSubmit}>
               <FormField name='firstName' label="Prénom" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
               <FormField name='lastName' label="Nom" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+              <FormField name='email' label="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
               <FormField name='firstHiredAt' type="date" label="Date de première embauche" value={firstHiredAt} onChange={(e) => setFirstHiredAt(e.target.value)}/>
               <EntityPicker 
                 entityType="jobTitles"

@@ -53,11 +53,20 @@ function User() {
                     <div>{user.email}</div>
                 </div>
             )
+        },
+        {
+            header: 'Email',
+            render: (user) => user.email
+        },
+        {
+            header: 'Date de première embauche',
+            render: (user) => user.firstHiredAt ? new Date(user.firstHiredAt).toLocaleDateString() : ''
         }
     ];
 
     const renderActions = (user) => (
         <>
+            <Button icon={faEdit} color="info" to={"/users/detail/" + user.id}>Détail</Button>
             <Button icon={faEdit} color="warning" to={"/users/edit/" + user.id}>Modifier</Button>
             <Button icon={faTrash} color="danger" onClick={() => handleDelete(user.id)}>Supprimer</Button>
         </>

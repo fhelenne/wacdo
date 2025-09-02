@@ -6,16 +6,16 @@ import {faEdit} from '../utils/icons.js';
 import fetchWithJWT from '../utils/fetcWithJWT.js'
 import {useParams} from "react-router-dom";
 
-function DetailJobTitle() {
-    const [jobTitle, setJobTitle] = useState([]);
+function DetailUser() {
+    const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
     const params = useParams();
     useEffect(() => {
         setLoading(true);
-        fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles/' + params.id)
+        fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + '/users/' + params.id)
             .then((response) => response.json())
             .then((response) => {
-                setJobTitle(response);
+                setUser(response);
                 setLoading(false);
             })
             .catch((error) => {
@@ -30,9 +30,9 @@ function DetailJobTitle() {
         <main role="jobtitle">
             <section>
                 <PageHeader
-                    title={"Detail du poste " +params.id}
+                    title={"Detail du collaborateur " +params.id}
                     actionButton={<Button icon={faEdit} color="warning"
-                                          to={'/job-titles/edit/' + params.id}>Modifier</Button>}
+                                          to={'/users/edit/' + params.id}>Modifier</Button>}
                 />
 
                 <section>
@@ -42,9 +42,15 @@ function DetailJobTitle() {
                         <>
                             <dl>
                                 <dt>ID</dt>
-                                <dd>{jobTitle.id}</dd>
+                                <dd>{user.id}</dd>
                                 <dt>Nom</dt>
-                                <dd>{jobTitle.name}</dd>
+                                <dd>{user.lastName}</dd>
+                                <dt>Prénom</dt>
+                                <dd>{user.firstName}</dd>
+                                <dt>email</dt>
+                                <dd>{user.email}</dd>
+                                <dt>Date de première embauche</dt>
+                                <dd>{user.firstHiredAt}</dd>
                             </dl>
                         </>
                     )}
@@ -54,4 +60,4 @@ function DetailJobTitle() {
     );
 }
 
-export default DetailJobTitle;
+export default DetailUser;

@@ -11,6 +11,7 @@ import {ToastContainer} from 'react-toastify'
 
 import Login from './pages/Login'
 const User = lazy(() => import('./pages/User'))
+const DetailUser = lazy(() => import('./pages/DetailUser'))
 const CreateUser = lazy(() => import('./pages/CreateUser'))
 const EditUser = lazy(() => import('./pages/EditUser'))
 const Assignment = lazy(() => import('./pages/Assignment'))
@@ -51,6 +52,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<RoleBasedHomeRedirect />} />
               <Route path="/users" element={<ProtectedRoute><User /></ProtectedRoute>} />
+                <Route path="/users/detail/:id" element={<ProtectedRoute><DetailUser /></ProtectedRoute>} />
               <Route path="/users/add" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
               <Route path="/users/edit/:id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
               <Route path="/assignments" element={<ProtectedRoute><Assignment /></ProtectedRoute>} />
