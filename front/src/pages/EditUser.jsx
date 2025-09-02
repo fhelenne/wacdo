@@ -14,11 +14,20 @@ export default function EditUser() {
         return new Date(isoDate).toISOString().split('T')[0]; // Extraire uniquement la partie "YYYY-MM-DD"
     };
 
+    const getRoleFromRoles = (roles) => {
+        return roles && roles.includes('ROLE_ADMIN') ? 'admin' : 'employee';
+    };
+
+    const getRoles = (selectedRole) => {
+        return selectedRole === 'admin' ? ['ROLE_ADMIN', 'ROLE_EMPLOYEE'] : ['ROLE_EMPLOYEE'];
+    };
+
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [firstHiredAt,setFirstHiredAt] = useState('');
     const [email,setEmail] = useState('');
     const [jobTitle, setJobTitle] = useState('');
+    const [role, setRole] = useState('employee');
     const params = useParams();
     const navigate = useNavigate();
     useEffect(() => {
@@ -31,6 +40,7 @@ export default function EditUser() {
             setFirstHiredAt(formatDateToInput(response.firstHiredAt));
             setEmail(response.email);
             setJobTitle(response.jobTitle);
+            setRole(getRoleFromRoles(response.roles));
         });
     }, [params]);
 
@@ -43,7 +53,8 @@ export default function EditUser() {
               lastName: lastName,
               firstHiredAt: firstHiredAt,
               email: email,
-              jobTitle: jobTitle
+              jobTitle: jobTitle,
+              roles: getRoles(role)
           }),
         }).then(response => {
             if (response.ok) {
@@ -75,6 +86,19 @@ export default function EditUser() {
                 initialValue={jobTitle}
                 onEntitySelect={(selectedJobTitleId) => setJobTitle(selectedJobTitleId)}
               />
+              <div>
+                  <label htmlFor="role">Rôle</label>
+                  <select 
+                      id="role" 
+                      name="role" 
+                      value={role} 
+                      onChange={(e) => setRole(e.target.value)}
+                      required
+                  >
+                      <option value="employee">Employé</option>
+                      <option value="admin">Administrateur</option>
+                  </select>
+              </div>
               <Button type='submit'>Enregistrer</Button>
           </form>
       </section>

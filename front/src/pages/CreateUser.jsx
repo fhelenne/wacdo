@@ -12,7 +12,12 @@ export default function CreateUser() {
     const [email, setEmail] = useState('');
     const [plainPassword, setPlainPassword] = useState('');
     const [firstHiredAt, setFirstHiredAt] = useState('');
+    const [role, setRole] = useState('employee');
     const navigate = useNavigate();
+
+    const getRoles = (selectedRole) => {
+        return selectedRole === 'admin' ? ['ROLE_ADMIN', 'ROLE_EMPLOYEE'] : ['ROLE_EMPLOYEE'];
+    };
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -23,7 +28,8 @@ export default function CreateUser() {
                 lastName: lastName,
                 email: email,
                 plainPassword: plainPassword,
-                firstHiredAt: firstHiredAt
+                firstHiredAt: firstHiredAt,
+                roles: getRoles(role)
             }),
             // …
         }).then(response => {
@@ -53,6 +59,19 @@ export default function CreateUser() {
                            onChange={(e) => setPlainPassword(e.target.value)}/>
                 <FormField name='firstHiredAt' type="date" label="Date de première embauche"
                            onChange={(e) => setFirstHiredAt(e.target.value)}/>
+                <div>
+                    <label htmlFor="role">Rôle</label>
+                    <select 
+                        id="role" 
+                        name="role" 
+                        value={role} 
+                        onChange={(e) => setRole(e.target.value)}
+                        required
+                    >
+                        <option value="employee">Employé</option>
+                        <option value="admin">Administrateur</option>
+                    </select>
+                </div>
                 <Button type='submit'>Enregistrer</Button>
             </form>
         </section>
