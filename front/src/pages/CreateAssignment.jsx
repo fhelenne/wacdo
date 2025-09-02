@@ -1,15 +1,15 @@
 import PageHeader from "../components/PageHeader.jsx";
 import Button from "../components/Button.jsx";
 import FormField from "../components/FormField.jsx";
-import EntityPicker from "../components/forms/EntityPicker.jsx";
+import {EntityPicker} from "../components/forms/EntityPicker.jsx";
 import {useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js'
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {notify} from "../utils/notify.js";
 
 export default function CreateAssignment() {
-    let params = new URLSearchParams(window.location.search);
-    const [user, setUser] = useState('');
+    const params = new URLSearchParams(window.location.search);
+    const [user, setUser] = useState(params.has('user_id')?params.get('user_id'):'');
     const [restaurant, setRestaurant] = useState('');
     const [jobTitle, setJobTitle] = useState('');
     const [startAt, setStartAt] = useState('');
@@ -31,7 +31,14 @@ export default function CreateAssignment() {
         }).then(response => {
             if (response.ok) {
                 notify.success('Affectation créée', {});
-                navigate('/assignments');
+                const userregex = /\/api\/users\/(\d+)/;
+                if (params.has('user_id')) {
+                    const match = params.get('user_id').match(userregex);
+                    const userId = match ? match[1] : null;
+                    navigate(userId ? '/users/detail/' + userId : '/assignments');
+                } else {
+                    navigate('/assignments');
+                }
             } else {
                 notify.error('Erreur lors de la création de l\'affectation', {});
             }
@@ -53,7 +60,8 @@ export default function CreateAssignment() {
                     <EntityPicker
                         entityType="users"
                         label="Collaborateur"
-                        initialValue={params.get('user_id')?params.get('user_id'):' '}
+                        initialValue={params.get('user_id')}
+                        disabled={params.has('user_id')}
                         onEntitySelect={(selectedUserId) => setUser(selectedUserId)}
                     />
                     <EntityPicker

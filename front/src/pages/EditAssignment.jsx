@@ -1,7 +1,7 @@
 import PageHeader from "../components/PageHeader.jsx";
 import Button from "../components/Button.jsx";
 import FormField from "../components/FormField.jsx";
-import EntityPicker from "../components/forms/EntityPicker.jsx";
+import {EntityPicker} from "../components/forms/EntityPicker.jsx";
 import {useEffect, useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js'
 import {useParams, useNavigate} from "react-router-dom";

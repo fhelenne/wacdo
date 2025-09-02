@@ -1,13 +1,14 @@
 import {useState, useEffect} from "react";
 import fetchWithJWT from '../../utils/fetcWithJWT.js';
 
-export default function EntityPicker({
-                                         entityType,
-                                         onEntitySelect,
-                                         initialValue,
-                                         label,
-                                         renderOption
-                                     }) {
+export function EntityPicker({
+                                 entityType,
+                                 onEntitySelect,
+                                 disabled,
+                                 initialValue,
+                                 label,
+                                 renderOption
+                             }) {
     const [entities, setEntities] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -48,7 +49,7 @@ export default function EntityPicker({
                 console.error(`Failed to fetch ${entityType}:`, error);
                 setLoading(false);
             });
-    }, []);
+    }, [config.endpoint, entityType]);
 
     const handleEntityChange = (e) => {
         onEntitySelect(e.target.value);
@@ -82,9 +83,10 @@ export default function EntityPicker({
             ) : (
                 <select
                     role="listbox"
-                     id={`${entityType}-selection`}
+                    id={`${entityType}-selection`}
                     value={initialValue}
-                    onChange={handleEntityChange}
+                    onChange={!disabled?handleEntityChange:null}
+                    disabled={disabled ? true : null}
                 >
                     <option value="">Sélectionner un {label || entityType}</option>
                     {entities.map((entity) => (
