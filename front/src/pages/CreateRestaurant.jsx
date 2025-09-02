@@ -26,7 +26,7 @@ export default function CreateRestaurant() {
             }
         })
         .catch(error => {
-            notify.error('Erreur de connexion'+error, {});
+            // notify.error('Erreur de connexion'+error, {});
         });
     }
 

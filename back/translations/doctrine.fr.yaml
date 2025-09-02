@@ -1,0 +1,44 @@
+# Traductions pour les messages Doctrine ORM
+
+# Erreurs de base de données
+'An exception occurred while executing a query: %message%': 'Une exception s''est produite lors de l''exécution d''une requête : %message%'
+'An exception occurred in the driver: %message%': 'Une exception s''est produite dans le driver : %message%'
+'Connection to database failed.': 'La connexion à la base de données a échoué.'
+'Database server has gone away.': 'Le serveur de base de données n''est plus accessible.'
+
+# Erreurs de contraintes
+'An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation': 'Une exception s''est produite lors de l''exécution d''une requête : Violation de contrainte d''intégrité'
+'Duplicate entry': 'Entrée dupliquée'
+'Cannot add or update a child row: a foreign key constraint fails': 'Impossible d''ajouter ou de modifier une ligne enfant : échec de contrainte de clé étrangère'
+'Cannot delete or update a parent row: a foreign key constraint fails': 'Impossible de supprimer ou modifier une ligne parent : échec de contrainte de clé étrangère'
+
+# Erreurs d'entité
+'Entity of type "%entityName%" for IDs %identifier% was not found.': 'Entité de type "%entityName%" pour les ID %identifier% non trouvée.'
+'Multiple non-persisted new entities were found': 'Plusieurs nouvelles entités non persistées ont été trouvées'
+'A new entity was found through the relationship': 'Une nouvelle entité a été trouvée via la relation'
+
+# Erreurs de mapping
+'Class "%className%" is not a valid entity or mapped super class.': 'La classe "%className%" n''est pas une entité valide ou une super classe mappée.'
+'Property "%propertyName%" in "%className%" was already declared': 'La propriété "%propertyName%" dans "%className%" a déjà été déclarée'
+'Invalid mapping file': 'Fichier de mapping invalide'
+
+# Erreurs de transaction
+'There is no active transaction.': 'Il n''y a pas de transaction active.'
+'Transaction commit failed.': 'L''engagement de la transaction a échoué.'
+'Transaction rollback failed.': 'L''annulation de la transaction a échoué.'
+
+# Erreurs de cache
+'Query cache is not configured.': 'Le cache de requête n''est pas configuré.'
+'Result cache is not configured.': 'Le cache de résultat n''est pas configuré.'
+'Cache entry not found.': 'Entrée de cache non trouvée.'
+
+# Erreurs de requête
+'Invalid query.': 'Requête invalide.'
+'Syntax error in DQL query.': 'Erreur de syntaxe dans la requête DQL.'
+'Unknown alias "%alias%".': 'Alias inconnu "%alias%".'
+'Unknown field "%field%".': 'Champ inconnu "%field%".'
+
+# Messages de validation Doctrine
+'Expected argument of type "%expected%", "%actual%" given': 'Argument de type "%expected%" attendu, "%actual%" fourni'
+'This value is already used.': 'Cette valeur est déjà utilisée.'
+'Reference constraint violation.': 'Violation de contrainte de référence.'

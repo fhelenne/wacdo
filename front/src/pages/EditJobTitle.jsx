@@ -36,7 +36,7 @@ export default function EditJobTitle() {
             }
         })
         .catch(error => {
-            notify.error('Erreur de connexion'+error, {});
+            // notify.error('Erreur de connexion'+error, {});
         });
     }
 

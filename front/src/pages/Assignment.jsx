@@ -60,7 +60,8 @@ function Assignment() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Failed to fetch assignments:', error);
+        // L'erreur a déjà été affichée par fetchWithJWT
+        console.error('Erreur lors du chargement des affectations:', error);
         setLoading(false);
       });
   };
@@ -73,13 +74,12 @@ function Assignment() {
       })
       .then(() => {
         // Remove the deleted assignment from the state
-          notify.success('supprimé !', {})
+        notify.success('Affectation supprimée avec succès', {});
         setAssignments(assignments.filter(assignment => assignment.id !== id));
       })
       .catch((error) => {
-        notify.error(error, {});
-        // Optionally, show an error message to the user
-        // window.alert("Impossible de supprimer l'affectation. Veuillez réessayer.");
+        // L'erreur a déjà été affichée par fetchWithJWT
+        console.error('Erreur lors de la suppression:', error);
       });
     }
   };

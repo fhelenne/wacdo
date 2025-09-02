@@ -69,7 +69,7 @@ export default function EditAssignment() {
                 }
             })
             .catch(error => {
-                notify.error('Erreur de connexion' + error, {});
+                // notify.error('Erreur de connexion' + error, {});
             });
     }
 

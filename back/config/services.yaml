@@ -19,8 +19,25 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+
+    # Normaliseur personnalisé pour traduire les erreurs API Platform
+    App\Serializer\ErrorNormalizer:
+        arguments:
+            $translator: '@translator'
+        tags:
+            - { name: 'serializer.normalizer', priority: 64 }
+
+    # Enregistrement explicite du listener d'exception pour la traduction
+    App\EventListener\ApiExceptionListener:
+        arguments:
+            $translator: '@translator'
+            $serializer: '@serializer'
+        tags:
+            - { name: kernel.event_subscriber }
+
     App\State\UserPasswordHasher:
         bind:
           $processor: '@api_platform.doctrine.orm.state.persist_processor'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

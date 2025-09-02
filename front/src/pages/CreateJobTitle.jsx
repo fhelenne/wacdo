@@ -17,15 +17,13 @@ export default function CreateJobTitle() {
           // …
         })
         .then(response => {
-            if (response.ok) {
-                notify.success('poste créé', {});
-                navigate('/job-titles');
-            } else {
-                notify.error('Erreur lors de la création du poste', {});
-            }
+            // fetchWithJWT gère déjà les erreurs automatiquement
+            notify.success('Poste créé avec succès', {});
+            navigate('/job-titles');
         })
         .catch(error => {
-            notify.error('Erreur de connexion'+error, {});
+            // L'erreur a déjà été affichée par fetchWithJWT
+            console.error('Erreur lors de la création du poste:', error);
         });
     }
 

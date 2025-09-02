@@ -1,0 +1,108 @@
+# Traductions spécifiques à API Platform
+# Messages d'erreur Hydra et API Platform uniquement
+
+# Erreurs de ressources API Platform
+'Item not found for "%id%".': 'Élément non trouvé pour "%id%".'
+'Unable to find the object "%id%" of type "%type%".': 'Impossible de trouver l''objet "%id%" de type "%type%".'
+'The type "%type%" is not supported by this server.': 'Le type "%type%" n''est pas supporté par ce serveur.'
+
+# Erreurs de sérialisation et dénormalisation API Platform
+'Unable to denormalize the given data to an object of class "%class%".': 'Impossible de traiter les données fournies pour créer un objet de classe "%class%".'
+'Expected IRI or nested document for attribute "%attribute%", "%type%" given.': 'IRI ou document imbriqué attendu pour l''attribut "%attribute%", "%type%" fourni.'
+'Nested documents for attribute "%attribute%" are not allowed. Use IRIs instead.': 'Les documents imbriqués pour l''attribut "%attribute%" ne sont pas autorisés. Utilisez des IRI à la place.'
+'The input value "%value%" is not a valid IRI.': 'La valeur d''entrée "%value%" n''est pas un IRI valide.'
+'Invalid value provided (invalid IRI?).': 'Valeur invalide fournie (IRI invalide ?).'
+
+# Erreurs de validation JSON-LD
+'Invalid JSON-LD document.': 'Document JSON-LD invalide.'
+'The JSON-LD document must be an object.': 'Le document JSON-LD doit être un objet.'
+'The "@type" field is missing.': 'Le champ "@type" est manquant.'
+'Invalid "@type" value.': 'Valeur "@type" invalide.'
+
+# Erreurs de contexte IRI
+'Unable to generate an IRI for the item of type "%type%".': 'Impossible de générer un IRI pour l''élément de type "%type%".'
+'The context "%context%" does not exist.': 'Le contexte "%context%" n''existe pas.'
+
+# Messages spécifiques aux opérations API Platform
+'Method "%method%" is not allowed for this resource.': 'La méthode "%method%" n''est pas autorisée pour cette ressource.'
+'The "%method%" method is not supported for this route.': 'La méthode "%method%" n''est pas supportée pour cette route.'
+'This operation is not supported.': 'Cette opération n''est pas supportée.'
+'Operation "%operation%" is not allowed.': 'L''opération "%operation%" n''est pas autorisée.'
+'Unable to perform the operation.': 'Impossible d''effectuer l''opération.'
+
+# Messages de filtres et recherches API Platform
+'Invalid filter parameter "%parameter%".': 'Paramètre de filtre invalide "%parameter%".'
+'The property "%property%" does not exist.': 'La propriété "%property%" n''existe pas.'
+'Invalid search criteria.': 'Critères de recherche invalides.'
+
+# Messages de pagination API Platform
+'Invalid page number.': 'Numéro de page invalide.'
+'Page "%page%" does not exist.': 'La page "%page%" n''existe pas.'
+'The page parameter must be a positive integer.': 'Le paramètre de page doit être un entier positif.'
+
+# Messages de collection API Platform
+'Unable to create a new item.': 'Impossible de créer un nouvel élément.'
+'Unable to update the item.': 'Impossible de mettre à jour l''élément.'
+'Unable to delete the item.': 'Impossible de supprimer l''élément.'
+'The collection is empty.': 'La collection est vide.'
+
+# Messages de formats API Platform
+'The requested format "%format%" is not supported.': 'Le format demandé "%format%" n''est pas supporté.'
+'Unable to serialize the data.': 'Impossible de sérialiser les données.'
+'Unable to deserialize the data.': 'Impossible de désérialiser les données.'
+
+# Messages de normalisation étendus
+'Cannot create an instance of "%class%" from serialized data because its constructor requires parameter "%parameter%" to be present.': 'Impossible de créer une instance de "%class%" à partir des données sérialisées car son constructeur nécessite que le paramètre "%parameter%" soit présent.'
+'Type "%type%" is not supported.': 'Le type "%type%" n''est pas supporté.'
+'Cannot normalize class "%class%".': 'Impossible de normaliser la classe "%class%".'
+'Cannot denormalize class "%class%".': 'Impossible de dénormaliser la classe "%class%".'
+
+# Messages de contexte et IRI étendus
+'Unable to generate an IRI for "%item%".': 'Impossible de générer un IRI pour "%item%".'
+'No matching IRI template found for object of type "%type%".': 'Aucun modèle d''IRI correspondant trouvé pour l''objet de type "%type%".'
+'IRI "%iri%" is malformed.': 'L''IRI "%iri%" est malformé.'
+
+# Messages de métadonnées
+'No metadata found for "%class%".': 'Aucune métadonnée trouvée pour "%class%".'
+'Property "%property%" not found in class "%class%".': 'Propriété "%property%" non trouvée dans la classe "%class%".'
+'Operation "%operation%" is not supported for "%class%".': 'L''opération "%operation%" n''est pas supportée pour "%class%".'
+
+# Messages de providers et processors
+'No provider found for operation "%operation%" and class "%class%".': 'Aucun provider trouvé pour l''opération "%operation%" et la classe "%class%".'
+'No processor found for operation "%operation%" and class "%class%".': 'Aucun processor trouvé pour l''opération "%operation%" et la classe "%class%".'
+'Provider returned null for operation "%operation%".': 'Le provider a retourné null pour l''opération "%operation%".'
+
+# Messages de cache
+'Cache miss for "%key%".': 'Cache manqué pour "%key%".'
+'Cache hit for "%key%".': 'Cache trouvé pour "%key%".'
+'Unable to clear cache for "%key%".': 'Impossible de vider le cache pour "%key%".'
+
+# Messages de sécurité API Platform
+'Access to operation "%operation%" on "%class%" denied.': 'Accès à l''opération "%operation%" sur "%class%" refusé.'
+'This resource is not accessible.': 'Cette ressource n''est pas accessible.'
+'You do not have sufficient privileges to access this resource.': 'Vous n''avez pas les privilèges suffisants pour accéder à cette ressource.'
+
+# Messages de doctrine intégration
+'No entity manager found for class "%class%".': 'Aucun gestionnaire d''entité trouvé pour la classe "%class%".'
+'Entity "%entity%" not found.': 'Entité "%entity%" non trouvée.'
+'Multiple entities found for "%criteria%".': 'Plusieurs entités trouvées pour "%criteria%".'
+
+# Messages de subresources
+'Subresource "%subresource%" not found.': 'Sous-ressource "%subresource%" non trouvée.'
+'Invalid subresource relation.': 'Relation de sous-ressource invalide.'
+'Subresource operation not allowed.': 'Opération de sous-ressource non autorisée.'
+
+# Messages de graphQL (si utilisé)
+'GraphQL query is invalid.': 'La requête GraphQL est invalide.'
+'GraphQL mutation failed.': 'La mutation GraphQL a échoué.'
+'Unknown GraphQL type "%type%".': 'Type GraphQL inconnu "%type%".'
+
+# Messages de mercure (si utilisé)
+'Unable to publish to Mercure hub.': 'Impossible de publier vers le hub Mercure.'
+'Mercure topic "%topic%" is not valid.': 'Le topic Mercure "%topic%" n''est pas valide.'
+
+# Messages d'erreur système
+'A system error occurred.': 'Une erreur système s''est produite.'
+'The operation could not be completed.': 'L''opération n''a pas pu être terminée.'
+'Temporary system failure.': 'Défaillance système temporaire.'
+'Resource temporarily unavailable.': 'Ressource temporairement indisponible.'

@@ -46,7 +46,7 @@ export default function EditRestaurant() {
             }
         })
         .catch(error => {
-            notify.error('Erreur de connexion'+error, {});
+            // notify.error('Erreur de connexion'+error, {});
         });
     }
 

@@ -41,7 +41,7 @@ export default function CreateUser() {
             }
         })
             .catch(error => {
-                notify.error('Erreur de connexion' + error, {});
+                // notify.error('Erreur de connexion' + error, {});
             });
     }
 
