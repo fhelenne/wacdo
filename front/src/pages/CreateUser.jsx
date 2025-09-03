@@ -5,6 +5,7 @@ import {useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js';
 import {useNavigate} from "react-router-dom";
 import {notify} from "../utils/notify.js";
+import {useForm} from "react-hook-form";
 
 export default function CreateUser() {
     const [firstName, setFirstName] = useState('');
@@ -14,13 +15,16 @@ export default function CreateUser() {
     const [firstHiredAt, setFirstHiredAt] = useState('');
     const [role, setRole] = useState('employee');
     const navigate = useNavigate();
-
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm({mode: 'all'})
     const getRoles = (selectedRole) => {
         return selectedRole === 'admin' ? ['ROLE_ADMIN', 'ROLE_EMPLOYEE'] : ['ROLE_EMPLOYEE'];
     };
 
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = () => {
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/users', {
             method: "POST",
             body: JSON.stringify({
@@ -40,9 +44,6 @@ export default function CreateUser() {
                 notify.error('Erreur lors de la création du collaborateur', {});
             }
         })
-            .catch(error => {
-                // notify.error('Erreur de connexion' + error, {});
-            });
     }
 
     return (<main role="dashboard">
@@ -51,20 +52,81 @@ export default function CreateUser() {
                 title="Créer un collaborateur"
                 description=""
             />
-            <form role="form" onSubmit={handleOnSubmit}>
-                <FormField name='firstName' label="Prénom" onChange={(e) => setFirstName(e.target.value)}/>
-                <FormField name='lastName' label="Nom" onChange={(e) => setLastName(e.target.value)}/>
-                <FormField name='email' label="Email" onChange={(e) => setEmail(e.target.value)}/>
-                <FormField name='plainPassword' label="Mot de passe"
-                           onChange={(e) => setPlainPassword(e.target.value)}/>
-                <FormField name='firstHiredAt' type="date" label="Date de première embauche"
-                           onChange={(e) => setFirstHiredAt(e.target.value)}/>
+            <form role="form" onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                    <label htmlFor="user-firstName">Prénom</label>
+                    <input
+                        id='user-firstName'
+                        name='firstName'
+                        {...register('firstName', {required: "le prénom est obligatoire"})}
+                        data-form-type="other"
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
+                    {errors.firstName && <span className="message error">{errors.firstName?.message}</span>}
+                </div>
+                <div>
+                    <label htmlFor="user-lastName">Nom</label>
+                    <input
+                        id='user-lastName'
+                        name='lastName'
+                        {...register('lastName', {required: "le nom est obligatoire"})}
+                        data-form-type="other"
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+                    {errors.lastName && <span className="message error">{errors.lastName?.message}</span>}
+                </div>
+                <div>
+                    <label htmlFor="user-email">Email</label>
+                    <input
+                        id='user-email'
+                        name='email'
+                        {...register('email', {
+                            required: "l'email est obligatoire",
+                            pattern: {
+                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                message: 'Veuillez verifier l\'adresse email',
+                            },
+                        })}
+                        data-form-type="other"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    {errors.email && <span className="message error">{errors.email?.message}</span>}
+                </div>
+                <div>
+                    <label htmlFor="user-plainPassword">Mot de passe</label>
+                    <input
+                        id='user-plainPassword'
+                        name='plainPassword'
+                        {...register('plainPassword', {
+                            required: "le mot de passe est obligatoire",
+                            minLength: {
+                                value: 3,
+                                message: "Le mot de passe doit contenir au moins 3 caractères"
+                              }
+                        })}
+                        data-form-type="other"
+                        onChange={(e) => setPlainPassword(e.target.value)}
+                    />
+                    {errors.plainPassword && <span className="message error">{errors.plainPassword?.message}</span>}
+                </div>
+                <div>
+                    <label htmlFor="user-firstHiredAt">Date de première embauche</label>
+                    <input
+                        id='user-firstHiredAt'
+                        name='firstHiredAt'
+                        type="date"
+                        {...register('firstHiredAt', {required: "la date est obligatoire"})}
+                        data-form-type="other"
+                        onChange={(e) => setFirstHiredAt(e.target.value)}
+                    />
+                    {errors.firstHiredAt && <span className="message error">{errors.firstHiredAt?.message}</span>}
+                </div>
                 <div>
                     <label htmlFor="role">Rôle</label>
-                    <select 
-                        id="role" 
-                        name="role" 
-                        value={role} 
+                    <select
+                        id="role"
+                        name="role"
+                        value={role}
                         onChange={(e) => setRole(e.target.value)}
                         required
                     >

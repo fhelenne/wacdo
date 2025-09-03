@@ -67,14 +67,6 @@ const fieldTranslations = {
   'confirmPassword': 'Confirmation du mot de passe'
 };
 
-// Messages d'erreur spécifiques aux assignments
-const assignmentErrorMessages = {
-  'This value is already used': 'Cette affectation existe déjà',
-  'This value should not be blank': 'Ce champ est obligatoire pour l\'affectation',
-  'This value should not be null': 'Cette valeur est requise pour l\'affectation',
-  'Invalid input': 'Données d\'affectation invalides',
-  'Constraint violation': 'Conflit d\'affectation détecté'
-};
 
 // Fonction pour améliorer les messages d'erreur d'assignment
 function improveAssignmentErrorMessage(message, url) {
@@ -224,7 +216,7 @@ export default async function fetchWithJWT(url, options = {}) {
     try {
       const errorData = await response.clone().json();
       errorMessage = extractApiPlatformError(errorData);
-    } catch (parseError) {
+    } catch {
       // Si on ne peut pas parser la réponse JSON, utiliser le status text
       errorMessage = response.statusText || errorMessage;
     }

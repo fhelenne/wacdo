@@ -6,18 +6,22 @@ import {useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js'
 import {useNavigate} from "react-router-dom";
 import {notify} from "../utils/notify.js";
+import {useForm} from "react-hook-form";
 
 export default function CreateAssignment() {
     const params = new URLSearchParams(window.location.search);
-    const [user, setUser] = useState(params.has('user_id')?params.get('user_id'):'');
+    const [user, setUser] = useState(params.has('user_id') ? params.get('user_id') : '');
     const [restaurant, setRestaurant] = useState('');
     const [jobTitle, setJobTitle] = useState('');
     const [startAt, setStartAt] = useState('');
     const [endAt, setEndAt] = useState('');
     const navigate = useNavigate();
-
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
+    const {
+            register,
+            handleSubmit,
+            formState: {errors},
+        } = useForm({mode: 'all'})
+    const onSubmit = () => {
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/assignments', {
             method: "POST",
             body: JSON.stringify({
@@ -43,9 +47,6 @@ export default function CreateAssignment() {
                 notify.error('Erreur lors de la création de l\'affectation', {});
             }
         })
-            .catch(error => {
-                // notify.error('Erreur de connexion' + error, {});
-            });
     }
 
     return (
@@ -55,7 +56,7 @@ export default function CreateAssignment() {
                     title="Créer une affectation"
                     description=""
                 />
-                <form role="form" onSubmit={handleOnSubmit}>
+                <form role="form" onSubmit={handleSubmit(onSubmit)}>
 
                     <EntityPicker
                         entityType="users"
@@ -74,18 +75,30 @@ export default function CreateAssignment() {
                         label="Poste"
                         onEntitySelect={(selectedJobTitleId) => setJobTitle(selectedJobTitleId)}
                     />
-                    <FormField
-                        name='startAt'
-                        type="date"
-                        label="Date de début"
-                        onChange={(e) => setStartAt(e.target.value)}
-                    />
-                    <FormField
-                        name='endAt'
-                        type="date"
-                        label="Date de fin"
-                        onChange={(e) => setEndAt(e.target.value)}
-                    />
+                    <div>
+                        <label htmlFor="assignment-startAt">Date de début</label>
+                        <input
+                            id='assignment-startAt'
+                            name='startAt'
+                            type="date"
+                            {...register('startAt', {required: "la date de début est obligatoire"})}
+                            data-form-type="other"
+                            onChange={(e) => setStartAt(e.target.value)}
+                        />
+                        {errors.startAt && <span className="message error">{errors.startAt?.message}</span>}
+                    </div>
+                    <div>
+                        <label htmlFor="assignment-endAt">Date de fin</label>
+                        <input
+                            id='assignment-endAt'
+                            name='endAt'
+                            type="date"
+                            {...register('endAt', {required: "la date de fin est obligatoire"})}
+                            data-form-type="other"
+                            onChange={(e) => setEndAt(e.target.value)}
+                        />
+                        {errors.endAt && <span className="message error">{errors.endAt?.message}</span>}
+                    </div>
                     <Button type='submit'>Enregistrer</Button>
                 </form>
             </section>
