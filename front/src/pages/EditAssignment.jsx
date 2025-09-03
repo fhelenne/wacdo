@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js'
 import {useParams, useNavigate} from "react-router-dom";
 import {notify} from "../utils/notify.js";
+import {useForm} from "react-hook-form";
 
 export default function EditAssignment() {
 
@@ -22,7 +23,12 @@ export default function EditAssignment() {
     const [endAt, setEndAt] = useState('');
     const params = useParams();
     const navigate = useNavigate();
-
+    const {
+        setValue,
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm({mode: 'onChange'})
     // Fetch assignment details on mount
     useEffect(() => {
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + `/assignments/${params.id}`, {
@@ -34,8 +40,13 @@ export default function EditAssignment() {
                 setUser(response.employee['@id']);
                 setRestaurant(response.restaurant['@id']);
                 setJobTitle(response.jobTitle['@id']);
+
                 setStartAt(formatDateToInput(response.startAt));
+                setValue('startAt', formatDateToInput(response.startAt));
+
                 setEndAt(formatDateToInput(response.endAt));
+                setValue('endAt', formatDateToInput(response.endAt));
+
             })
             .catch((error) => {
                 console.error('Failed to fetch assignment details:', error);
@@ -44,8 +55,7 @@ export default function EditAssignment() {
             });
     }, [params.id, navigate]);
 
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = () => {
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + `/assignments/${params.id}`, {
             method: "PATCH",
             body: JSON.stringify({
@@ -68,9 +78,6 @@ export default function EditAssignment() {
                     notify.error('Erreur lors de la modification de l\'affectation', {});
                 }
             })
-            .catch(error => {
-                // notify.error('Erreur de connexion' + error, {});
-            });
     }
 
     return (
@@ -80,7 +87,7 @@ export default function EditAssignment() {
                     title={"Modifier l'affectation #" + params.id}
                     description=""
                 />
-                <form role="form" onSubmit={handleOnSubmit}>
+                <form role="form" onSubmit={handleSubmit(onSubmit)}>
                     <div role="group" aria-labelledby="user-label">
                         <EntityPicker
                             entityType="users"
@@ -105,20 +112,46 @@ export default function EditAssignment() {
                             onEntitySelect={(selectedJobTitleId) => setJobTitle(selectedJobTitleId)}
                         />
                     </div>
-                    <FormField
-                        name='startAt'
-                        type="date"
-                        label="Date de début"
-                        value={startAt}
-                        onChange={(e) => setStartAt(e.target.value)}
-                    />
-                    <FormField
-                        name='endAt'
-                        type="date"
-                        label="Date de fin"
-                        value={endAt}
-                        onChange={(e) => setEndAt(e.target.value)}
-                    />
+                    <div>
+                        <label htmlFor="assignment-startAt">Date de début</label>
+                        <input
+                            id='assignment-startAt'
+                            name='startAt'
+                            type="date"
+                            value={startAt}
+                            {...register('startAt', {required: "la date de début est obligatoire"})}
+                            data-form-type="other"
+                            onChange={(e) => setStartAt(e.target.value)}
+                        />
+                        {errors.startAt && <span className="message error">{errors.startAt?.message}</span>}
+                    </div>
+                    <div>
+                        <label htmlFor="assignment-endAt">Date de fin</label>
+                        <input
+                            id='assignment-endAt'
+                            name='endAt'
+                            type="date"
+                            value={endAt}
+                            {...register('endAt', {required: "la date de fin est obligatoire"})}
+                            data-form-type="other"
+                            onChange={(e) => setEndAt(e.target.value)}
+                        />
+                        {errors.endAt && <span className="message error">{errors.endAt?.message}</span>}
+                    </div>
+                    {/*<FormField*/}
+                    {/*    name='startAt'*/}
+                    {/*    type="date"*/}
+                    {/*    label="Date de début"*/}
+                    {/*    value={startAt}*/}
+                    {/*    onChange={(e) => setStartAt(e.target.value)}*/}
+                    {/*/>*/}
+                    {/*<FormField*/}
+                    {/*    name='endAt'*/}
+                    {/*    type="date"*/}
+                    {/*    label="Date de fin"*/}
+                    {/*    value={endAt}*/}
+                    {/*    onChange={(e) => setEndAt(e.target.value)}*/}
+                    {/*/>*/}
                     <Button type='submit'>Enregistrer</Button>
                 </form>
             </section>

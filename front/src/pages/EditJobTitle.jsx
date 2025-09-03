@@ -6,22 +6,29 @@ import fetchWithAuth from '../utils/fetcWithJWT.js';
 import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import {notify} from "../utils/notify.js";
+import {useForm} from "react-hook-form";
 
 export default function EditJobTitle() {
     const [title,setTitle] = useState('');
     const params = useParams();
     const navigate = useNavigate();
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        formState: {errors},
+    } = useForm()
     useEffect(() => {
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles/'+params.id,{
           method: "GET"
         }).then((response) => response.json())
           .then(response => {
             setTitle(response.name);
+            setValue('name',response.name)
         });
     }, [params]);
 
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = () => {
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles/'+params.id,{
           method: "PATCH",
           body: JSON.stringify({ name: title }),
@@ -35,9 +42,6 @@ export default function EditJobTitle() {
                 notify.error('Erreur lors de la modification du poste', {});
             }
         })
-        .catch(error => {
-            // notify.error('Erreur de connexion'+error, {});
-        });
     }
 
   return (  <main role="dashboard">
@@ -46,8 +50,19 @@ export default function EditJobTitle() {
           title={"Modifier le poste "+title}
           description=""
         />
-          <form role="form" onSubmit={handleOnSubmit}>
-              <FormField name='name' label="Nom du poste" value={title} onChange={(e) => setTitle(e.target.value)}/>
+          <form role="form" onSubmit={handleSubmit(onSubmit)}>
+              <div>
+                    <label htmlFor="job_title-name">Nom du poste</label>
+                    <input
+                        id='job_title-name'
+                        name='name'
+                        value={title}
+                        {...register('name', {required: 'Le nom du poste est obligatoire.'})}
+                        data-form-type="other"
+                        onChange={(e) => {setTitle(e.target.value);setValue('name',e.target.value )}}
+                    />
+                    {errors.name && <span className="message error">{errors.name?.message}</span>}
+                </div>
               <Button type='submit'>Enregistrer</Button>
           </form>
       </section>

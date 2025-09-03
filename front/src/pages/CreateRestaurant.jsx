@@ -70,7 +70,13 @@ export default function CreateRestaurant() {
                     <input
                         id='restaurant-zipCode'
                         name='zipCode'
-                        {...register('zipCode', {required: 'Le code postal est obligatoire.'})}
+                        {...register('zipCode', {
+                            required: 'Le code postal est obligatoire.',
+                            pattern: {
+                                value: /^[0-9]{5,5}$/,
+                                message: "Le code postal n'est pas valide",
+                            }
+                        })}
                         data-form-type="other"
                         onChange={(e) => setZipCode(e.target.value)}
                     />
