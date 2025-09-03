@@ -3,6 +3,7 @@ import { jwtDecode } from 'jwt-decode'
 
 const AuthContext = createContext({
   isAuthenticated: false,
+  userId: false,
   roles: [],
   isAdmin: false,
   isEmployee: false,
@@ -27,6 +28,7 @@ export function AuthProvider({ children }) {
   })
 
   const [roles, setRoles] = useState([])
+  const [userId, setUserId] = useState([])
 
   // Vérifier l'expiration du token après l'initialisation
   useEffect(() => {
@@ -38,7 +40,7 @@ export function AuthProvider({ children }) {
         // Utiliser l'expiry du token décodé au lieu du localStorage
         const decodedToken = jwtDecode(tokenString)
         const now = Math.floor(Date.now() / 1000) // exp est en secondes
-
+        setUserId(decodedToken.user_id);
         if (decodedToken.exp && now > decodedToken.exp) {
           console.log('Token expiré, suppression...')
           localStorage.removeItem('jwt')
@@ -86,7 +88,7 @@ export function AuthProvider({ children }) {
     const isAuthenticated = !!token
     const isAdmin = roles.includes('ROLE_ADMIN')
     const isEmployee = roles.includes('ROLE_EMPLOYEE') && !isAdmin
-    return { isAuthenticated, roles, isAdmin, isEmployee, login, logout }
+    return { isAuthenticated, userId,roles, isAdmin, isEmployee, login, logout }
   }, [token, roles])
 
   return (

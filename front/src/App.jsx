@@ -27,9 +27,9 @@ const CreateJobTitle = lazy(() => import('./pages/CreateJobTitle'))
 const EditJobTitle = lazy(() => import('./pages/EditJobTitle'))
 
 function RoleBasedHomeRedirect() {
-  const { isAuthenticated, isAdmin } = useAuth()
+  const { isAuthenticated,userId, isAdmin } = useAuth()
   if (!isAuthenticated) return <Navigate to="/login" replace />
-  return <Navigate to={isAdmin ? '/assignments' : '/users'} replace />
+  return <Navigate to={isAdmin ? '/assignments' : '/users/detail/'+userId} replace />
 }
 
 function AppShell({ children }) {
