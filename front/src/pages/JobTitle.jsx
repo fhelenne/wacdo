@@ -14,6 +14,7 @@ function JobTitle() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        document.title = `Wacdo Postes`;
         setLoading(true);
         fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles')
             .then((response) => response.json())

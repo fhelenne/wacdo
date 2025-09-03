@@ -13,7 +13,7 @@ export default function CreateRestaurant() {
     const [zipCode, setZipCode] = useState('');
     const [city, setCity] = useState('');
     const navigate = useNavigate();
-
+    document.title = `Wacdo : Créer un restaurant`;
     const {
         register,
         handleSubmit,

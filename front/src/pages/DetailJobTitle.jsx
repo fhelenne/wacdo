@@ -10,6 +10,7 @@ function DetailJobTitle() {
     const [jobTitle, setJobTitle] = useState([]);
     const [loading, setLoading] = useState(true);
     const params = useParams();
+    document.title = `Wacdo : Detail poste`;
     useEffect(() => {
         setLoading(true);
         fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + '/job_titles/' + params.id)

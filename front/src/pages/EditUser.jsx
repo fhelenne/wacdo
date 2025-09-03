@@ -22,7 +22,7 @@ export default function EditUser() {
     const getRoles = (selectedRole) => {
         return selectedRole === 'admin' ? ['ROLE_ADMIN', 'ROLE_EMPLOYEE'] : ['ROLE_EMPLOYEE'];
     };
-
+    document.title = `Wacdo : Modification d'un collaborateur`;
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [plainPassword,setPlainPassword] = useState('');

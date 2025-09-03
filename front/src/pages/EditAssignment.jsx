@@ -23,6 +23,7 @@ export default function EditAssignment() {
     const [endAt, setEndAt] = useState('');
     const params = useParams();
     const navigate = useNavigate();
+    document.title = `Wacdo : Modifier une affectation`;
     const {
         setValue,
         register,

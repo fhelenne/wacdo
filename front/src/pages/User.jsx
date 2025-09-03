@@ -13,7 +13,7 @@ import {notify} from "../utils/notify.js";
 function User() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    document.title = `Wacdo : Collaborateurs`;
     const handleDelete = (id) => {
         if (window.confirm("Êtes-vous sûr de vouloir supprimer ce collaborateur ?")) {
             fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/users/${id}`, {

@@ -13,7 +13,7 @@ function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useAuth();
-
+    document.title = `Wacdo : Login`;
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);

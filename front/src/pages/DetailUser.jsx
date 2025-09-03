@@ -15,7 +15,7 @@ function DetailUser() {
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
     const params = useParams();
-
+    document.title = `Wacdo : Détails d'un collaborateur`;
     const isObject = (value) => value !== null && typeof value === 'object';
 
     const getJobTitleName = (row) => {

@@ -15,6 +15,7 @@ export default function CreateUser() {
     const [firstHiredAt, setFirstHiredAt] = useState('');
     const [role, setRole] = useState('employee');
     const navigate = useNavigate();
+    document.title = `Wacdo : Création d'un collaborateur`;
     const {
         register,
         handleSubmit,

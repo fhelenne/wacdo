@@ -11,6 +11,7 @@ import {useForm} from "react-hook-form"
 export default function CreateJobTitle() {
     const [title, setTitle] = useState('');
     const navigate = useNavigate();
+    document.title = `Wacdo : Créer un Poste`;
     const {
         register,
         handleSubmit,

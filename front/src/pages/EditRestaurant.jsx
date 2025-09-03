@@ -15,6 +15,7 @@ export default function EditRestaurant() {
     const [city, setCity] = useState('');
     const params = useParams();
     const navigate = useNavigate();
+    document.title = `Wacdo : Modifier un restaurant`;
     const {
         register,
         handleSubmit,

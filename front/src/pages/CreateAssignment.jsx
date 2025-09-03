@@ -16,6 +16,7 @@ export default function CreateAssignment() {
     const [startAt, setStartAt] = useState('');
     const [endAt, setEndAt] = useState('');
     const navigate = useNavigate();
+    document.title = `Wacdo : Créer une affectation`;
     const {
             register,
             handleSubmit,

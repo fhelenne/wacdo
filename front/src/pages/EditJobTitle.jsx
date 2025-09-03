@@ -12,6 +12,7 @@ export default function EditJobTitle() {
     const [title,setTitle] = useState('');
     const params = useParams();
     const navigate = useNavigate();
+    document.title = `Wacdo : Modification d'un Poste`;
     const {
         register,
         handleSubmit,
