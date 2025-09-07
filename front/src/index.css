@@ -1,119 +1,147 @@
 :root {
-  font-family: Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light;
-  color: rgba(255, 255, 255, 0.87);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    color-scheme: light;
+    color: rgba(255, 255, 255, 0.87);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 
 body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+    color: #535bf2;
 }
 
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-size: 3.2em;
+    line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+    border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    outline: 4px auto -webkit-focus-ring-color;
 }
 
 /* Styles pour les listes de définition */
 dl, dt, dd {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 dl {
-  color: black;
-  margin: 1rem;
+    color: black;
+    margin: 1rem;
 
-  display: grid;
-  grid-template-columns: auto 5px 1fr;
-  /*grid-template-columns: auto auto;*/
-  /*grid-template-columns: auto 5px auto;*/
-  grid-template-rows: auto [last-line];
-  grid-auto-rows: min-content;
+    display: grid;
+    grid-template-columns: auto 5px 1fr;
+    /*grid-template-columns: auto auto;*/
+    /*grid-template-columns: auto 5px auto;*/
+    grid-template-rows: auto [last-line];
+    grid-auto-rows: min-content;
 
-  grid-gap: 1rem;
+    grid-gap: 1rem;
 
-  /* This is to allow the `dl > dt:first-child::after` to fill the height */
-  position: relative;
+    /* This is to allow the `dl > dt:first-child::after` to fill the height */
+    position: relative;
 }
 
 dl > dt:first-child::after {
-  content: '';
-  display: inline;
-  border-left: 1px solid grey;
-  width: 1px;
+    content: '';
+    display: inline;
+    border-left: 1px solid grey;
+    width: 1px;
 
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  /* Offset it to the right a bit using margin: */
-  margin-left: 1rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    /* Offset it to the right a bit using margin: */
+    margin-left: 1rem;
 }
 
 dl > dt {
     font-weight: bold;
-  grid-column-start: 1;
-  grid-column-end: 2;
-  align-self: center;
-  justify-self: end; /* i.e. right-align */
-  text-align: right; /* This is needed so narrow-viewports don't break. */
+    grid-column-start: 1;
+    grid-column-end: 2;
+    align-self: center;
+    justify-self: end; /* i.e. right-align */
+    text-align: right; /* This is needed so narrow-viewports don't break. */
 }
-dl > dd {
-  grid-column-start: 3;
-  grid-column-end: 4;
 
-  align-self: center;
-  justify-self: start; /* i.e. left-align */
+dl > dd {
+    grid-column-start: 3;
+    grid-column-end: 4;
+
+    align-self: center;
+    justify-self: start; /* i.e. left-align */
 }
 
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+    }
+
+    a:hover {
+        color: #747bff;
+    }
+
+    button {
+        background-color: #f9f9f9;
+    }
 }
+
+
+/* MESSAGES */
+.message {
+    padding: 0.5rem;
+    color: black;
+    border: 1px solid #5c8cc3;
+    border-radius: 0.2rem;
+
+    &.error {
+        color: red;
+        border-color: red;
+    }
+}
+
+form > div .message {
+    border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+

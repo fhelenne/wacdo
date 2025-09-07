@@ -13,7 +13,7 @@ function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useAuth();
-
+    document.title = `Wacdo : Login`;
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -33,7 +33,7 @@ function Login() {
         login(data.token);
         const isAdmin = !!userInfo.roles?.includes("ROLE_ADMIN");
         const isEmployee = !!userInfo.roles?.includes("ROLE_EMPLOYEE") && !isAdmin;
-        navigate(isAdmin ? '/assignments' : isEmployee ? '/users' : '/assignments');
+        navigate(isAdmin ? '/assignments' : isEmployee ? '/users/details/'+userInfo.userId : '/assignments');
       } else {
         throw new Error('Réponse inattendue du serveur');
       }
@@ -81,6 +81,7 @@ function Login() {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
+                data-form-type="other"
               />
               <label htmlFor="remember-me">Se souvenir de moi</label>
             </div>

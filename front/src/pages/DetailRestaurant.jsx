@@ -9,6 +9,7 @@ import {useParams} from "react-router-dom";
 function DetailRestaurant() {
     const [restaurant, setRestaurant] = useState([]);
     const [loading, setLoading] = useState(true);
+    document.title = `Wacdo : Detail restaurant`;
     const params = useParams();
     useEffect(() => {
         setLoading(true);

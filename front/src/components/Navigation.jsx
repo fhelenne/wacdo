@@ -16,7 +16,7 @@ import { useAuth } from '../contexts/AuthContext.jsx';
 function Navigation() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, isAdmin, isEmployee, logout } = useAuth();
+  const { isAuthenticated, userId,isAdmin, isEmployee, logout } = useAuth();
   
   // Don't show navigation on login page
   if (location.pathname === '/login' || !isAuthenticated) {
@@ -31,7 +31,7 @@ function Navigation() {
   ];
 
   const navItems = isEmployee
-    ? allNavItems.filter((item) => item.path === '/users')
+    ? allNavItems.filter((item) => false)
     : allNavItems;
 
   const handleLogout = (e) => {
@@ -44,7 +44,7 @@ function Navigation() {
     <nav role="navigation">
       <Link
         base={import.meta.env.BASE_URL}
-        to={isEmployee ? '/users' : '/assignments'}
+        to={isEmployee ? '/users/detail/'+userId : '/assignments'}
         role="link"
       >
         <FontAwesomeIcon icon={faHamburger} /> Wacdo Admin

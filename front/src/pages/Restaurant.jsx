@@ -13,7 +13,7 @@ import {notify} from "../utils/notify.js";
 function Restaurant() {
     const [restaurants, setRestaurants] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    document.title = `Wacdo : Restaurants`;
     useEffect(() => {
         setLoading(true);
         fetchWithJWT(import.meta.env.VITE_WACDO_BACK_API_URL + `/restaurants`)

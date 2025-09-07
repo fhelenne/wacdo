@@ -1,0 +1,174 @@
+# Traductions des contraintes de validation Symfony
+
+# Contraintes de validation Symfony spécifiques
+'This field is missing.': 'Ce champ est manquant.'
+'This field was not expected.': 'Ce champ n''était pas attendu.'
+'This value should not be blank.': 'Cette valeur ne doit pas être vide.'
+'This value should not be null.': 'Cette valeur ne doit pas être nulle.'
+'This value should be null.': 'Cette valeur doit être nulle.'
+'This value is required.': 'Cette valeur est obligatoire.'
+
+# Contraintes de type
+'This value is not a valid email address.': 'Cette valeur n''est pas une adresse email valide.'
+'This value is not a valid URL.': 'Cette valeur n''est pas une URL valide.'
+'This value is not a valid date.': 'Cette valeur n''est pas une date valide.'
+'This value is not a valid datetime.': 'Cette valeur n''est pas une date/heure valide.'
+
+# Contraintes de longueur
+'This value is too short. It should have {{ limit }} character or more.|This value is too short. It should have {{ limit }} characters or more.': 'Cette valeur est trop courte. Elle doit avoir {{ limit }} caractère ou plus.|Cette valeur est trop courte. Elle doit avoir {{ limit }} caractères ou plus.'
+'This value is too long. It should have {{ limit }} character or less.|This value is too long. It should have {{ limit }} characters or less.': 'Cette valeur est trop longue. Elle doit avoir {{ limit }} caractère ou moins.|Cette valeur est trop longue. Elle doit avoir {{ limit }} caractères ou moins.'
+
+# Contraintes numériques
+'This value should be {{ limit }} or more.': 'Cette valeur doit être supérieure ou égale à {{ limit }}.'
+'This value should be {{ limit }} or less.': 'Cette valeur doit être inférieure ou égale à {{ limit }}.'
+'This value should be greater than {{ compared_value }}.': 'Cette valeur doit être supérieure à {{ compared_value }}.'
+'This value should be less than {{ compared_value }}.': 'Cette valeur doit être inférieure à {{ compared_value }}.'
+
+# Contraintes de choix
+'The value you selected is not a valid choice.': 'La valeur sélectionnée n''est pas un choix valide.'
+'You must select at least {{ limit }} choice.|You must select at least {{ limit }} choices.': 'Vous devez sélectionner au moins {{ limit }} choix.|Vous devez sélectionner au moins {{ limit }} choix.'
+'You must select at most {{ limit }} choice.|You must select at most {{ limit }} choices.': 'Vous devez sélectionner au maximum {{ limit }} choix.|Vous devez sélectionner au maximum {{ limit }} choix.'
+
+# Contraintes d'unicité
+'This value is already used.': 'Cette valeur est déjà utilisée.'
+'This value is already in use.': 'Cette valeur est déjà utilisée.'
+'Duplicate entry.': 'Entrée dupliquée.'
+'This email is already registered.': 'Cet email est déjà enregistré.'
+'This username is already taken.': 'Ce nom d''utilisateur est déjà pris.'
+
+# Contraintes de fichier
+'The file is too large ({{ size }} {{ suffix }}). Allowed maximum size is {{ limit }} {{ suffix }}.': 'Le fichier est trop volumineux ({{ size }} {{ suffix }}). La taille maximale autorisée est {{ limit }} {{ suffix }}.'
+'The mime type of the file is invalid ({{ type }}). Allowed mime types are {{ types }}.': 'Le type MIME du fichier est invalide ({{ type }}). Les types MIME autorisés sont {{ types }}.'
+
+# Messages personnalisés pour votre domaine
+'Name cannot be empty': 'Le nom ne peut pas être vide'
+'Email already exists': 'Cet email existe déjà'
+'Start date must be before end date': 'La date de début doit être antérieure à la date de fin'
+'Employee already assigned to this job title': 'L''employé est déjà affecté à ce poste'
+
+# Messages spécifiques aux assignments
+'Assignment dates overlap': 'Les dates d''affectation se chevauchent avec une affectation existante'
+'Assignment start date is required': 'La date de début d''affectation est obligatoire'
+'Assignment end date must be after start date': 'La date de fin d''affectation doit être postérieure à la date de début'
+'Employee is required for assignment': 'Un employé doit être sélectionné pour l''affectation'
+'Job title is required for assignment': 'Un poste doit être sélectionné pour l''affectation'
+'Restaurant is required for assignment': 'Un restaurant doit être sélectionné pour l''affectation'
+'Assignment period is invalid': 'La période d''affectation n''est pas valide'
+'Cannot assign employee to multiple positions simultaneously': 'Impossible d''affecter un employé à plusieurs postes simultanément'
+'Assignment conflicts with existing assignment': 'Cette affectation entre en conflit avec une affectation existante'
+'Invalid assignment period': 'Période d''affectation invalide'
+
+# Messages spécifiques aux employés/collaborateurs
+'Employee email is required': 'L''adresse email du collaborateur est obligatoire'
+'Employee first name is required': 'Le prénom du collaborateur est obligatoire'
+'Employee last name is required': 'Le nom de famille du collaborateur est obligatoire'
+'Employee password is required': 'Un mot de passe est requis pour le collaborateur'
+'Employee email must be unique': 'Cette adresse email est déjà utilisée par un autre collaborateur'
+'Invalid employee data': 'Les informations du collaborateur ne sont pas valides'
+'Employee creation failed': 'La création du collaborateur a échoué'
+'Duplicate employee email': 'Un collaborateur avec cette adresse email existe déjà'
+'Employee validation error': 'Erreur de validation des données du collaborateur'
+'Invalid employee email format': 'Le format de l''adresse email n''est pas valide'
+'Employee password too short': 'Le mot de passe doit contenir au moins 6 caractères'
+'Employee data incomplete': 'Les informations du collaborateur sont incomplètes'
+
+# Messages spécifiques aux contraintes de l'entité User
+'This entity already exists.': 'Un collaborateur avec ces informations existe déjà.'
+'The email field is not valid.': "Le format de l'adresse email n'est pas valide."
+'The firstName field cannot be blank.': 'Le prénom est obligatoire.'
+'The lastName field cannot be blank.': 'Le nom de famille est obligatoire.'
+'The email field cannot be blank.': "L'adresse email est obligatoire."
+'The plainPassword field cannot be blank.': 'Le mot de passe est obligatoire.'
+
+# Contraintes numériques étendues
+'This value should be positive.': 'Cette valeur doit être positive.'
+'This value should be negative.': 'Cette valeur doit être negative.'
+'This value should be between {{ min }} and {{ max }}.': 'Cette valeur doit être comprise entre {{ min }} et {{ max }}.'
+'This value is not valid.': 'Cette valeur n''est pas valide.'
+'This value should be a valid number.': 'Cette valeur doit être un nombre valide.'
+'This value should be a valid integer.': 'Cette valeur doit être un entier valide.'
+'This value should be a valid decimal.': 'Cette valeur doit être un décimal valide.'
+
+# Contraintes de regex et format
+'This value is not a valid IP address.': 'Cette valeur n''est pas une adresse IP valide.'
+'This value does not match the expected {{ charset }} charset.': 'Cette valeur ne correspond pas au jeu de caractères {{ charset }} attendu.'
+'This value should match {{ pattern }}.': 'Cette valeur doit correspondre à {{ pattern }}.'
+
+# Contraintes de date et heure
+'This value is not a valid time.': 'Cette valeur n''est pas une heure valide.'
+'This value should be a valid date.': 'Cette valeur doit être une date valide.'
+'This value should be {{ compared_value }} or before.': 'Cette valeur doit être {{ compared_value }} ou antérieure.'
+'This value should be {{ compared_value }} or after.': 'Cette valeur doit être {{ compared_value }} ou postérieure.'
+
+# Contraintes de collections
+'This collection should contain {{ limit }} element or more.|This collection should contain {{ limit }} elements or more.': 'Cette collection doit contenir {{ limit }} élément ou plus.|Cette collection doit contenir {{ limit }} éléments ou plus.'
+'This collection should contain {{ limit }} element or less.|This collection should contain {{ limit }} elements or less.': 'Cette collection doit contenir {{ limit }} élément ou moins.|Cette collection doit contenir {{ limit }} éléments ou moins.'
+'This collection should contain exactly {{ limit }} element.|This collection should contain exactly {{ limit }} elements.': 'Cette collection doit contenir exactement {{ limit }} élément.|Cette collection doit contenir exactement {{ limit }} éléments.'
+
+# Contraintes de type
+'This value should be of type {{ type }}.': 'Cette valeur doit être de type {{ type }}.'
+'This value should be a valid JSON.': 'Cette valeur doit être un JSON valide.'
+'This value should be true.': 'Cette valeur doit être vraie.'
+'This value should be false.': 'Cette valeur doit être fausse.'
+
+# Contraintes spécifiques métier
+'This value is not a valid phone number.': 'Cette valeur n''est pas un numéro de téléphone valide.'
+'This value is not a valid postal code.': 'Cette valeur n''est pas un code postal valide.'
+'This value is not a valid credit card number.': 'Cette valeur n''est pas un numéro de carte de crédit valide.'
+'This value is not a valid IBAN.': 'Cette valeur n''est pas un IBAN valide.'
+
+# Messages d'erreur courants
+'Required field': 'Champ obligatoire'
+'Invalid format': 'Format invalide'
+'Value too long': 'Valeur trop longue'
+'Value too short': 'Valeur trop courte'
+'Invalid characters': 'Caractères invalides'
+'Duplicate entry': 'Entrée en double'
+'Reference not found': 'Référence non trouvée'
+
+# Messages de résumé de validation
+'Validation error': 'Erreur de validation'
+'Multiple validation errors': 'Plusieurs erreurs de validation'
+'Form validation failed': 'La validation du formulaire a échoué'
+'Invalid data provided': 'Données invalides fournies'
+
+# Messages de validation DateTime spécifiques
+'The data is either not an string, an empty string, or null; you should pass a string that can be parsed with the passed format or a valid DateTime string.': "La date n'est pas valide."
+'This value should be a datetime.': 'Cette valeur doit être une date/heure.'
+'Failed to parse time string': 'Impossible d''analyser la chaîne de temps'
+'The parsed date was invalid.': 'La date analysée est invalide.'
+'Invalid date format.': 'Format de date invalide.'
+'Expected a datetime.': 'Une date/heure est attendue.'
+
+# Messages de validation supplémentaires couramment manqués
+'This value should be a string.': 'Cette valeur doit être une chaîne de caractères.'
+'This value should be an integer.': 'Cette valeur doit être un entier.'
+'This value should be a float.': 'Cette valeur doit être un nombre décimal.'
+'This value should be an array.': 'Cette valeur doit être un tableau.'
+'This value should be a boolean.': 'Cette valeur doit être un booléen.'
+'This value should be an object.': 'Cette valeur doit être un objet.'
+
+# Messages de validation de format
+'This value should be a valid UUID.': 'Cette valeur doit être un UUID valide.'
+'This value should be a valid JSON string.': 'Cette valeur doit être une chaîne JSON valide.'
+'This value should be a valid regex.': 'Cette valeur doit être une expression régulière valide.'
+'This value should be alphanumeric.': 'Cette valeur doit être alphanumérique.'
+
+# Messages de validation de plage
+'This value should be equal to {{ compared_value }}.': 'Cette valeur doit être égale à {{ compared_value }}.'
+'This value should not be equal to {{ compared_value }}.': 'Cette valeur ne doit pas être égale à {{ compared_value }}.'
+'This value should be identical to {{ compared_value_type }} {{ compared_value }}.': 'Cette valeur doit être identique à {{ compared_value_type }} {{ compared_value }}.'
+'This value should not be identical to {{ compared_value_type }} {{ compared_value }}.': 'Cette valeur ne doit pas être identique à {{ compared_value_type }} {{ compared_value }}.'
+
+# Messages de validation de fichier étendus
+'The file could not be uploaded.': 'Le fichier n''a pas pu être téléchargé.'
+'The file is empty.': 'Le fichier est vide.'
+'The file does not exist.': 'Le fichier n''existe pas.'
+'The file is not readable.': 'Le fichier n''est pas lisible.'
+'The file is too large.': 'Le fichier est trop volumineux.'
+'The file type is not allowed.': 'Le type de fichier n''est pas autorisé.'
+
+# Messages d'erreur de sérialisation
+'Cannot denormalize non-array data to type {{ type }}.': 'Impossible de dénormaliser des données non-tableau vers le type {{ type }}.'
+'Object of class {{ class }} could not be converted to {{ type }}.': 'L''objet de classe {{ class }} n''a pas pu être converti en {{ type }}.'
+'The type of the "{{ property }}" attribute must be "{{ expected_types }}", "{{ actual_type }}" given.': 'Le type de l''attribut "{{ property }}" doit être "{{ expected_types }}", "{{ actual_type }}" fourni.'
