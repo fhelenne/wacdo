@@ -75,20 +75,6 @@ function Login() {
             required
           />
 
-          <div>
-            <div>
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                data-form-type="other"
-              />
-              <label htmlFor="remember-me">Se souvenir de moi</label>
-            </div>
-            <div>
-              <a href="#">Mot de passe oublié ?</a>
-            </div>
-          </div>
 
           <Button type="submit">
             Se connecter

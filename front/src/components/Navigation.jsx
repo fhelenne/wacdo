@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { memo } from 'react';
+import {memo} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {useAuth} from "../contexts/AuthContext.jsx";
 import '../styles/components/Navigation.css';
 import { 
   faHouse,
@@ -11,15 +12,13 @@ import {
   faUser, 
   faSignOutAlt 
 } from '../utils/icons.js';
-import { useAuth } from '../contexts/AuthContext.jsx';
 
 function Navigation() {
+  const Auth = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, userId,isAdmin, isEmployee, logout } = useAuth();
-  
   // Don't show navigation on login page
-  if (location.pathname === '/login' || !isAuthenticated) {
+  if (location.pathname === '/login' || !Auth.isAuthenticated) {
     return null;
   }
 
@@ -30,13 +29,13 @@ function Navigation() {
     { path: '/job-titles', name: 'Postes', icon: faBriefcase },
   ];
 
-  const navItems = isEmployee
-    ? allNavItems.filter((item) => false)
+  const navItems = Auth.isEmployee
+    ? allNavItems.filter(() => false)
     : allNavItems;
 
   const handleLogout = (e) => {
     e.preventDefault();
-    logout();
+    Auth.logout();
     navigate('/login');
   };
 
@@ -44,7 +43,7 @@ function Navigation() {
     <nav role="navigation">
       <Link
         base={import.meta.env.BASE_URL}
-        to={isEmployee ? '/users/detail/'+userId : '/assignments'}
+        to={Auth.isEmployee ? '/users/detail/'+Auth.userId : '/assignments'}
         role="link"
       >
         <FontAwesomeIcon icon={faHamburger} /> Wacdo Admin
@@ -68,7 +67,7 @@ function Navigation() {
         })}
       </ul>
       <div role="status">
-        <FontAwesomeIcon icon={faUser} /> {isAdmin ? 'Admin' : 'Employé'}
+        <FontAwesomeIcon icon={faUser} /> {Auth.isAdmin ? 'Admin' : 'Employé'}
       </div>
       <button
         type="button"

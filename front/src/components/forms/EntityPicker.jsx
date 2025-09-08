@@ -84,8 +84,9 @@ export function EntityPicker({
                 <select
                     role="listbox"
                     id={`${entityType}-selection`}
+                    name={entityType}
                     value={initialValue}
-                    onChange={!disabled?handleEntityChange:null}
+                    onChange={!disabled ? handleEntityChange : null}
                     disabled={disabled ? true : null}
                 >
                     <option value="">Sélectionner un {label || entityType}</option>

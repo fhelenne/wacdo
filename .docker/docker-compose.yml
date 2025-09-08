@@ -40,8 +40,12 @@ services:
             - ../front:/app
             - ./log/front:/var/log
         command: sh -c "npm install && npm run dev -- --host"
+        depends_on:
+            - proxy
         networks:
             - wacdonet
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
 
     proxy:
         build:
@@ -57,6 +61,8 @@ services:
             - ./caddy/data:/data
         networks:
             - wacdonet
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
 
 volumes:
     db_data:

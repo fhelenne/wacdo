@@ -204,7 +204,9 @@ export default async function fetchWithJWT(url, options = {}) {
     'Content-Type': ContentType
   };
 
-  const response = await fetch(url, {
+  const baseUrl = import.meta.env.VITE_WACDO_BACK_API_URL || '';
+  const fullUrl = url.startsWith('http://') || url.startsWith('https://') ? url : `${baseUrl}${url}`;
+  const response = await fetch(fullUrl, {
     ...options,
     headers,
   });

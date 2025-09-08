@@ -1,6 +1,5 @@
 import PageHeader from "../components/PageHeader.jsx";
 import Button from "../components/Button.jsx";
-import FormField from "../components/FormField.jsx";
 import {EntityPicker} from "../components/forms/EntityPicker.jsx";
 import {useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js'
@@ -35,7 +34,7 @@ export default function CreateAssignment() {
             // …
         }).then(response => {
             if (response.ok) {
-                notify.success('Affectation créée', {});
+                notify.success('Affectation créée', {autoClose: false});
                 const userregex = /\/api\/users\/(\d+)/;
                 if (params.has('user_id')) {
                     const match = params.get('user_id').match(userregex);
@@ -45,7 +44,7 @@ export default function CreateAssignment() {
                     navigate('/assignments');
                 }
             } else {
-                notify.error('Erreur lors de la création de l\'affectation', {});
+                notify.error('Erreur lors de la création de l\'affectation', {autoClose: false});
             }
         })
     }

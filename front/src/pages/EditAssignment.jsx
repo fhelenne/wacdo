@@ -1,6 +1,5 @@
 import PageHeader from "../components/PageHeader.jsx";
 import Button from "../components/Button.jsx";
-import FormField from "../components/FormField.jsx";
 import {EntityPicker} from "../components/forms/EntityPicker.jsx";
 import {useEffect, useState} from "react";
 import fetchWithAuth from '../utils/fetcWithJWT.js'
@@ -139,20 +138,6 @@ export default function EditAssignment() {
                         />
                         {errors.endAt && <span className="message error">{errors.endAt?.message}</span>}
                     </div>
-                    {/*<FormField*/}
-                    {/*    name='startAt'*/}
-                    {/*    type="date"*/}
-                    {/*    label="Date de début"*/}
-                    {/*    value={startAt}*/}
-                    {/*    onChange={(e) => setStartAt(e.target.value)}*/}
-                    {/*/>*/}
-                    {/*<FormField*/}
-                    {/*    name='endAt'*/}
-                    {/*    type="date"*/}
-                    {/*    label="Date de fin"*/}
-                    {/*    value={endAt}*/}
-                    {/*    onChange={(e) => setEndAt(e.target.value)}*/}
-                    {/*/>*/}
                     <Button type='submit'>Enregistrer</Button>
                 </form>
             </section>

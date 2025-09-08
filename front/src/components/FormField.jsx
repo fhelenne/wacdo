@@ -14,6 +14,7 @@ function FormField({
       <label htmlFor={id}>{label}</label>
       <input
         id={id}
+        data-testid={name}
         name={name}
         type={type}
         role={role}
