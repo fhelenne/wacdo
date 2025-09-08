@@ -38,7 +38,7 @@ class Assignment
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Groups(['restaurant:read', 'assignment:read', 'assignment:create'])]
+    #[Groups(['user:read','restaurant:read', 'assignment:read', 'assignment:create'])]
     private ?\DateTimeImmutable $startAt = null;
 
     #[ORM\Column(nullable: true)]
