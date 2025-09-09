@@ -7,7 +7,7 @@ export default defineConfig(({mode}) => {
     return {
         plugins: [react()],
         // host: true,
-        base: mode === 'production' ? '/formation/front':'',
+        base: mode.includes(['test', 'development'])? '':'/formation/front',
         strictPort: false,
         cors: true,
         test: {
