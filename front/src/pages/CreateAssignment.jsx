@@ -15,23 +15,13 @@ export default function CreateAssignment() {
     const [startAt, setStartAt] = useState('');
     const [endAt, setEndAt] = useState('');
     const navigate = useNavigate();
-
     document.title = `Wacdo : Créer une affectation`;
     const {
             register,
             handleSubmit,
             formState: {errors},
-            setValue,
         } = useForm({mode: 'all'})
     const onSubmit = () => {
-        console.log('Form Submission:', {
-            user,
-            restaurant,
-            jobTitle,
-            startAt,
-            endAt
-        });
-
         fetchWithAuth(import.meta.env.VITE_WACDO_BACK_API_URL + '/assignments', {
             method: "POST",
             body: JSON.stringify({
@@ -74,25 +64,16 @@ export default function CreateAssignment() {
                         initialValue={params.get('user_id')}
                         disabled={params.has('user_id')}
                         onEntitySelect={(selectedUserId) => setUser(selectedUserId)}
-                        register={register}
-                        errors={errors}
-                        setValue={setValue}
                     />
                     <EntityPicker
                         entityType="restaurants"
                         label="Restaurant"
                         onEntitySelect={(selectedRestaurantId) => setRestaurant(selectedRestaurantId)}
-                        register={register}
-                        errors={errors}
-                        setValue={setValue}
                     />
                     <EntityPicker
                         entityType="jobTitles"
                         label="Poste"
                         onEntitySelect={(selectedJobTitleId) => setJobTitle(selectedJobTitleId)}
-                        register={register}
-                        errors={errors}
-                        setValue={setValue}
                     />
                     <div>
                         <label htmlFor="assignment-startAt">Date de début</label>

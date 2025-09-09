@@ -94,9 +94,6 @@ export default function EditAssignment() {
                             label="Collaborateur"
                             initialValue={user}
                             onEntitySelect={(selectedUserId) => setUser(selectedUserId)}
-                            register={register}
-                            errors={errors}
-                            setValue={setValue}
                         />
                     </div>
                     <div role="group" aria-labelledby="restaurant-label">
@@ -105,9 +102,6 @@ export default function EditAssignment() {
                             label="Restaurant"
                             initialValue={restaurant}
                             onEntitySelect={(selectedRestaurantId) => setRestaurant(selectedRestaurantId)}
-                            register={register}
-                            errors={errors}
-                            setValue={setValue}
                         />
                     </div>
                     <div role="group" aria-labelledby="job-title-label">
@@ -116,9 +110,6 @@ export default function EditAssignment() {
                             label="Poste"
                             initialValue={jobTitle}
                             onEntitySelect={(selectedJobTitleId) => setJobTitle(selectedJobTitleId)}
-                            register={register}
-                            errors={errors}
-                            setValue={setValue}
                         />
                     </div>
                     <div>
