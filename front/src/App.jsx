@@ -2,7 +2,7 @@
 import ErrorBoundary from './components/ErrorBoundary'
 import './styles/forms.css'
 import './App.css'
-import AppRoutes from "./utils/AppRoutes.jsx";
+import AppRoutes from "./components/AppRoutes.jsx";
 
 
 
