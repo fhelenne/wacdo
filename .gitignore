@@ -45,7 +45,7 @@
 /front/build/
 /front/.vite/
 /front/coverage/
-/front/.env.local
+/front/.env.development
 /front/.env.development.local
 /front/.env.test.local
 /front/.env.production.local

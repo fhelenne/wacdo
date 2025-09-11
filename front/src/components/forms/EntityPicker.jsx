@@ -109,14 +109,14 @@ export function EntityPicker({
         // Optional: Additional validation logic specific to entity type
         switch (entityType) {
             case 'users':
-                // Example: Ensure a valid user is selected
-                return value.startsWith(config.apiPath) ? true : 'Sélection d\'utilisateur invalide';
+                // Use regex to validate user selection
+                return config.idRegex.test(value) ? true : 'Sélection d\'utilisateur invalide';
             case 'restaurants':
-                // Example: Ensure a valid restaurant is selected
-                return value.startsWith(config.apiPath) ? true : 'Sélection de restaurant invalide';
+                // Use regex to validate restaurant selection
+                return config.idRegex.test(value) ? true : 'Sélection de restaurant invalide';
             case 'jobTitles':
-                // Example: Ensure a valid job title is selected
-                return value.startsWith(config.apiPath) ? true : 'Sélection de poste invalide';
+                // Use regex to validate job title selection
+                return config.idRegex.test(value) ? true : 'Sélection de poste invalide';
             default:
                 return true;
         }
